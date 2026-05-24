@@ -1,0 +1,14 @@
+{
+    "Core": true,
+    "Auth": true,
+    "CMS": true,
+    "Patients": true,
+    "Doctors": true,
+    "Appointments": true,
+    "Pharmacy": true,
+    "Laboratory": true,
+    "Billing": true,
+    "Reports": true,
+    "Notifications": true,
+    "Settings": true
+}
