@@ -78,6 +78,19 @@
             </div>
 
             {{-- Right: Content --}}
+            @php
+                $aboutHeadline = \Modules\Settings\Models\Setting::where('key', 'home_about_headline')->value('value') ?: 'We Are Best Professional In Medical Sectors';
+                // Split the headline so the last two words are wrapped in gradient span
+                $words = explode(' ', $aboutHeadline);
+                if (count($words) > 2) {
+                    $lastTwo = array_slice($words, -2);
+                    $rest = array_slice($words, 0, count($words) - 2);
+                    $formattedHeadline = implode(' ', $rest) . '<br> <span class="text-gradient">' . implode(' ', $lastTwo) . '</span>';
+                } else {
+                    $formattedHeadline = $aboutHeadline;
+                }
+                $aboutDesc = \Modules\Settings\Models\Setting::where('key', 'home_about_description')->value('value') ?: 'Fugiat ut voluptate quo. Occaecat hic aute corporis culpitur facilius laboris excepteur, labore et Repnat emdolit. Patturiam, sint aute risus ture.';
+            @endphp
             <div class="flex flex-col gap-6">
                 <div>
                     <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-600 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-4">
@@ -87,13 +100,12 @@
                         Introduction To Us
                     </div>
                     <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
-                        We Are Best Professional<br>
-                        In <span class="text-gradient">Medical Sectors</span>
+                        {!! $formattedHeadline !!}
                     </h2>
                 </div>
 
                 <p class="text-gray-500 text-sm leading-relaxed">
-                    Fugiat ut voluptate quo. Occaecat hic aute corporis culpitur facilius laboris excepteur, labore et Repnat emdolit. Patturiam, sint aute risus ture.
+                    {{ $aboutDesc }}
                 </p>
 
                 {{-- Benefits List --}}

@@ -55,6 +55,12 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
                     System Preferences
                 </button>
+
+                {{-- Homepage Content --}}
+                <button @click="activeTab = 'homepage'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'homepage', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'homepage' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    Homepage Content
+                </button>
             </nav>
         </div>
 
@@ -266,6 +272,154 @@
                                 <span class="text-sm font-bold text-slate-700">Allow Public Patient Registration</span>
                             </label>
                             <p class="text-xs text-slate-500 mt-1 ml-8">If checked, patients can sign up through the public portal.</p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Tab: Homepage Content --}}
+                <div x-show="activeTab === 'homepage'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-cloak>
+                    <h2 class="text-lg font-black text-slate-900 mb-6 pb-4 border-b border-slate-100">Homepage Content</h2>
+                    
+                    <div class="space-y-8">
+                        {{-- Hero Section --}}
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <h3 class="text-base font-bold text-slate-800 mb-4">Hero Section</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">Hero Headline</label>
+                                    <input type="text" name="home_hero_headline" value="{{ $settings['home_hero_headline'] ?? 'Best Caring, Better Doctors' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">Hero Description</label>
+                                    <textarea name="home_hero_description" rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">{{ $settings['home_hero_description'] ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- About Section --}}
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <h3 class="text-base font-bold text-slate-800 mb-4">About Section</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">About Headline</label>
+                                    <input type="text" name="home_about_headline" value="{{ $settings['home_about_headline'] ?? 'We Are Best Professional In Medical Sectors' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">About Description</label>
+                                    <textarea name="home_about_description" rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">{{ $settings['home_about_description'] ?? 'Fugiat ut voluptate quo. Occaecat hic aute corporis culpitur facilius laboris excepteur, labore et Repnat emdolit. Patturiam, sint aute risus ture.' }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Services Section --}}
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <h3 class="text-base font-bold text-slate-800 mb-4">Services Section</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">Services Headline</label>
+                                    <input type="text" name="home_services_headline" value="{{ $settings['home_services_headline'] ?? 'Extra Ordinary Health Solutions' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Statistics Section --}}
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <h3 class="text-base font-bold text-slate-800 mb-4">Statistics Counters</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">Happy Patients</label>
+                                    <input type="number" name="home_stats_patients" value="{{ $settings['home_stats_patients'] ?? '25000' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">Expert Doctors</label>
+                                    <input type="number" name="home_stats_doctors" value="{{ $settings['home_stats_doctors'] ?? '410' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">Years Experience</label>
+                                    <input type="number" name="home_stats_experience" value="{{ $settings['home_stats_experience'] ?? '17' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">Departments</label>
+                                    <input type="number" name="home_stats_departments" value="{{ $settings['home_stats_departments'] ?? '33' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Doctors Section --}}
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <h3 class="text-base font-bold text-slate-800 mb-4">Doctors Section</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">Doctors Headline</label>
+                                    <input type="text" name="home_doctors_headline" value="{{ $settings['home_doctors_headline'] ?? 'Meet Our Experienced Medical Doctors' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Process Section --}}
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <h3 class="text-base font-bold text-slate-800 mb-4">Process Section</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">Process Headline</label>
+                                    <input type="text" name="home_process_headline" value="{{ $settings['home_process_headline'] ?? 'Simple Process We Follow' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-slate-700 mb-2">Step 1 Title</label>
+                                        <input type="text" name="home_process_step1" value="{{ $settings['home_process_step1'] ?? 'Book Appointment' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-slate-700 mb-2">Step 2 Title</label>
+                                        <input type="text" name="home_process_step2" value="{{ $settings['home_process_step2'] ?? 'Doctor Consultation' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-slate-700 mb-2">Step 3 Title</label>
+                                        <input type="text" name="home_process_step3" value="{{ $settings['home_process_step3'] ?? 'Treatment Plan' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-slate-700 mb-2">Step 4 Title</label>
+                                        <input type="text" name="home_process_step4" value="{{ $settings['home_process_step4'] ?? 'Fast Recovery' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium text-sm">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- CTA Section --}}
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <h3 class="text-base font-bold text-slate-800 mb-4">Call to Action (CTA) Section</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">CTA Headline</label>
+                                    <input type="text" name="home_cta_headline" value="{{ $settings['home_cta_headline'] ?? 'Best Caring For You' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">CTA Description</label>
+                                    <textarea name="home_cta_description" rows="2" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">{{ $settings['home_cta_description'] ?? 'Our dedicated team of medical professionals is here around the clock to provide you with the best possible care.' }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Testimonials Section --}}
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <h3 class="text-base font-bold text-slate-800 mb-4">Testimonials Section</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">Testimonials Headline</label>
+                                    <input type="text" name="home_testimonials_headline" value="{{ $settings['home_testimonials_headline'] ?? 'Our Happy Patient\'s Genuine Reviews' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Blog Section --}}
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <h3 class="text-base font-bold text-slate-800 mb-4">Blog Section</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">Blog Headline</label>
+                                    <input type="text" name="home_blog_headline" value="{{ $settings['home_blog_headline'] ?? 'Read Our Recent Insights & Blogs' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

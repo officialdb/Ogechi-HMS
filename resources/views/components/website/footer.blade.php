@@ -30,16 +30,24 @@
             {{-- Brand Column --}}
             <div class="lg:col-span-2 flex flex-col gap-5">
                 {{-- Logo --}}
+                @php
+                    $siteLogo = \Modules\Settings\Models\Setting::where('key', 'site_logo')->value('value');
+                    $appName = \Modules\Settings\Models\Setting::where('key', 'app_name')->value('value') ?: 'Ogechi Hospital';
+                @endphp
                 <a href="{{ route('home') }}" class="flex items-center gap-2.5 w-fit group">
-                    <div class="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:bg-blue-400 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <span class="text-lg font-bold text-white block leading-none">Ogechi Hospital</span>
-                        <span class="text-[10px] font-medium text-blue-300 uppercase tracking-wider leading-none">Premium Healthcare</span>
-                    </div>
+                    @if($siteLogo)
+                        <img src="{{ Storage::url($siteLogo) }}" alt="{{ $appName }}" class="h-10 object-contain">
+                    @else
+                        <div class="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:bg-blue-400 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-lg font-bold text-white block leading-none">{{ $appName }}</span>
+                            <span class="text-[10px] font-medium text-blue-300 uppercase tracking-wider leading-none">Premium Healthcare</span>
+                        </div>
+                    @endif
                 </a>
 
                 <p class="text-sm text-blue-200 leading-relaxed max-w-xs">
@@ -83,7 +91,7 @@
                         ['label' => 'Instagram', 'icon' => '<rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" fill="none" stroke="currentColor" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>'],
                         ['label' => 'YouTube',   'icon' => '<path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/>'],
                     ] as $social)
-                        <a href="#" aria-label="{{ $social['label'] }}" class="w-9 h-9 bg-white/10 hover:bg-blue-500 rounded-xl flex items-center justify-center text-blue-200 hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30">
+                        <a href="javascript:void(0)" aria-label="{{ $social['label'] }}" class="w-9 h-9 bg-white/10 hover:bg-blue-500 rounded-xl flex items-center justify-center text-blue-200 hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">{!! $social['icon'] !!}</svg>
                         </a>
                     @endforeach
@@ -164,11 +172,11 @@
                 &copy; {{ date('Y') }} Ogechi Hospital. All rights reserved. Designed with ❤️ for better healthcare.
             </p>
             <div class="flex items-center gap-4">
-                <a href="#" class="text-xs text-blue-300 hover:text-white transition-colors">Privacy Policy</a>
+                <a href="javascript:void(0)" class="text-xs text-blue-300 hover:text-white transition-colors">Privacy Policy</a>
                 <span class="text-blue-600">•</span>
-                <a href="#" class="text-xs text-blue-300 hover:text-white transition-colors">Terms of Service</a>
+                <a href="javascript:void(0)" class="text-xs text-blue-300 hover:text-white transition-colors">Terms of Service</a>
                 <span class="text-blue-600">•</span>
-                <a href="#" class="text-xs text-blue-300 hover:text-white transition-colors">Sitemap</a>
+                <a href="javascript:void(0)" class="text-xs text-blue-300 hover:text-white transition-colors">Sitemap</a>
             </div>
         </div>
     </div>

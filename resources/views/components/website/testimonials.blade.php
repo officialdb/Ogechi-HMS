@@ -3,6 +3,17 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Section Header --}}
+        @php
+            $testimonialsHeadline = \Modules\Settings\Models\Setting::where('key', 'home_testimonials_headline')->value('value') ?: 'Our Happy Patient\'s Genuine Reviews';
+            $words = explode(' ', $testimonialsHeadline);
+            if (count($words) > 2) {
+                $lastTwo = array_slice($words, -2);
+                $rest = array_slice($words, 0, count($words) - 2);
+                $formattedHeadline = implode(' ', $rest) . '<br> <span class="text-gradient">' . implode(' ', $lastTwo) . '</span>';
+            } else {
+                $formattedHeadline = $testimonialsHeadline;
+            }
+        @endphp
         <div class="text-center mb-14">
             <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-600 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -11,8 +22,7 @@
                 Testimonials
             </div>
             <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
-                Our Happy Patient's<br>
-                <span class="text-gradient">Genuine Reviews</span>
+                {!! $formattedHeadline !!}
             </h2>
         </div>
 

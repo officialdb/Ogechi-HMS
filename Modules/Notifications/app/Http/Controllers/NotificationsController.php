@@ -5,6 +5,7 @@ namespace Modules\Notifications\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class NotificationsController extends Controller
 {
@@ -26,6 +27,8 @@ class NotificationsController extends Controller
         $notification = Auth::user()->notifications()->findOrFail($id);
         $notification->markAsRead();
         
+        Cache::forget('unread_notifications_' . Auth::id());
+        
         // If it came via AJAX/JSON
         if (request()->wantsJson()) {
             return response()->json(['success' => true]);
@@ -41,6 +44,8 @@ class NotificationsController extends Controller
     {
         Auth::user()->unreadNotifications->markAsRead();
         
+        Cache::forget('unread_notifications_' . Auth::id());
+        
         if (request()->wantsJson()) {
             return response()->json(['success' => true]);
         }
@@ -55,6 +60,8 @@ class NotificationsController extends Controller
     {
         $notification = Auth::user()->notifications()->findOrFail($id);
         $notification->delete();
+        
+        Cache::forget('unread_notifications_' . Auth::id());
         
         return back()->with('success', 'Notification deleted.');
     }
@@ -76,6 +83,8 @@ class NotificationsController extends Controller
             ],
             'read_at' => null,
         ]);
+        
+        Cache::forget('unread_notifications_' . Auth::id());
         
         return back()->with('success', 'Test notification sent to your inbox.');
     }

@@ -27,16 +27,29 @@
                     <span class="text-xs font-semibold text-white/80 uppercase tracking-widest">Health & Medical</span>
                 </div>
 
+                @php
+                    $heroHeadline = \Modules\Settings\Models\Setting::where('key', 'home_hero_headline')->value('value') ?: 'Best Caring, Better Doctors';
+                    // We split the headline assuming the last two words should be blue.
+                    $words = explode(' ', $heroHeadline);
+                    if (count($words) > 2) {
+                        $lastTwo = array_slice($words, -2);
+                        $rest = array_slice($words, 0, count($words) - 2);
+                        $formattedHeadline = implode(' ', $rest) . ',<br><span class="text-blue-300">' . implode(' ', $lastTwo) . '</span>';
+                    } else {
+                        $formattedHeadline = $heroHeadline;
+                    }
+                    $heroDesc = \Modules\Settings\Models\Setting::where('key', 'home_hero_description')->value('value') ?: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.';
+                @endphp
+
                 {{-- Headline --}}
                 <div>
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                        Best Caring,<br>
-                        <span class="text-blue-300">Better Doctors</span>
+                        {!! $formattedHeadline !!}
                     </h1>
                 </div>
 
                 <p class="text-white/75 text-base lg:text-lg leading-relaxed max-w-md">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.
+                    {{ $heroDesc }}
                 </p>
 
                 {{-- CTAs --}}

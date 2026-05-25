@@ -47,12 +47,11 @@
 
     <div x-show="!loading" x-transition class="grid grid-cols-2 lg:grid-cols-4 gap-4" style="display:none;">
         @php
-            $totalPatients = $patients->total();
             $miniStats = [
-                ['label'=>'Total Patients','value'=>number_format($totalPatients),'icon'=>'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z','bg'=>'bg-blue-50','color'=>'text-blue-600','delta'=>'All records'],
-                ['label'=>'Admitted Today','value'=>'12','icon'=>'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z','bg'=>'bg-rose-50','color'=>'text-rose-500','delta'=>'+3 this morning'],
-                ['label'=>'Outpatients','value'=>'47','icon'=>'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2','bg'=>'bg-emerald-50','color'=>'text-emerald-600','delta'=>'Active today'],
-                ['label'=>'Discharged','value'=>'8','icon'=>'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z','bg'=>'bg-violet-50','color'=>'text-violet-600','delta'=>'This week'],
+                ['label'=>'Total Patients','value'=>number_format($stats['total'] ?? 0),'icon'=>'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z','bg'=>'bg-blue-50','color'=>'text-blue-600','delta'=>'All records'],
+                ['label'=>'Admitted Today','value'=>number_format($stats['admitted_today'] ?? 0),'icon'=>'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z','bg'=>'bg-rose-50','color'=>'text-rose-500','delta'=>'Today\'s admissions'],
+                ['label'=>'Outpatients','value'=>number_format($stats['outpatients'] ?? 0),'icon'=>'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2','bg'=>'bg-emerald-50','color'=>'text-emerald-600','delta'=>'Active today'],
+                ['label'=>'Discharged','value'=>number_format($stats['discharged'] ?? 0),'icon'=>'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z','bg'=>'bg-violet-50','color'=>'text-violet-600','delta'=>'Recent records'],
             ];
         @endphp
         @foreach($miniStats as $s)

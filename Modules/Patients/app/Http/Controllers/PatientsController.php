@@ -22,9 +22,25 @@ class PatientsController extends Controller
     {
         $search = trim((string) $request->string('search'));
 
+        $stats = [
+            'total' => Patient::count(),
+            'admitted_today' => \Illuminate\Support\Facades\DB::table('patient_visits')
+                                    ->whereDate('visit_date', today())
+                                    ->where('visit_type', 'admission')
+                                    ->count(),
+            'outpatients' => \Illuminate\Support\Facades\DB::table('patient_visits')
+                                    ->whereDate('visit_date', today())
+                                    ->whereIn('visit_type', ['consultation', 'follow-up'])
+                                    ->count(),
+            'discharged' => \Illuminate\Support\Facades\DB::table('patient_visits')
+                                    ->where('visit_type', 'routine-check')
+                                    ->count(),
+        ];
+
         return view('patients::patients.index', [
             'patients' => $this->patientService->paginatedPatients($search),
             'search' => $search,
+            'stats' => $stats,
         ]);
     }
 

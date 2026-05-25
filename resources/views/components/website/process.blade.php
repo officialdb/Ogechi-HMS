@@ -3,6 +3,17 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Section Header --}}
+        @php
+            $processHeadline = \Modules\Settings\Models\Setting::where('key', 'home_process_headline')->value('value') ?: 'Simple Process We Follow';
+            $words = explode(' ', $processHeadline);
+            if (count($words) > 2) {
+                $lastTwo = array_slice($words, -2);
+                $rest = array_slice($words, 0, count($words) - 2);
+                $formattedHeadline = implode(' ', $rest) . ' <span class="text-gradient">' . implode(' ', $lastTwo) . '</span>';
+            } else {
+                $formattedHeadline = $processHeadline;
+            }
+        @endphp
         <div class="text-center mb-16">
             <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-600 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -11,7 +22,7 @@
                 How We Work
             </div>
             <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
-                Simple Process <span class="text-gradient">We Follow</span>
+                {!! $formattedHeadline !!}
             </h2>
         </div>
 
@@ -25,28 +36,28 @@
                 $steps = [
                     [
                         'step' => '01',
-                        'title' => 'Book Appointment',
+                        'title' => \Modules\Settings\Models\Setting::where('key', 'home_process_step1')->value('value') ?: 'Book Appointment',
                         'desc'  => 'Schedule your visit online or by phone at your convenience, day or night.',
                         'icon'  => '<path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>',
                         'color' => 'bg-blue-600',
                     ],
                     [
                         'step' => '02',
-                        'title' => 'Doctor Consultation',
+                        'title' => \Modules\Settings\Models\Setting::where('key', 'home_process_step2')->value('value') ?: 'Doctor Consultation',
                         'desc'  => 'Meet with our qualified specialists for a thorough diagnosis and care plan.',
                         'icon'  => '<path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>',
                         'color' => 'bg-indigo-600',
                     ],
                     [
                         'step' => '03',
-                        'title' => 'Treatment Plan',
+                        'title' => \Modules\Settings\Models\Setting::where('key', 'home_process_step3')->value('value') ?: 'Treatment Plan',
                         'desc'  => 'Receive a personalized, evidence-based treatment plan tailored just for you.',
                         'icon'  => '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>',
                         'color' => 'bg-violet-600',
                     ],
                     [
                         'step' => '04',
-                        'title' => 'Fast Recovery',
+                        'title' => \Modules\Settings\Models\Setting::where('key', 'home_process_step4')->value('value') ?: 'Fast Recovery',
                         'desc'  => 'Our dedicated team ensures you recover quickly with continuous follow-up care.',
                         'icon'  => '<path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>',
                         'color' => 'bg-emerald-600',

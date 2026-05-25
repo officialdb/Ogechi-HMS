@@ -77,6 +77,7 @@
                         ['label'=>'Patients',     'route'=>'patients.index',  'active'=>'patients.*',      'icon'=>'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z'],
                         ['label'=>'Doctors',      'route'=>'modules.doctors.index',      'active'=>'modules.doctors.*',      'icon'=>'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'],
                         ['label'=>'Departments',  'route'=>'modules.departments.index',  'active'=>'modules.departments.*',  'icon'=>'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4'],
+                        ['label'=>'Laboratory',   'route'=>'modules.laboratory.index',   'active'=>'modules.laboratory.*',   'icon'=>'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z'],
                         ['label'=>'Blog / CMS',   'route'=>'modules.cms.index',          'active'=>'modules.cms.*',          'icon'=>'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4'],
                         ['label'=>'Appointments', 'route'=>'modules.appointments.index', 'active'=>'modules.appointments.*', 'icon'=>'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z','badge'=>'5'],
                         ['label'=>'Pharmacy',     'route'=>'modules.pharmacy.index',     'active'=>'modules.pharmacy.*',     'icon'=>'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2'],
@@ -163,20 +164,53 @@
                 <a href="{{ route('modules.notifications.index') }}" class="relative w-9 h-9 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
                     @auth
-                        @if(auth()->user()->unreadNotifications->count() > 0)
-                            <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center shadow-sm">{{ auth()->user()->unreadNotifications->count() }}</span>
+                        @php
+                            $unreadCount = \Illuminate\Support\Facades\Cache::remember(
+                                'unread_notifications_' . auth()->id(),
+                                60,
+                                fn() => auth()->user()->unreadNotifications()->count()
+                            );
+                        @endphp
+                        @if($unreadCount > 0)
+                            <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center shadow-sm">{{ $unreadCount }}</span>
                         @endif
                     @endauth
                 </a>
-                <div class="flex items-center gap-2.5 pl-3 border-l border-slate-100 cursor-pointer">
-                    <div class="w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-md flex-shrink-0" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-                        {{ substr(Auth::user()->name ?? 'A', 0, 1) }}
+                <div class="relative" x-data="{ userMenuOpen: false }" @click.away="userMenuOpen = false">
+                    <div @click="userMenuOpen = !userMenuOpen" class="flex items-center gap-2.5 pl-3 border-l border-slate-100 cursor-pointer">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-md flex-shrink-0" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
+                            {{ substr(Auth::user()->name ?? 'A', 0, 1) }}
+                        </div>
+                        <div class="hidden sm:block leading-tight">
+                            <p class="text-[13px] font-semibold text-slate-800 leading-none">{{ Auth::user()->name ?? 'Admin' }}</p>
+                            <p class="text-[11px] text-slate-400 mt-0.5">Administrator</p>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 transition-transform" :class="userMenuOpen ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                     </div>
-                    <div class="hidden sm:block leading-tight">
-                        <p class="text-[13px] font-semibold text-slate-800 leading-none">{{ Auth::user()->name ?? 'Admin' }}</p>
-                        <p class="text-[11px] text-slate-400 mt-0.5">Administrator</p>
+
+                    {{-- Dropdown Menu --}}
+                    <div x-cloak x-show="userMenuOpen" 
+                         x-transition:enter="transition ease-out duration-100"
+                         x-transition:enter-start="transform opacity-0 scale-95"
+                         x-transition:enter-end="transform opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-75"
+                         x-transition:leave-start="transform opacity-100 scale-100"
+                         x-transition:leave-end="transform opacity-0 scale-95"
+                         class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-slate-100 py-1 z-50">
+                        
+                        <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors">
+                            Admin Profile
+                        </a>
+                        
+                        <div class="border-t border-slate-100 my-1"></div>
+                        
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">
+                                Log Out
+                            </button>
+                        </form>
                     </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </div>
             </div>
         </header>

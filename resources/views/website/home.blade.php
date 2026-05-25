@@ -1,5 +1,8 @@
+@php
+    $appName = \Modules\Settings\Models\Setting::where('key', 'app_name')->value('value') ?: 'Ogechi Hospital';
+@endphp
 <x-layouts.website
-    title="Ogechi Hospital – Best Caring, Better Doctors"
+    title="{{ $appName }} – Best Caring, Better Doctors"
     metaDescription="Ogechi Hospital offers premium, compassionate healthcare with expert specialists in cardiology, neurology, orthopedics, dentistry and more. Book your appointment today."
 >
     {{-- ============================================================ --}}

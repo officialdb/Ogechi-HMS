@@ -36,6 +36,18 @@
             </div>
 
             {{-- Center/Right: CTA Content --}}
+            @php
+                $ctaHeadline = \Modules\Settings\Models\Setting::where('key', 'home_cta_headline')->value('value') ?: 'Best Caring For You';
+                $words = explode(' ', $ctaHeadline);
+                if (count($words) > 2) {
+                    $lastTwo = array_slice($words, -2);
+                    $rest = array_slice($words, 0, count($words) - 2);
+                    $formattedHeadline = implode(' ', $rest) . '<br> <span class="text-blue-200">' . implode(' ', $lastTwo) . '</span>';
+                } else {
+                    $formattedHeadline = $ctaHeadline;
+                }
+                $ctaDesc = \Modules\Settings\Models\Setting::where('key', 'home_cta_description')->value('value') ?: 'Our dedicated team of medical professionals is here around the clock to provide you with the best possible care. Book your appointment today.';
+            @endphp
             <div class="flex-1 flex flex-col gap-6 text-center lg:text-left">
                 <div>
                     <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1 text-xs font-semibold text-white/80 uppercase tracking-wider mb-4">
@@ -45,12 +57,11 @@
                         Caring For You
                     </div>
                     <h2 class="text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight">
-                        Best Caring<br>
-                        <span class="text-blue-200">For You</span>
+                        {!! $formattedHeadline !!}
                     </h2>
                 </div>
                 <p class="text-white/75 text-base leading-relaxed max-w-lg mx-auto lg:mx-0">
-                    Our dedicated team of medical professionals is here around the clock to provide you with the best possible care. Book your appointment today.
+                    {{ $ctaDesc }}
                 </p>
 
                 {{-- Appointment Form --}}
