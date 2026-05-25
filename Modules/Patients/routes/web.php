@@ -5,7 +5,7 @@ use Modules\Patients\Http\Controllers\PatientVitalsController;
 use Modules\Patients\Http\Controllers\PatientVisitsController;
 use Modules\Patients\Http\Controllers\PatientsController;
 
-Route::prefix('patients')->name('patients.')->group(function () {
+Route::prefix('dashboard/patients')->name('patients.')->group(function () {
     Route::get('/', [PatientsController::class, 'index'])
         ->middleware(['auth', 'permission:patients.view'])
         ->name('index');

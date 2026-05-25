@@ -31,6 +31,7 @@
             "Modules\\CMS\\": "Modules/CMS/app/",
             "Modules\\Core\\": "Modules/Core/app/",
             "Modules\\Doctors\\": "Modules/Doctors/app/",
+            "Modules\\Departments\\": "Modules/Departments/app/",
             "Modules\\Laboratory\\": "Modules/Laboratory/app/",
             "Modules\\Notifications\\": "Modules/Notifications/app/",
             "Modules\\Patients\\": "Modules/Patients/app/",
@@ -45,6 +46,7 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
+            "app/Helpers/helpers.php",
             "vendor/nwidart/laravel-modules/src/helpers.php",
             "vendor/spatie/laravel-activitylog/src/helpers.php",
             "vendor/spatie/laravel-permission/src/helpers.php"

@@ -4,53 +4,79 @@ namespace Modules\Notifications\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of notifications.
      */
     public function index()
     {
-        return view('notifications::index');
+        $notifications = Auth::user()->notifications()->paginate(20);
+        
+        return view('notifications::index', compact('notifications'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mark a specific notification as read.
      */
-    public function create()
+    public function markAsRead($id)
     {
-        return view('notifications::create');
+        $notification = Auth::user()->notifications()->findOrFail($id);
+        $notification->markAsRead();
+        
+        // If it came via AJAX/JSON
+        if (request()->wantsJson()) {
+            return response()->json(['success' => true]);
+        }
+        
+        return back()->with('success', 'Notification marked as read.');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Mark all notifications as read.
      */
-    public function store(Request $request) {}
-
-    /**
-     * Show the specified resource.
-     */
-    public function show($id)
+    public function markAllAsRead()
     {
-        return view('notifications::show');
+        Auth::user()->unreadNotifications->markAsRead();
+        
+        if (request()->wantsJson()) {
+            return response()->json(['success' => true]);
+        }
+        
+        return back()->with('success', 'All notifications marked as read.');
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Delete a specific notification.
      */
-    public function edit($id)
+    public function destroy($id)
     {
-        return view('notifications::edit');
+        $notification = Auth::user()->notifications()->findOrFail($id);
+        $notification->delete();
+        
+        return back()->with('success', 'Notification deleted.');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Generate a test notification (For Development/Testing).
      */
-    public function update(Request $request, $id) {}
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id) {}
+    public function sendTest()
+    {
+        // Simple raw database notification since we don't have a dedicated Notification class set up yet.
+        Auth::user()->notifications()->create([
+            'id' => \Illuminate\Support\Str::uuid()->toString(),
+            'type' => 'App\Notifications\SystemAlert',
+            'data' => [
+                'title' => 'System Alert: Low Stock',
+                'message' => 'Amoxicillin is running low in the pharmacy (5 units left).',
+                'icon' => 'warning', // info, success, warning, error
+                'url' => route('modules.pharmacy.index')
+            ],
+            'read_at' => null,
+        ]);
+        
+        return back()->with('success', 'Test notification sent to your inbox.');
+    }
 }

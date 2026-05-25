@@ -65,6 +65,16 @@ class Patient extends Model
         return $this->hasMany(PatientVisit::class);
     }
 
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(\Modules\Appointments\Models\Appointment::class);
+    }
+
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(\Modules\Billing\Models\Invoice::class);
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

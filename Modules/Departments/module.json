@@ -1,0 +1,11 @@
+{
+    "name": "Departments",
+    "alias": "departments",
+    "description": "Hospital Departments management module",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Departments\\Providers\\DepartmentsServiceProvider"
+    ],
+    "files": []
+}

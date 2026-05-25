@@ -10,5 +10,6 @@
     "Billing": true,
     "Reports": true,
     "Notifications": true,
-    "Settings": true
+    "Settings": true,
+    "Departments": true
 }
