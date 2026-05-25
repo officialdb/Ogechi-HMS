@@ -13,7 +13,7 @@
             @endphp
 
             @foreach($stats as $index => $stat)
-                <div class="flex flex-col items-center text-center py-6 {{ $index < 3 ? 'lg:border-r border-white/15' : '' }}">
+                <div class="flex flex-col items-center text-center py-6 {{ $index < 3 ? 'lg:border-r border-white/15' : '' }}" data-aos="fade-up" data-aos-delay="{{ $index * 150 }}">
                     <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-4 backdrop-blur-sm">
                         {!! $stat['icon'] !!}
                     </div>

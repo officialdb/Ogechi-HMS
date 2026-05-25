@@ -54,13 +54,17 @@
                         <article class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-blue-900/10 border border-gray-100 hover:border-blue-100 transition-all duration-300 hover:-translate-y-2 flex flex-col">
                             {{-- Thumbnail --}}
                             <a href="{{ route('website.blog.show', $post->slug) }}" class="h-52 bg-gradient-to-br {{ $grad }} relative overflow-hidden flex-shrink-0 block">
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <div class="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/20">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="{{ $iconPath }}"/>
-                                        </svg>
+                                @if($post->thumbnail)
+                                    <img src="{{ Storage::url($post->thumbnail) }}" alt="{{ $post->title }}" class="w-full h-full object-cover">
+                                @else
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <div class="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/20">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="{{ $iconPath }}"/>
+                                            </svg>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                                 <div class="absolute top-4 left-4">
                                     <span class="{{ $catColor }} text-xs font-bold px-3 py-1 rounded-full bg-white shadow-sm">{{ $post->category }}</span>
                                 </div>

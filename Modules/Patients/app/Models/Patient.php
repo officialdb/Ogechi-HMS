@@ -101,4 +101,9 @@ class Patient extends Model
                 ->implode(' ');
         });
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
 }

@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Section Header --}}
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14" data-aos="fade-up">
             @php
                 $blogHeadline = \Modules\Settings\Models\Setting::where('key', 'home_blog_headline')->value('value') ?: 'Read Our Recent Insights & Blogs';
                 $words = explode(' ', $blogHeadline);
@@ -47,23 +47,27 @@
                     $catColor = $post->cat_color ?: 'bg-blue-100 text-blue-600';
                     $readTime = $post->read_time ?: '5 min read';
                 @endphp
-                <article class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-blue-900/10 border border-gray-100 hover:border-blue-100 transition-all duration-300 hover:-translate-y-2 flex flex-col">
+                <article class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-blue-900/10 border border-gray-100 hover:border-blue-100 transition-all duration-300 hover:-translate-y-2 flex flex-col" data-aos="fade-up" data-aos-delay="{{ $loop->index * 150 }}">
 
                     {{-- Thumbnail --}}
                     <div class="h-48 bg-gradient-to-br {{ $grad }} relative overflow-hidden flex-shrink-0">
-                        <div class="absolute inset-0 flex items-center justify-center opacity-20">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-32 h-32 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="{{ $iconPath }}"/>
-                            </svg>
-                        </div>
-                        {{-- Medical cross watermark --}}
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/20">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        @if($post->thumbnail)
+                            <img src="{{ Storage::url($post->thumbnail) }}" alt="{{ $post->title }}" class="absolute inset-0 w-full h-full object-cover">
+                        @else
+                            <div class="absolute inset-0 flex items-center justify-center opacity-20">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-32 h-32 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="{{ $iconPath }}"/>
                                 </svg>
                             </div>
-                        </div>
+                            {{-- Medical cross watermark --}}
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/20">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="{{ $iconPath }}"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        @endif
                         {{-- Category Badge --}}
                         <div class="absolute top-4 left-4">
                             <span class="{{ $catColor }} text-xs font-bold px-3 py-1 rounded-full bg-white shadow-sm">{{ $post->category }}</span>

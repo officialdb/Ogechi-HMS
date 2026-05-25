@@ -9,7 +9,7 @@
         <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
 
             {{-- Left: Doctor Illustration --}}
-            <div class="relative hidden lg:flex gap-4 items-end">
+            <div class="relative hidden lg:flex gap-4 items-end" data-aos="fade-right">
                 {{-- Doctor 1 --}}
                 <div class="w-36 h-52 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20">
                     <svg viewBox="0 0 144 208" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +48,7 @@
                 }
                 $ctaDesc = \Modules\Settings\Models\Setting::where('key', 'home_cta_description')->value('value') ?: 'Our dedicated team of medical professionals is here around the clock to provide you with the best possible care. Book your appointment today.';
             @endphp
-            <div class="flex-1 flex flex-col gap-6 text-center lg:text-left">
+            <div class="flex-1 flex flex-col gap-6 text-center lg:text-left" data-aos="fade-up">
                 <div>
                     <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1 text-xs font-semibold text-white/80 uppercase tracking-wider mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-blue-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -100,7 +100,7 @@
             </div>
 
             {{-- Right: Extra Doctor --}}
-            <div class="relative hidden xl:flex items-end">
+            <div class="relative hidden xl:flex items-end" data-aos="fade-left">
                 <div class="w-44 h-64 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20">
                     <svg viewBox="0 0 176 256" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                         <rect width="176" height="256" fill="rgba(255,255,255,0.06)"/>

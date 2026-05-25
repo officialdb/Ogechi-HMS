@@ -17,10 +17,10 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-0 items-end w-full">
 
             {{-- Left: Content --}}
-            <div class="order-2 lg:order-1 pb-12 lg:pb-28 pt-8 lg:pt-0 flex flex-col gap-6">
+            <div class="pb-12 lg:pb-28 pt-8 lg:pt-0 flex flex-col gap-6" data-aos="fade-right">
 
                 {{-- Trust Badge --}}
-                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 w-fit">
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 w-fit mt-8">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                     </svg>
@@ -39,6 +39,7 @@
                         $formattedHeadline = $heroHeadline;
                     }
                     $heroDesc = \Modules\Settings\Models\Setting::where('key', 'home_hero_description')->value('value') ?: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.';
+                    $contactPhone = \Modules\Settings\Models\Setting::where('key', 'contact_phone')->value('value') ?: '+234 800 123 4567';
                 @endphp
 
                 {{-- Headline --}}
@@ -60,20 +61,20 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
                     </a>
-                    <a href="tel:+2348001234567" class="inline-flex items-center gap-2 bg-transparent border-2 border-white/40 text-white font-semibold text-sm px-6 py-3 rounded-xl hover:bg-white/10 hover:border-white/60 transition-all duration-300">
+                    <a href="tel:{{ preg_replace('/[^0-9+]/', '', $contactPhone) }}" class="inline-flex items-center gap-2 bg-transparent border-2 border-white/40 text-white font-semibold text-sm px-6 py-3 rounded-xl hover:bg-white/10 hover:border-white/60 transition-all duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                         </svg>
-                        +234 800 123 4567
+                        {{ $contactPhone }}
                     </a>
                 </div>
             </div>
 
             {{-- Right: Doctor Image --}}
-            <div class="order-1 lg:order-2 relative flex justify-center lg:justify-end items-end">
+            <div class="relative flex justify-center lg:justify-end items-end" data-aos="fade-up">
                 {{-- Doctor placeholder (styled div) --}}
                 <div class="relative z-10 w-72 sm:w-80 lg:w-96">
-                    <div class="relative bg-gradient-to-b from-blue-400/20 to-transparent rounded-t-full overflow-hidden" style="height: 520px;">
+                    <div class="relative bg-gradient-to-b from-blue-400/20 to-transparent rounded-t-full overflow-hidden h-[360px] sm:h-[450px] lg:h-[520px]">
                         {{-- Doctor silhouette SVG --}}
                         <svg viewBox="0 0 320 520" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                             {{-- Body/Coat --}}
@@ -99,7 +100,7 @@
                 </div>
 
                 {{-- Floating Card 1: Emergency Services --}}
-                <div class="float-anim absolute -left-4 lg:-left-8 bottom-32 lg:bottom-40 bg-white rounded-2xl shadow-xl shadow-blue-900/20 p-4 w-48 border border-blue-50 z-20">
+                <div class="float-anim absolute -left-2 sm:-left-4 lg:-left-8 bottom-16 sm:bottom-32 lg:bottom-40 bg-white rounded-2xl shadow-xl shadow-blue-900/20 p-3 sm:p-4 w-40 sm:w-48 border border-blue-50 z-20" data-aos="zoom-in" data-aos-delay="400">
                     <div class="flex items-center gap-3 mb-2">
                         <div class="w-9 h-9 bg-blue-100 rounded-xl flex items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -115,7 +116,7 @@
                 </div>
 
                 {{-- Floating Card 2: Skilled Professionals --}}
-                <div class="float-anim-delay absolute -right-2 lg:-right-4 bottom-32 lg:bottom-40 bg-white rounded-2xl shadow-xl shadow-blue-900/20 p-4 w-48 border border-blue-50 z-20">
+                <div class="float-anim-delay absolute -right-2 lg:-right-4 bottom-32 sm:bottom-48 lg:bottom-56 bg-white rounded-2xl shadow-xl shadow-blue-900/20 p-3 sm:p-4 w-40 sm:w-48 border border-blue-50 z-20" data-aos="zoom-in" data-aos-delay="600">
                     <div class="flex items-center gap-3 mb-2">
                         <div class="w-9 h-9 bg-green-100 rounded-xl flex items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

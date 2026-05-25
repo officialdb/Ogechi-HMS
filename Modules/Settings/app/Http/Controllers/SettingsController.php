@@ -45,8 +45,11 @@ class SettingsController extends Controller
                 ['value' => $value]
             );
             
-            // Clear cache for this specific setting so the helper picks up the new value
             Cache::forget('setting_' . $key);
+        }
+
+        if ($request->wantsJson()) {
+            return response()->json(['success' => true, 'message' => 'Settings updated successfully.']);
         }
 
         return back()->with('success', 'Settings updated successfully.');

@@ -1,5 +1,33 @@
 <x-admin-layout title="System Settings">
-<div class="max-w-6xl mx-auto space-y-6" x-data="{ activeTab: 'general' }">
+<div class="max-w-6xl mx-auto space-y-6" x-data="{ 
+    activeTab: 'general',
+    isSaving: false,
+    showToast: false,
+    toastMessage: '',
+    async saveSettings(event) {
+        this.isSaving = true;
+        let form = event.target;
+        let formData = new FormData(form);
+        try {
+            let response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+            });
+            let data = await response.json();
+            if (response.ok && data.success) {
+                this.toastMessage = data.message || 'Settings saved successfully!';
+            } else {
+                this.toastMessage = data.message || 'Error saving settings.';
+            }
+        } catch (error) {
+            this.toastMessage = 'Error saving settings.';
+        }
+        this.isSaving = false;
+        this.showToast = true;
+        setTimeout(() => this.showToast = false, 3000);
+    }
+}">
     
     {{-- ── HEADER ─────────────────────────────────────── --}}
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -66,7 +94,7 @@
 
         {{-- ── FORM CONTENT ─────────────────────────────── --}}
         <div class="flex-1">
-            <form action="{{ route('modules.settings.update') }}" method="POST" enctype="multipart/form-data" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+            <form @submit.prevent="saveSettings" action="{{ route('modules.settings.update') }}" method="POST" enctype="multipart/form-data" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
                 @csrf
 
                 {{-- Tab: General --}}
@@ -426,14 +454,31 @@
 
                 {{-- Submit Button --}}
                 <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end">
-                    <button type="submit" class="flex items-center gap-2 px-6 py-3 text-sm font-bold text-white rounded-xl shadow-md shadow-blue-500/20 transition-all hover:opacity-90 hover:scale-[1.02]" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                        Save Settings
+                    <button type="submit" :disabled="isSaving" class="flex items-center gap-2 px-6 py-3 text-sm font-bold text-white rounded-xl shadow-md shadow-blue-500/20 transition-all hover:opacity-90 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
+                        <svg x-show="!isSaving" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        <svg x-show="isSaving" x-cloak class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                        <span x-text="isSaving ? 'Saving...' : 'Save Settings'"></span>
                     </button>
                 </div>
 
             </form>
         </div>
     </div>
+
+    {{-- Toast Notification --}}
+    <div x-show="showToast" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 translate-y-4"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 translate-y-4"
+         x-cloak
+         class="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-6 py-4 bg-slate-900 text-white rounded-2xl shadow-xl shadow-slate-900/20">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span class="font-medium" x-text="toastMessage"></span>
+    </div>
+
 </div>
 </x-admin-layout>
+

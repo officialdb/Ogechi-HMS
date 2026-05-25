@@ -14,7 +14,7 @@
                 $formattedHeadline = $processHeadline;
             }
         @endphp
-        <div class="text-center mb-16">
+        <div class="text-center mb-16" data-aos="fade-up">
             <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-600 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
@@ -65,8 +65,8 @@
                 ];
             @endphp
 
-            @foreach($steps as $step)
-                <div class="relative z-10 flex flex-col items-center text-center gap-4 group">
+            @foreach($steps as $index => $step)
+                <div class="relative z-10 flex flex-col items-center text-center gap-4 group" data-aos="zoom-in" data-aos-delay="{{ $index * 200 }}">
                     {{-- Step Icon Circle --}}
                     <div class="w-20 h-20 {{ $step['color'] }} rounded-full flex items-center justify-center shadow-xl shadow-blue-900/20 group-hover:scale-110 transition-transform duration-300 relative">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">

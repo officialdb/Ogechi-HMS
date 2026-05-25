@@ -72,11 +72,15 @@
 
                     {{-- Featured banner --}}
                     <div class="h-64 rounded-2xl bg-gradient-to-br {{ $grad }} mb-8 relative overflow-hidden flex items-center justify-center">
-                        <div class="w-24 h-24 bg-white/15 backdrop-blur-sm rounded-3xl flex items-center justify-center border border-white/25">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="{{ $iconPath }}"/>
-                            </svg>
-                        </div>
+                        @if($post->thumbnail)
+                            <img src="{{ Storage::url($post->thumbnail) }}" alt="{{ $post->title }}" class="absolute inset-0 w-full h-full object-cover">
+                        @else
+                            <div class="w-24 h-24 bg-white/15 backdrop-blur-sm rounded-3xl flex items-center justify-center border border-white/25">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="{{ $iconPath }}"/>
+                                </svg>
+                            </div>
+                        @endif
                         <div class="absolute bottom-4 left-4 flex gap-2">
                             <span class="{{ $post->cat_color ?? 'bg-blue-100 text-blue-600' }} text-xs font-bold px-3 py-1 rounded-full bg-white shadow">{{ $post->category }}</span>
                         </div>

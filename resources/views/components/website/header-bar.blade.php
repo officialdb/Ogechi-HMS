@@ -5,6 +5,8 @@
         @php
             $siteLogo = \Modules\Settings\Models\Setting::where('key', 'site_logo')->value('value');
             $appName = \Modules\Settings\Models\Setting::where('key', 'app_name')->value('value') ?: 'Ogechi Hospital';
+            $contactPhone = \Modules\Settings\Models\Setting::where('key', 'contact_phone')->value('value') ?: '+234 800 123 4567';
+            $contactEmail = \Modules\Settings\Models\Setting::where('key', 'contact_email')->value('value') ?: 'info@ogechihospital.com';
         @endphp
         <a href="{{ route('home') }}" class="flex items-center gap-2.5 group">
             @if($siteLogo)
@@ -24,7 +26,7 @@
 
         {{-- Contact Info --}}
         <div class="flex items-center gap-8">
-            <a href="tel:+2348001234567" class="flex items-center gap-2.5 group">
+            <a href="tel:{{ preg_replace('/[^0-9+]/', '', $contactPhone) }}" class="flex items-center gap-2.5 group">
                 <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
@@ -32,11 +34,11 @@
                 </div>
                 <div>
                     <p class="text-[10px] text-gray-400 font-medium uppercase tracking-wide leading-none mb-0.5">Phone Number</p>
-                    <p class="text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors leading-none">+234 800 123 4567</p>
+                    <p class="text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors leading-none">{{ $contactPhone }}</p>
                 </div>
             </a>
 
-            <a href="mailto:info@ogechihospital.com" class="flex items-center gap-2.5 group">
+            <a href="mailto:{{ $contactEmail }}" class="flex items-center gap-2.5 group">
                 <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -44,7 +46,7 @@
                 </div>
                 <div>
                     <p class="text-[10px] text-gray-400 font-medium uppercase tracking-wide leading-none mb-0.5">Email Address</p>
-                    <p class="text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors leading-none">info@ogechihospital.com</p>
+                    <p class="text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors leading-none">{{ $contactEmail }}</p>
                 </div>
             </a>
 

@@ -13,6 +13,9 @@ Route::get('/doctors',   [WebsiteController::class, 'doctors'])->name('website.d
 Route::get('/blog',      [WebsiteController::class, 'blog'])->name('website.blog');
 Route::get('/blog/{slug}', [WebsiteController::class, 'blogShow'])->name('website.blog.show');
 Route::get('/contact',   [WebsiteController::class, 'contact'])->name('website.contact');
+Route::post('/book-appointment', [WebsiteController::class, 'bookAppointment'])
+    ->middleware('throttle:3,1')
+    ->name('website.book');
 
 Route::get('/dashboard', DashboardController::class)
     ->middleware(['auth'])

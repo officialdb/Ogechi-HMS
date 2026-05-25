@@ -27,7 +27,7 @@
     @endif
 
     {{-- Form --}}
-    <form method="POST" action="{{ route('modules.cms.update', $post) }}" enctype="multipart/form-data" class="bg-white border border-slate-100 shadow-sm rounded-2xl overflow-hidden">
+    <form id="cms-edit-form" method="POST" action="{{ route('modules.cms.update', $post) }}" enctype="multipart/form-data" class="bg-white border border-slate-100 shadow-sm rounded-2xl overflow-hidden">
         @csrf
         @method('PUT')
         
@@ -168,7 +168,7 @@
         });
 
         // Set hidden input before form submit
-        var form = document.querySelector('form[action="{{ route('modules.cms.update', $post) }}"]');
+        var form = document.getElementById('cms-edit-form');
         form.onsubmit = function() {
             var bodyInput = document.querySelector('#body-input');
             var content = quill.root.innerHTML;

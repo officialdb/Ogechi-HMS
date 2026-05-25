@@ -18,13 +18,25 @@
                 <div>
                     <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-600 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-4">Our Story</div>
                     <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-5">
-                        We Are Best Professional<br>In <span class="text-gradient">Medical Sectors</span>
+                        About <span class="text-gradient">Ogechi Hospital</span>
                     </h2>
                     <p class="text-gray-500 text-sm leading-relaxed mb-4">
-                        Founded in 2008, Ogechi Hospital began with a simple but powerful mission: to make premium, compassionate healthcare accessible to every Nigerian. What started as a small clinic in Enugu has grown into one of Nigeria's most respected full-service hospitals.
+                        At Ogechi Hospital, we are dedicated to delivering quality healthcare services built on compassion, professionalism, integrity, and patient-centered care. We understand that every patient deserves timely medical attention, accurate diagnosis, and effective treatment in a safe and supportive environment. Our commitment is to provide healthcare services that improve lives, strengthen families, and support the wellbeing of the community we serve.
+                    </p>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                        Since our establishment, Ogechi Hospital has remained focused on creating a healthcare experience where patients feel valued, respected, and cared for at every stage of treatment. We combine medical expertise with a compassionate approach to ensure that every individual who walks through our doors receives the highest standard of care possible.
+                    </p>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                        Our hospital provides a wide range of healthcare services including general medical consultations, maternity care, pediatric services, laboratory investigations, emergency treatment, inpatient and outpatient care, and preventive health services. We are committed to using modern medical practices and reliable diagnostic support to help patients receive accurate and effective treatment.
+                    </p>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                        At Ogechi Hospital, we believe healthcare goes beyond treating illness. We focus on preventive care, health education, and long-term wellness to help individuals and families live healthier lives. Through continuous improvement, professional development, and dedication to excellence, we strive to maintain a healthcare environment that patients can trust with confidence.
+                    </p>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                        Our medical professionals and healthcare staff work together to provide compassionate care tailored to the unique needs of every patient. We are driven by a strong sense of responsibility to ensure comfort, safety, dignity, and confidentiality in every interaction.
                     </p>
                     <p class="text-gray-500 text-sm leading-relaxed mb-6">
-                        Today, we are home to over 410 specialist doctors, nurses, and support staff — united by our commitment to clinical excellence, patient dignity, and continuous innovation in medical practice.
+                        As a healthcare provider, our goal is to continue building strong relationships within the community by offering accessible, affordable, and dependable medical services. We remain committed to making quality healthcare available to everyone while upholding the values of integrity, empathy, accountability, and excellence in all we do.
                     </p>
                     <div class="grid grid-cols-2 gap-4">
                         @foreach([
@@ -49,7 +61,7 @@
                             </div>
                             <h3 class="font-bold text-gray-900">Our Mission</h3>
                         </div>
-                        <p class="text-sm text-gray-600 leading-relaxed">To provide accessible, compassionate, and evidence-based healthcare that improves the quality of life for every patient we serve — treating not just the condition, but the whole person.</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">To provide accessible, affordable, and high-quality healthcare services through compassionate patient care, professional medical excellence, accurate diagnosis, and a commitment to improving the health and wellbeing of individuals, families, and the community.</p>
                     </div>
                     {{-- Vision --}}
                     <div class="bg-blue-600 rounded-2xl p-6 text-white hover:shadow-xl hover:shadow-blue-600/30 transition-shadow">
@@ -59,7 +71,7 @@
                             </div>
                             <h3 class="font-bold text-white">Our Vision</h3>
                         </div>
-                        <p class="text-sm text-blue-100 leading-relaxed">To be West Africa's most trusted healthcare institution — setting the standard for clinical excellence, patient experience, and medical innovation by 2030.</p>
+                        <p class="text-sm text-blue-100 leading-relaxed">To be a trusted and leading healthcare institution recognized for exceptional patient care, medical excellence, innovation, and continuous commitment to healthier communities through reliable and compassionate healthcare services.</p>
                     </div>
                     {{-- Values --}}
                     <div class="bg-[#F5F9FF] rounded-2xl p-6 border border-blue-50 hover:shadow-md transition-shadow">

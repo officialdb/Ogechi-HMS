@@ -15,28 +15,37 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 @php
+                    $contactEmail = \Modules\Settings\Models\Setting::where('key', 'contact_email')->value('value') ?: 'info@ogechihospital.com';
+                    $contactPhone = \Modules\Settings\Models\Setting::where('key', 'contact_phone')->value('value') ?: '+234 800 123 4567';
+                    $contactAddress = \Modules\Settings\Models\Setting::where('key', 'contact_address')->value('value') ?: '12 Healthcare Avenue, Enugu, Nigeria';
+                    $googleMapsUrl = \Modules\Settings\Models\Setting::where('key', 'google_maps_url')->value('value');
+                    
+                    $addressParts = explode(',', $contactAddress);
+                    $addressMain = trim($addressParts[0] ?? $contactAddress);
+                    $addressSub = count($addressParts) > 1 ? trim(implode(',', array_slice($addressParts, 1))) : 'Visit Us';
+
                     $contactCards = [
                         [
                             'icon'  => 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z',
                             'label' => 'Phone',
-                            'value' => '+234 800 123 4567',
+                            'value' => $contactPhone,
                             'sub'   => 'Mon–Fri, 8AM–10PM',
                             'color' => 'bg-blue-600',
-                            'href'  => 'tel:+2348001234567',
+                            'href'  => 'tel:' . preg_replace('/[^0-9+]/', '', $contactPhone),
                         ],
                         [
                             'icon'  => 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
                             'label' => 'Email',
-                            'value' => 'info@ogechihospital.com',
+                            'value' => $contactEmail,
                             'sub'   => 'Reply within 24 hours',
                             'color' => 'bg-indigo-600',
-                            'href'  => 'mailto:info@ogechihospital.com',
+                            'href'  => 'mailto:' . $contactEmail,
                         ],
                         [
                             'icon'  => 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z',
                             'label' => 'Address',
-                            'value' => '12 Healthcare Avenue',
-                            'sub'   => 'Enugu, Nigeria',
+                            'value' => $addressMain,
+                            'sub'   => $addressSub,
                             'color' => 'bg-violet-600',
                             'href'  => '#map',
                         ],
@@ -88,9 +97,42 @@
                             x-data="{
                                 submitted: false,
                                 loading: false,
-                                submit() {
+                                errorMsg: '',
+                                formData: {
+                                    patient_status: 'new',
+                                    name: '',
+                                    email: '',
+                                    phone: '',
+                                    doctor_id: '',
+                                    appointment_date: '',
+                                    appointment_time: '',
+                                    subject: '',
+                                    message: ''
+                                },
+                                async submit() {
                                     this.loading = true;
-                                    setTimeout(() => { this.loading = false; this.submitted = true; }, 1500);
+                                    this.errorMsg = '';
+                                    try {
+                                        const res = await fetch('{{ route('website.book') }}', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'Accept': 'application/json',
+                                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                            },
+                                            body: JSON.stringify(this.formData)
+                                        });
+                                        const data = await res.json();
+                                        if (!res.ok) {
+                                            this.errorMsg = data.message || 'An error occurred. Please check your details.';
+                                        } else {
+                                            this.submitted = true;
+                                        }
+                                    } catch (err) {
+                                        this.errorMsg = 'A network error occurred. Please try again later.';
+                                    } finally {
+                                        this.loading = false;
+                                    }
                                 }
                             }"
                             @submit.prevent="submit()"
@@ -104,11 +146,29 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                                     </svg>
                                 </div>
-                                <h3 class="font-bold text-green-800 text-sm">Message Sent Successfully!</h3>
-                                <p class="text-green-600 text-xs mt-1">We'll get back to you within 1 business hour. Thank you!</p>
+                                <h3 class="font-bold text-green-800 text-sm">Appointment Booked Successfully!</h3>
+                                <p class="text-green-600 text-xs mt-1">We will contact you shortly to confirm your slot. Thank you!</p>
+                            </div>
+
+                            {{-- Error state --}}
+                            <div x-show="errorMsg !== ''" x-transition class="bg-red-50 border border-red-200 rounded-2xl p-4 text-sm text-red-600 font-medium" style="display:none;" x-text="errorMsg">
                             </div>
 
                             <div x-show="!submitted" class="space-y-4">
+                                {{-- Patient Status --}}
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-700 mb-2">Are you a new or returning patient?</label>
+                                    <div class="flex items-center gap-4">
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" x-model="formData.patient_status" value="new" class="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                                            <span class="text-sm text-gray-700 font-medium">New Patient</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" x-model="formData.patient_status" value="returning" class="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                                            <span class="text-sm text-gray-700 font-medium">Returning Patient</span>
+                                        </label>
+                                    </div>
+                                </div>
                                 {{-- Name & Email --}}
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
@@ -116,6 +176,7 @@
                                         <input
                                             id="contact_name"
                                             type="text"
+                                            x-model="formData.name"
                                             placeholder="e.g. Amaka Okafor"
                                             required
                                             class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
@@ -126,6 +187,7 @@
                                         <input
                                             id="contact_email"
                                             type="email"
+                                            x-model="formData.email"
                                             placeholder="you@example.com"
                                             required
                                             class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
@@ -136,57 +198,68 @@
                                 {{-- Phone & Subject --}}
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
-                                        <label class="block text-xs font-semibold text-gray-700 mb-1.5" for="contact_phone">Phone Number</label>
+                                        <label class="block text-xs font-semibold text-gray-700 mb-1.5" for="contact_phone">Phone Number <span class="text-red-500">*</span></label>
                                         <input
                                             id="contact_phone"
                                             type="tel"
+                                            x-model="formData.phone"
+                                            required
                                             placeholder="+234 800 000 0000"
                                             class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
                                         >
                                     </div>
                                     <div>
-                                        <label class="block text-xs font-semibold text-gray-700 mb-1.5" for="contact_subject">Subject <span class="text-red-500">*</span></label>
+                                        <label class="block text-xs font-semibold text-gray-700 mb-1.5" for="contact_subject">Reason <span class="text-red-500">*</span></label>
                                         <select
                                             id="contact_subject"
+                                            x-model="formData.subject"
                                             required
                                             class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
                                         >
-                                            <option value="">Select a subject</option>
+                                            <option value="">Select a reason</option>
                                             <option>Book an Appointment</option>
                                             <option>General Enquiry</option>
                                             <option>Emergency Consultation</option>
-                                            <option>Medical Records Request</option>
-                                            <option>Billing & Insurance</option>
-                                            <option>Feedback / Complaint</option>
                                         </select>
                                     </div>
                                 </div>
 
-                                {{-- Department & Preferred Date --}}
+                                {{-- Doctor --}}
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-700 mb-1.5" for="contact_doctor">Select Doctor <span class="text-red-500">*</span></label>
+                                    <select
+                                        id="contact_doctor"
+                                        x-model="formData.doctor_id"
+                                        required
+                                        class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
+                                    >
+                                        <option value="">Select a specialist</option>
+                                        @foreach($doctors ?? [] as $doc)
+                                            <option value="{{ $doc->id }}">{{ $doc->user->name ?? 'Dr. '.$doc->first_name.' '.$doc->last_name }} ({{ $doc->department->name ?? 'General' }})</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                {{-- Date & Time --}}
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
-                                        <label class="block text-xs font-semibold text-gray-700 mb-1.5" for="contact_dept">Department</label>
-                                        <select
-                                            id="contact_dept"
-                                            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
-                                        >
-                                            <option value="">Select department</option>
-                                            <option>Cardiology</option>
-                                            <option>Neurology</option>
-                                            <option>Orthopedics</option>
-                                            <option>Dentistry</option>
-                                            <option>Pediatrics</option>
-                                            <option>Ophthalmology</option>
-                                            <option>Dermatology</option>
-                                            <option>Emergency Care</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs font-semibold text-gray-700 mb-1.5" for="contact_date">Preferred Date</label>
+                                        <label class="block text-xs font-semibold text-gray-700 mb-1.5" for="contact_date">Preferred Date <span class="text-red-500">*</span></label>
                                         <input
                                             id="contact_date"
                                             type="date"
+                                            x-model="formData.appointment_date"
+                                            required
                                             min="{{ date('Y-m-d') }}"
+                                            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
+                                        >
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-gray-700 mb-1.5" for="contact_time">Preferred Time <span class="text-red-500">*</span></label>
+                                        <input
+                                            id="contact_time"
+                                            type="time"
+                                            x-model="formData.appointment_time"
+                                            required
                                             class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
                                         >
                                     </div>
@@ -194,10 +267,11 @@
 
                                 {{-- Message --}}
                                 <div>
-                                    <label class="block text-xs font-semibold text-gray-700 mb-1.5" for="contact_message">Your Message <span class="text-red-500">*</span></label>
+                                    <label class="block text-xs font-semibold text-gray-700 mb-1.5" for="contact_message">Additional Notes <span class="text-red-500">*</span></label>
                                     <textarea
                                         id="contact_message"
-                                        rows="5"
+                                        rows="4"
+                                        x-model="formData.message"
                                         placeholder="Describe your symptoms, questions, or appointment details..."
                                         required
                                         class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors resize-none"
@@ -312,32 +386,44 @@
                 <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-600 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-3">Find Us</div>
                 <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">Our <span class="text-gradient">Location</span></h2>
             </div>
-            {{-- Map placeholder (styled) --}}
-            <div class="relative rounded-2xl overflow-hidden shadow-lg border border-gray-100" style="height: 400px; background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);">
-                <div class="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                    {{-- Decorative map grid --}}
-                    <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(#3B82F6 1px, transparent 1px), linear-gradient(90deg, #3B82F6 1px, transparent 1px); background-size: 40px 40px;"></div>
+            {{-- Map placeholder (styled) or embedded iframe --}}
+            @if($googleMapsUrl)
+                @php
+                    $mapSrc = $googleMapsUrl;
+                    if (preg_match('/src="([^"]+)"/', $googleMapsUrl, $matches)) {
+                        $mapSrc = $matches[1];
+                    }
+                @endphp
+                <div class="relative rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-[400px]">
+                    <iframe src="{{ $mapSrc }}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            @else
+                <div class="relative rounded-2xl overflow-hidden shadow-lg border border-gray-100" style="height: 400px; background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center gap-4">
+                        {{-- Decorative map grid --}}
+                        <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(#3B82F6 1px, transparent 1px), linear-gradient(90deg, #3B82F6 1px, transparent 1px); background-size: 40px 40px;"></div>
 
-                    {{-- Pin --}}
-                    <div class="relative z-10 flex flex-col items-center gap-3">
-                        <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-2xl shadow-blue-600/40 animate-bounce">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            </svg>
-                        </div>
-                        <div class="bg-white rounded-2xl shadow-xl px-6 py-3 text-center border border-blue-100">
-                            <p class="font-bold text-gray-900 text-sm">Ogechi Hospital</p>
-                            <p class="text-blue-600 text-xs font-medium mt-0.5">12 Healthcare Avenue, Enugu, Nigeria</p>
-                            <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer"
-                               class="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-                                Open in Google Maps
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                            </a>
+                        {{-- Pin --}}
+                        <div class="relative z-10 flex flex-col items-center gap-3">
+                            <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-2xl shadow-blue-600/40 animate-bounce">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </div>
+                            <div class="bg-white rounded-2xl shadow-xl px-6 py-3 text-center border border-blue-100">
+                                <p class="font-bold text-gray-900 text-sm">{{ \Modules\Settings\Models\Setting::where('key', 'app_name')->value('value') ?: 'Ogechi Hospital' }}</p>
+                                <p class="text-blue-600 text-xs font-medium mt-0.5">{{ $contactAddress }}</p>
+                                <a href="https://maps.google.com/?q={{ urlencode($contactAddress) }}" target="_blank" rel="noopener noreferrer"
+                                   class="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+                                    Open in Google Maps
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </section>
 

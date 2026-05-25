@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Section Header --}}
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14" data-aos="fade-up">
             @php
                 $doctorsHeadline = \Modules\Settings\Models\Setting::where('key', 'home_doctors_headline')->value('value') ?: 'Meet Our Experienced Medical Doctors';
                 $words = explode(' ', $doctorsHeadline);
@@ -57,7 +57,7 @@
                     $initials = strtoupper(substr($doctor->first_name, 0, 1));
                     $yearsExp = $doctor->created_at ? now()->diffInYears($doctor->created_at) : 10;
                 @endphp
-                <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl hover:shadow-blue-900/10 overflow-hidden border border-gray-100 hover:border-blue-100 transition-all duration-300 hover:-translate-y-2">
+                <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl hover:shadow-blue-900/10 overflow-hidden border border-gray-100 hover:border-blue-100 transition-all duration-300 hover:-translate-y-2" data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
                     <div class="relative h-56 bg-gradient-to-br {{ $grad }} overflow-hidden">
                         <svg viewBox="0 0 200 224" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                             <rect width="200" height="224" fill="{{ $rectFill }}"/>

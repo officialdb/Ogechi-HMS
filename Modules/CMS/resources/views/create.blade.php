@@ -25,7 +25,7 @@
     @endif
 
     {{-- Form --}}
-    <form method="POST" action="{{ route('modules.cms.store') }}" enctype="multipart/form-data" class="bg-white border border-slate-100 shadow-sm rounded-2xl overflow-hidden">
+    <form id="cms-post-form" method="POST" action="{{ route('modules.cms.store') }}" enctype="multipart/form-data" class="bg-white border border-slate-100 shadow-sm rounded-2xl overflow-hidden">
         @csrf
         
         <div class="p-6 sm:p-8 space-y-8">
@@ -139,7 +139,7 @@
         });
 
         // Set hidden input before form submit
-        var form = document.querySelector('form');
+        var form = document.getElementById('cms-post-form');
         form.onsubmit = function() {
             var bodyInput = document.querySelector('#body-input');
             // If the editor is practically empty, ensure it's validated or empty

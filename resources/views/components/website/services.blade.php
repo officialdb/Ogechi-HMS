@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Section Header --}}
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14" data-aos="fade-up">
             @php
                 $servicesHeadline = \Modules\Settings\Models\Setting::where('key', 'home_services_headline')->value('value') ?: 'Extra Ordinary Health Solutions';
                 $words = explode(' ', $servicesHeadline);
@@ -28,7 +28,7 @@
             </div>
             <div class="flex flex-col items-start lg:items-end gap-4">
                 <p class="text-gray-500 text-sm leading-relaxed max-w-sm">
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    At Ogechi Hospital, we focus on delivering healthcare services that prioritize patient comfort, safety, and trust.
                 </p>
                 <a href="{{ route('website.services') }}" class="inline-flex items-center gap-2 border-2 border-blue-600 text-blue-600 font-semibold text-sm px-5 py-2.5 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300 w-fit">
                     More Department
@@ -58,7 +58,7 @@
 
             @foreach($departments as $index => $department)
                 @php $c = $colorPalette[$index % count($colorPalette)]; @endphp
-                <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl hover:shadow-blue-900/10 p-6 border border-gray-100 hover:border-blue-100 transition-all duration-300 hover:-translate-y-2 flex flex-col gap-4">
+                <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl hover:shadow-blue-900/10 p-6 border border-gray-100 hover:border-blue-100 transition-all duration-300 hover:-translate-y-2 flex flex-col gap-4" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
 
                     {{-- Number --}}
                     <span class="text-4xl font-black {{ $c['num'] }} opacity-40 leading-none select-none">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>

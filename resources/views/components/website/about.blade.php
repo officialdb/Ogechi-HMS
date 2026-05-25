@@ -5,68 +5,85 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
             {{-- Left: Images Grid --}}
-            <div class="relative">
-                <div class="grid grid-cols-2 gap-4">
-                    {{-- Large Image --}}
-                    <div class="col-span-2 sm:col-span-1 rounded-2xl overflow-hidden h-64 sm:h-80 bg-gradient-to-br from-blue-800 to-blue-600 relative group">
-                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 to-transparent z-10"></div>
-                        {{-- Medical team SVG illustration --}}
-                        <svg viewBox="0 0 300 320" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="300" height="320" fill="#1E40AF"/>
-                            {{-- Background shapes --}}
-                            <circle cx="250" cy="50" r="80" fill="#2563EB" opacity="0.4"/>
-                            <circle cx="50" cy="280" r="60" fill="#1D4ED8" opacity="0.3"/>
-                            {{-- Figure 1 --}}
-                            <ellipse cx="100" cy="220" rx="45" ry="80" fill="#1E3A8A"/>
-                            <circle cx="100" cy="130" r="28" fill="#FCD34D"/>
-                            <rect cx="100" cy="155" width="20" height="25" fill="#F59E0B"/>
-                            {{-- Figure 2 (doctor) --}}
-                            <ellipse cx="190" cy="230" rx="50" ry="85" fill="#2563EB"/>
-                            <circle cx="190" cy="135" r="30" fill="#FDE68A"/>
-                            <rect x="175" y="160" width="15" height="28" rx="3" fill="#F59E0B"/>
-                            {{-- Lab coats --}}
-                            <rect x="165" y="180" width="50" height="110" rx="5" fill="#3B82F6" opacity="0.5"/>
-                            <rect x="75" y="175" width="50" height="110" rx="5" fill="#1E3A8A" opacity="0.5"/>
-                            {{-- Clipboard --}}
-                            <rect x="195" y="210" width="25" height="35" rx="3" fill="white" opacity="0.8"/>
-                            <line x1="200" y1="220" x2="214" y2="220" stroke="#94A3B8" stroke-width="2"/>
-                            <line x1="200" y1="228" x2="214" y2="228" stroke="#94A3B8" stroke-width="2"/>
-                            <line x1="200" y1="236" x2="210" y2="236" stroke="#94A3B8" stroke-width="2"/>
-                            {{-- Cross symbol --}}
-                            <rect x="182" y="195" width="12" height="4" rx="1" fill="white" opacity="0.9"/>
-                            <rect x="186" y="191" width="4" height="12" rx="1" fill="white" opacity="0.9"/>
-                        </svg>
-                        {{-- Play button --}}
-                        <div class="absolute inset-0 z-20 flex items-center justify-center">
-                            <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform cursor-pointer hover:bg-white/30">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
+            <div class="relative" data-aos="fade-right">
+                <div class="flex gap-4">
+                    {{-- Column 1 --}}
+                    <div class="flex flex-col gap-4 flex-1">
+                        {{-- Large Image --}}
+                        <div class="rounded-2xl overflow-hidden h-64 sm:h-80 bg-gradient-to-br from-blue-800 to-blue-600 relative group">
+                            <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 to-transparent z-10"></div>
+                            {{-- Medical team SVG illustration --}}
+                            <svg viewBox="0 0 300 320" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="320" fill="#1E40AF"/>
+                                {{-- Background shapes --}}
+                                <circle cx="250" cy="50" r="80" fill="#2563EB" opacity="0.4"/>
+                                <circle cx="50" cy="280" r="60" fill="#1D4ED8" opacity="0.3"/>
+                                {{-- Figure 1 --}}
+                                <ellipse cx="100" cy="220" rx="45" ry="80" fill="#1E3A8A"/>
+                                <circle cx="100" cy="130" r="28" fill="#FCD34D"/>
+                                <rect cx="100" cy="155" width="20" height="25" fill="#F59E0B"/>
+                                {{-- Figure 2 (doctor) --}}
+                                <ellipse cx="190" cy="230" rx="50" ry="85" fill="#2563EB"/>
+                                <circle cx="190" cy="135" r="30" fill="#FDE68A"/>
+                                <rect x="175" y="160" width="15" height="28" rx="3" fill="#F59E0B"/>
+                                {{-- Lab coats --}}
+                                <rect x="165" y="180" width="50" height="110" rx="5" fill="#3B82F6" opacity="0.5"/>
+                                <rect x="75" y="175" width="50" height="110" rx="5" fill="#1E3A8A" opacity="0.5"/>
+                                {{-- Clipboard --}}
+                                <rect x="195" y="210" width="25" height="35" rx="3" fill="white" opacity="0.8"/>
+                                <line x1="200" y1="220" x2="214" y2="220" stroke="#94A3B8" stroke-width="2"/>
+                                <line x1="200" y1="228" x2="214" y2="228" stroke="#94A3B8" stroke-width="2"/>
+                                <line x1="200" y1="236" x2="210" y2="236" stroke="#94A3B8" stroke-width="2"/>
+                                {{-- Cross symbol --}}
+                                <rect x="182" y="195" width="12" height="4" rx="1" fill="white" opacity="0.9"/>
+                                <rect x="186" y="191" width="4" height="12" rx="1" fill="white" opacity="0.9"/>
+                            </svg>
+                            {{-- Play button --}}
+                            <div class="absolute inset-0 z-20 flex items-center justify-center">
+                                <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform cursor-pointer hover:bg-white/30">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
                             </div>
+                        </div>
+
+                        {{-- Small Image 2 (Indigo) --}}
+                        <div class="hidden sm:block rounded-2xl overflow-hidden h-40 bg-gradient-to-br from-blue-500 to-indigo-700 relative">
+                            <svg viewBox="0 0 150 160" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="150" height="160" fill="#4F46E5"/>
+                                <circle cx="75" cy="50" r="80" fill="#4338CA" opacity="0.4"/>
+                                <circle cx="75" cy="55" r="22" fill="#C7D2FE"/>
+                                <ellipse cx="75" cy="125" rx="45" ry="45" fill="#3730A3"/>
+                                <rect x="62" y="75" width="26" height="60" rx="5" fill="#312E81" opacity="0.8"/>
+                                {{-- stethoscope --}}
+                                <path d="M60 85 Q50 110 55 125 Q60 140 75 143 Q90 140 95 125 Q100 110 90 85" fill="none" stroke="#A5B4FC" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
                         </div>
                     </div>
 
-                    {{-- Smaller Images --}}
-                    <div class="hidden sm:block rounded-2xl overflow-hidden h-40 bg-gradient-to-br from-cyan-600 to-blue-700 relative">
-                        <svg viewBox="0 0 150 160" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="150" height="160" fill="#0891B2"/>
-                            <circle cx="75" cy="60" r="35" fill="#0E7490" opacity="0.7"/>
-                            <ellipse cx="75" cy="130" rx="50" ry="40" fill="#155E75"/>
-                            <circle cx="75" cy="55" r="20" fill="#FDE68A"/>
-                            <rect x="60" y="72" width="30" height="55" rx="5" fill="#0C4A6E" opacity="0.8"/>
-                            <rect x="60" y="72" width="30" height="55" rx="5" fill="white" opacity="0.2"/>
-                        </svg>
-                    </div>
-                    <div class="hidden sm:block rounded-2xl overflow-hidden h-40 bg-gradient-to-br from-blue-500 to-indigo-700 relative">
-                        <svg viewBox="0 0 150 160" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="150" height="160" fill="#4F46E5"/>
-                            <circle cx="75" cy="50" r="80" fill="#4338CA" opacity="0.4"/>
-                            <circle cx="75" cy="55" r="22" fill="#C7D2FE"/>
-                            <ellipse cx="75" cy="125" rx="45" ry="45" fill="#3730A3"/>
-                            <rect x="62" y="75" width="26" height="60" rx="5" fill="#312E81" opacity="0.8"/>
-                            {{-- stethoscope --}}
-                            <path d="M60 85 Q50 110 55 125 Q60 140 75 143 Q90 140 95 125 Q100 110 90 85" fill="none" stroke="#A5B4FC" stroke-width="3" stroke-linecap="round"/>
-                        </svg>
+                    {{-- Column 2 --}}
+                    <div class="hidden sm:flex flex-col gap-4 flex-1">
+                        {{-- Small Image 1 (Teal) --}}
+                        <div class="rounded-2xl overflow-hidden h-40 bg-gradient-to-br from-cyan-600 to-blue-700 relative">
+                            <svg viewBox="0 0 150 160" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="150" height="160" fill="#0891B2"/>
+                                <circle cx="75" cy="60" r="35" fill="#0E7490" opacity="0.7"/>
+                                <ellipse cx="75" cy="130" rx="50" ry="40" fill="#155E75"/>
+                                <circle cx="75" cy="55" r="20" fill="#FDE68A"/>
+                                <rect x="60" y="72" width="30" height="55" rx="5" fill="#0C4A6E" opacity="0.8"/>
+                                <rect x="60" y="72" width="30" height="55" rx="5" fill="white" opacity="0.2"/>
+                            </svg>
+                        </div>
+
+                        {{-- Small Image 3 (Heartbeat pulse, now h-80) --}}
+                        <div class="rounded-2xl overflow-hidden h-80 bg-gradient-to-br from-rose-500 to-red-700 relative flex items-center justify-center">
+                            <svg viewBox="0 0 150 160" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="150" height="160" fill="#E11D48"/>
+                                <circle cx="75" cy="80" r="50" fill="#BE123C" opacity="0.6"/>
+                                <path d="M35 85 L55 85 L65 60 L85 115 L95 85 L115 85" fill="none" stroke="#FFE4E6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
                     </div>
                 </div>
 
@@ -91,7 +108,7 @@
                 }
                 $aboutDesc = \Modules\Settings\Models\Setting::where('key', 'home_about_description')->value('value') ?: 'Fugiat ut voluptate quo. Occaecat hic aute corporis culpitur facilius laboris excepteur, labore et Repnat emdolit. Patturiam, sint aute risus ture.';
             @endphp
-            <div class="flex flex-col gap-6">
+            <div class="flex flex-col gap-6" data-aos="fade-left">
                 <div>
                     <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-600 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
