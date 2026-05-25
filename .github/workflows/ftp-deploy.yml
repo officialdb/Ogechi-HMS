@@ -22,7 +22,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4' # Updated to match your local PHP 8.4 environment
+          php-version: '8.4'
           extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, gd, iconv, json, libxml, pdo
           coverage: none
 
@@ -40,13 +40,19 @@ jobs:
       - name: Build Frontend Assets
         run: npm run build
 
-      - name: 📂 Sync files
+      - name: 🔧 Patch public/index.php for server folder structure
+        run: |
+          sed -i "s|__DIR__.'/../storage|__DIR__.'/../Ogechihms/storage|g" public/index.php
+          sed -i "s|__DIR__.'/../vendor/autoload.php|__DIR__.'/../Ogechihms/vendor/autoload.php|g" public/index.php
+          sed -i "s|__DIR__.'/../bootstrap/app.php|__DIR__.'/../Ogechihms/bootstrap/app.php|g" public/index.php
+
+      - name: 📂 Deploy app files → /Ogechihms/
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: / # Change this if your public folder is inside a subfolder, e.g. /public_html/
+          server-dir: /Ogechihms/
           exclude: |
             **/.git*
             **/.git*/**
@@ -59,3 +65,16 @@ jobs:
             phpunit.xml
             .env.example
             .gitignore
+            **/public/**
+
+      - name: 🌐 Deploy public files → /public_html/
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./public/
+          server-dir: /public_html/
+          exclude: |
+            **/.git*
+            **/.git*/**
