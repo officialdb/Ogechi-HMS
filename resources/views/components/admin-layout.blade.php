@@ -23,6 +23,20 @@
         [x-cloak] { display: none !important; }
         @keyframes shimmer { 0%{background-position:-600px 0} 100%{background-position:600px 0} }
         .skeleton { background:linear-gradient(90deg,#e2e8f0 25%,#f1f5f9 50%,#e2e8f0 75%); background-size:600px 100%; animation:shimmer 1.6s infinite linear; border-radius:10px; }
+
+        /* ── Turbo smooth page transitions ──────────────── */
+        @keyframes turbo-fade-in {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        #main-content {
+            animation: turbo-fade-in 0.22s ease-out both;
+        }
+        /* Progress bar colour override */
+        .turbo-progress-bar {
+            height: 3px;
+            background: linear-gradient(90deg, #0B5ED7, #60A5FA);
+        }
     </style>
     {{ $styles ?? '' }}
 </head>
@@ -46,6 +60,8 @@
 
     {{-- ══ SIDEBAR ══════════════════════════════════════ --}}
     <aside
+        id="admin-sidebar"
+        data-turbo-permanent
         :class="[
             sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         ]"
@@ -138,6 +154,8 @@
     </aside>
 
     <div
+        id="sidebar-spacer"
+        data-turbo-permanent
         aria-hidden="true"
         class="hidden lg:block flex-shrink-0 transition-all duration-300"
         :style="{ width: sidebarCollapsed ? '96px' : '272px' }"
@@ -216,10 +234,32 @@
         </header>
 
         {{-- Content --}}
-        <main class="flex-1 py-6 px-6 lg:px-10 xl:px-12">
+        <main id="main-content" class="flex-1 py-6 px-6 lg:px-10 xl:px-12">
             {{ $slot }}
         </main>
     </div>
 </div>
+
+{{-- ── Turbo: update active sidebar link on every navigation ── --}}
+<script>
+    function updateActiveSidebarLink() {
+        const current = window.location.pathname;
+        document.querySelectorAll('#admin-sidebar a.admin-sidebar-link').forEach(link => {
+            const href = new URL(link.href, window.location.origin).pathname;
+            // Match exact or sub-path (e.g. /dashboard/patients matches /dashboard/patients/*)
+            const isActive = current === href || (href !== '/' && current.startsWith(href));
+            link.classList.toggle('nav-item-active', isActive);
+            link.classList.toggle('nav-item-inactive', !isActive);
+            // Sync SVG colour
+            const svg = link.querySelector('svg');
+            if (svg) svg.classList.toggle('text-white', isActive);
+        });
+    }
+    // Run on initial load
+    document.addEventListener('DOMContentLoaded', updateActiveSidebarLink);
+    // Run on every Turbo navigation
+    document.addEventListener('turbo:load', updateActiveSidebarLink);
+</script>
+
 </body>
 </html>
