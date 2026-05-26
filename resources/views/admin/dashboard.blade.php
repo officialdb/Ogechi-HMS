@@ -5,7 +5,17 @@
         <div class="flex items-center justify-between">
             <div>
                 <h1 class="text-xl font-bold text-slate-900">
-                    Good morning, {{ explode(' ', Auth::user()->name)[0] }} 👋
+                    @php
+                        $hour = now()->format('H');
+                        if ($hour < 12) {
+                            $greeting = 'Good morning';
+                        } elseif ($hour < 17) {
+                            $greeting = 'Good afternoon';
+                        } else {
+                            $greeting = 'Good evening';
+                        }
+                    @endphp
+                    {{ $greeting }}, {{ explode(' ', Auth::user()->name)[0] }} 👋
                 </h1>
                 <p class="text-sm text-slate-500 mt-0.5">Here's what's happening at Ogechi Hospital today.</p>
             </div>
