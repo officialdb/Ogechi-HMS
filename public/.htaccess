@@ -3,6 +3,9 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    # Force index.php to load before index.html
+    DirectoryIndex index.php index.html
+
     RewriteEngine On
 
     # Handle Authorization Header
