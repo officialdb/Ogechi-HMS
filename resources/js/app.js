@@ -6,12 +6,21 @@ Turbo.start();
 import Alpine from 'alpinejs';
 window.Alpine = Alpine;
 
-// Re-init Alpine on every Turbo page visit
+// ── Sidebar store: persists across Turbo navigations ─────────────
+Alpine.store('sidebar', {
+    open: false,
+    collapsed: localStorage.getItem('admin-sidebar-collapsed') === 'true',
+    toggle() {
+        this.collapsed = !this.collapsed;
+        localStorage.setItem('admin-sidebar-collapsed', this.collapsed ? 'true' : 'false');
+    },
+    close() { this.open = false; },
+});
+
+// Re-sync store from localStorage on every Turbo visit (handles back/forward)
 document.addEventListener('turbo:load', () => {
-    if (window.Alpine) {
-        // Alpine automatically re-initialises new DOM nodes via MutationObserver
-        // Nothing extra needed — this hook is here for any future JS init calls
-    }
+    Alpine.store('sidebar').collapsed =
+        localStorage.getItem('admin-sidebar-collapsed') === 'true';
 });
 
 Alpine.start();
