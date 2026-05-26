@@ -26,6 +26,13 @@ jobs:
       - name: Build Frontend Assets
         run: npm run build
 
+      - name: 🗂️ Allow build folder to be uploaded (not in .gitignore on CI)
+        run: |
+          sed -i '/\/public\/build/d' .gitignore
+          echo "Contents of public/build:"
+          ls -la public/build/
+          ls -la public/build/assets/
+
       - name: 🌐 Upload build assets → /public_html/build/
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
