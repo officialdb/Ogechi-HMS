@@ -13,14 +13,18 @@ Alpine.store('sidebar', {
     toggle() {
         this.collapsed = !this.collapsed;
         localStorage.setItem('admin-sidebar-collapsed', this.collapsed ? 'true' : 'false');
+        document.documentElement.classList.toggle('sidebar-is-collapsed', this.collapsed);
+        document.documentElement.style.setProperty('--sidebar-width', this.collapsed ? '96px' : '272px');
     },
     close() { this.open = false; },
 });
 
 // Re-sync store from localStorage on every Turbo visit (handles back/forward)
 document.addEventListener('turbo:load', () => {
-    Alpine.store('sidebar').collapsed =
-        localStorage.getItem('admin-sidebar-collapsed') === 'true';
+    const isCol = localStorage.getItem('admin-sidebar-collapsed') === 'true';
+    if(window.Alpine) Alpine.store('sidebar').collapsed = isCol;
+    document.documentElement.classList.toggle('sidebar-is-collapsed', isCol);
+    document.documentElement.style.setProperty('--sidebar-width', isCol ? '96px' : '272px');
 });
 
 Alpine.start();

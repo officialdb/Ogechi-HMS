@@ -37,6 +37,14 @@
             height: 3px;
             background: linear-gradient(90deg, #0B5ED7, #60A5FA);
         }
+
+        /* ── Sidebar pure CSS collapse logic ─────────────── */
+        html.sidebar-is-collapsed #admin-sidebar .hide-when-collapsed { display: none !important; }
+        html.sidebar-is-collapsed #admin-sidebar .show-when-collapsed { display: flex !important; }
+        html:not(.sidebar-is-collapsed) #admin-sidebar .show-when-collapsed { display: none !important; }
+        html.sidebar-is-collapsed #admin-sidebar .logo-container { padding-left: 0.75rem; padding-right: 0.75rem; }
+        html.sidebar-is-collapsed #admin-sidebar .logo-link { width: 100%; justify-content: center; }
+        html.sidebar-is-collapsed #admin-sidebar .nav-link { justify-content: center; padding-left: 0.75rem; padding-right: 0.75rem; }
     </style>
     {{ $styles ?? '' }}
     {{-- Instantly apply collapsed sidebar width from localStorage BEFORE Alpine loads --}}
@@ -44,6 +52,7 @@
         (function() {
             var collapsed = localStorage.getItem('admin-sidebar-collapsed') === 'true';
             document.documentElement.style.setProperty('--sidebar-width', collapsed ? '96px' : '272px');
+            if (collapsed) document.documentElement.classList.add('sidebar-is-collapsed');
         })();
     </script>
 </head>
@@ -62,19 +71,18 @@
         :class="[
             $store.sidebar.open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         ]"
-        class="admin-sidebar fixed top-0 left-0 z-40 h-full w-[272px] flex flex-col transition-all duration-300 ease-out lg:translate-x-0 border-r border-slate-100 shadow-xl lg:shadow-none"
-        :style="{ width: $store.sidebar.collapsed ? '96px' : '272px' }"
+        class="admin-sidebar fixed top-0 left-0 z-40 h-full flex flex-col transition-all duration-300 ease-out lg:translate-x-0 border-r border-slate-100 shadow-xl lg:shadow-none"
         style="width: var(--sidebar-width, 272px);"
     >
         {{-- Logo --}}
-        <div :class="$store.sidebar.collapsed ? 'px-3' : 'px-4'" class="flex items-center gap-3 py-4 border-b border-slate-100 flex-shrink-0 transition-all duration-300">
-            <a href="{{ route('dashboard') }}" :class="$store.sidebar.collapsed ? 'w-full justify-center' : 'flex-1'" class="flex items-center gap-3 min-w-0 transition-all duration-300">
+        <div class="logo-container px-4 flex items-center gap-3 py-4 border-b border-slate-100 flex-shrink-0 transition-all duration-300">
+            <a href="{{ route('dashboard') }}" class="logo-link flex-1 flex items-center gap-3 min-w-0 transition-all duration-300">
                 <div class="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                     </svg>
                 </div>
-                <div class="leading-tight min-w-0" x-cloak x-show="!$store.sidebar.collapsed" x-transition.opacity>
+                <div class="hide-when-collapsed leading-tight min-w-0 transition-opacity">
                     <p class="text-sm font-bold text-slate-900 truncate">Ogechi HMS</p>
                     <p class="text-[11px] text-slate-400 uppercase tracking-[0.14em] truncate">Hospital Management</p>
                 </div>
@@ -107,20 +115,19 @@
 
             @foreach($navGroups as $groupLabel => $items)
                 <div class="{{ $loop->first ? '' : 'pt-3' }}">
-                    <p x-cloak x-show="!$store.sidebar.collapsed" class="admin-sidebar-heading px-4 mb-1.5 font-bold text-slate-400 uppercase">{{ $groupLabel }}</p>
+                    <p class="hide-when-collapsed admin-sidebar-heading px-4 mb-1.5 font-bold text-slate-400 uppercase">{{ $groupLabel }}</p>
                     @foreach($items as $item)
                         @php $isActive = request()->routeIs($item['active']); @endphp
                         <a href="{{ route($item['route']) }}"
-                           :class="$store.sidebar.collapsed ? 'justify-center px-3' : ''"
                            title="{{ $item['label'] }}"
-                           class="admin-sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 mb-0.5 {{ $isActive ? 'nav-item-active' : 'nav-item-inactive' }}">
+                           class="nav-link admin-sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 mb-0.5 {{ $isActive ? 'nav-item-active' : 'nav-item-inactive' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="admin-sidebar-icon flex-shrink-0 {{ $isActive ? 'text-white' : 'text-slate-400' }}"
                                  fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.9">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="{{ $item['icon'] }}"/>
                             </svg>
-                            <span x-cloak x-show="!$store.sidebar.collapsed" class="flex-1 leading-none truncate">{{ $item['label'] }}</span>
+                            <span class="hide-when-collapsed flex-1 leading-none truncate">{{ $item['label'] }}</span>
                             @if(!empty($item['badge']))
-                                <span x-cloak x-show="!$store.sidebar.collapsed" class="text-[10px] font-bold px-1.5 py-0.5 rounded-full {{ $isActive ? 'bg-white/25 text-white' : 'bg-blue-100 text-blue-600' }}">{{ $item['badge'] }}</span>
+                                <span class="hide-when-collapsed text-[10px] font-bold px-1.5 py-0.5 rounded-full {{ $isActive ? 'bg-white/25 text-white' : 'bg-blue-100 text-blue-600' }}">{{ $item['badge'] }}</span>
                             @endif
                         </a>
                     @endforeach
@@ -129,21 +136,21 @@
         </nav>
 
         {{-- Create New --}}
-        <div x-cloak x-show="!$store.sidebar.collapsed" x-transition.opacity class="m-3 mt-4 rounded-2xl p-4 overflow-hidden" style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border:1px solid #BFDBFE;">
+        <div class="hide-when-collapsed m-3 mt-4 rounded-2xl p-4 overflow-hidden" style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border:1px solid #BFDBFE;">
             <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center mx-auto mb-2 shadow-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
                 </svg>
             </div>
-            <div x-cloak x-show="!$store.sidebar.collapsed" x-transition.opacity>
+            <div>
                 <p class="text-[11px] font-bold text-slate-700 text-center mb-0.5">Add New Category</p>
                 <p class="text-[10px] text-slate-400 text-center mb-3">or Database</p>
             </div>
-            <a href="{{ route('patients.create') }}" :class="$store.sidebar.collapsed ? 'text-[0px] py-2.5' : 'text-xs py-2'" class="block w-full text-center text-white font-bold rounded-xl transition-all duration-200 hover:opacity-90 shadow-md overflow-hidden" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
+            <a href="{{ route('patients.create') }}" class="text-xs py-2 block w-full text-center text-white font-bold rounded-xl transition-all duration-200 hover:opacity-90 shadow-md overflow-hidden" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
                 + Create New
             </a>
         </div>
-        <a x-cloak x-show="$store.sidebar.collapsed" x-transition.opacity href="{{ route('patients.create') }}" title="Create New" class="mx-auto mt-4 mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-md transition-all duration-200 hover:bg-blue-700">
+        <a href="{{ route('patients.create') }}" title="Create New" class="show-when-collapsed mx-auto mt-4 mb-3 h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-md transition-all duration-200 hover:bg-blue-700">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
             </svg>
@@ -156,7 +163,6 @@
         data-turbo-permanent
         aria-hidden="true"
         class="hidden lg:block flex-shrink-0 transition-all duration-300"
-        :style="{ width: $store.sidebar.collapsed ? '96px' : '272px' }"
         style="width: var(--sidebar-width, 272px);"
     ></div>
 
