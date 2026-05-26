@@ -74,7 +74,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                     </svg>
                 </div>
-                <div class="leading-tight min-w-0" x-show="!$store.sidebar.collapsed" x-transition.opacity>
+                <div class="leading-tight min-w-0" x-cloak x-show="!$store.sidebar.collapsed" x-transition.opacity>
                     <p class="text-sm font-bold text-slate-900 truncate">Ogechi HMS</p>
                     <p class="text-[11px] text-slate-400 uppercase tracking-[0.14em] truncate">Hospital Management</p>
                 </div>
@@ -107,7 +107,7 @@
 
             @foreach($navGroups as $groupLabel => $items)
                 <div class="{{ $loop->first ? '' : 'pt-3' }}">
-                    <p x-cloak x-show="!sidebarCollapsed" class="admin-sidebar-heading px-4 mb-1.5 font-bold text-slate-400 uppercase">{{ $groupLabel }}</p>
+                    <p x-cloak x-show="!$store.sidebar.collapsed" class="admin-sidebar-heading px-4 mb-1.5 font-bold text-slate-400 uppercase">{{ $groupLabel }}</p>
                     @foreach($items as $item)
                         @php $isActive = request()->routeIs($item['active']); @endphp
                         <a href="{{ route($item['route']) }}"
@@ -246,7 +246,8 @@
         document.querySelectorAll('#admin-sidebar a.admin-sidebar-link').forEach(link => {
             const href = new URL(link.href, window.location.origin).pathname;
             // Match exact or sub-path (e.g. /dashboard/patients matches /dashboard/patients/*)
-            const isActive = current === href || (href !== '/' && current.startsWith(href));
+            // But skip prefix matching for /dashboard or / so they are only active on exact match
+            const isActive = current === href || (href !== '/dashboard' && href !== '/' && current.startsWith(href));
             link.classList.toggle('nav-item-active', isActive);
             link.classList.toggle('nav-item-inactive', !isActive);
             // Sync SVG colour
