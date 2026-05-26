@@ -1,58 +1,109 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
+  <img src="public/storage/images/hero.jpg" alt="Ogechi Hospital" width="100%" style="border-radius: 12px;" onerror="this.style.display='none'">
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+  # 🏥 Ogechi Hospital Management System (HMS)
 
-## About Laravel
+  <p align="center">
+    <strong>A modern, premium, and highly optimized Hospital Management System built for Ogechi Hospital.</strong>
+  </p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+  <p align="center">
+    <a href="https://github.com/officialdb/Ogechi-HMS/actions/workflows/ftp-deploy.yml"><img src="https://github.com/officialdb/Ogechi-HMS/actions/workflows/ftp-deploy.yml/badge.svg?branch=main" alt="Deploy Status"></a>
+    <img src="https://img.shields.io/badge/Laravel-11.x-FF2D20?style=flat&logo=laravel" alt="Laravel Version">
+    <img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat&logo=php" alt="PHP Version">
+    <img src="https://img.shields.io/badge/TailwindCSS-3.4-38B2AC?style=flat&logo=tailwind-css" alt="Tailwind CSS">
+    <img src="https://img.shields.io/badge/Alpine.js-3.x-8BC0D0?style=flat&logo=alpine.js" alt="Alpine.js">
+  </p>
+</div>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🌟 Overview
 
-## Learning Laravel
+The **Ogechi HMS** is a comprehensive and secure web application designed to streamline the operations of Ogechi Hospital. It manages everything from patient registration and clinical records to billing, pharmacy, and laboratory reports—all wrapped in a beautiful, responsive, and intuitive user interface.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ✨ Key Features
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **🧑‍⚕️ Patient Management:** Comprehensive registration, medical history tracking, emergency contacts, and next-of-kin records.
+- **📅 Appointments & Scheduling:** Streamlined doctor appointments and consultation tracking.
+- **🏥 Departments & Staff:** Manage hospital departments, assign doctors, and track staff availability.
+- **💊 Pharmacy Module:** Inventory management for medicines and automated prescription handling.
+- **🧪 Laboratory:** Integrated lab test requests, result tracking, and reporting.
+- **💳 Billing & Invoicing:** Automated invoice generation, payment tracking, and financial reporting.
+- **📊 Admin Dashboard:** Real-time KPIs, statistics, and modular settings management.
+- **🌍 Frontend Website:** A public-facing CMS for blog posts, hospital information, and contact details.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 🛠️ Technology Stack
 
-## Agentic Development
+- **Backend:** [Laravel 11](https://laravel.com/) (PHP 8.2+)
+- **Frontend Core:** Blade Templates, [Tailwind CSS](https://tailwindcss.com/), [Alpine.js](https://alpinejs.dev/)
+- **Build Tool:** [Vite](https://vitejs.dev/)
+- **Database:** MySQL
+- **Icons:** Heroicons
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 🚀 Deployment & CI/CD Workflow
 
-```bash
-composer require laravel/boost --dev
+This repository utilizes a modern, zero-downtime deployment strategy using **GitHub Actions**.
 
-php artisan boost:install
-```
+### Branches Strategy
+- **`dev` Branch:** Used for all active development and staging.
+- **`main` Branch:** The production branch. **Do not push directly to main.**
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### How to Deploy
+1. Push your code changes to the `dev` branch.
+2. Open a **Pull Request (PR)** from `dev` to `main` on GitHub.
+3. Once the PR is approved and **merged**, the `Deploy via FTP` GitHub Action will automatically trigger.
+4. The workflow will compile all assets, optimize the backend, and securely sync only the modified files directly to the live cPanel server.
 
-## Contributing
+## 💻 Local Installation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+To run this application on your local machine, follow these steps:
 
-## Code of Conduct
+### Prerequisites
+- PHP >= 8.2
+- Composer
+- Node.js & NPM
+- MySQL Database
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Setup Instructions
 
-## Security Vulnerabilities
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/officialdb/Ogechi-HMS.git
+   cd Ogechi-HMS
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2. **Install PHP Dependencies**
+   ```bash
+   composer install
+   ```
 
-## License
+3. **Install & Compile Node Dependencies**
+   ```bash
+   npm install
+   npm run dev
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. **Environment Setup**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+   *Make sure to configure your `DB_DATABASE`, `DB_USERNAME`, and `DB_PASSWORD` in the `.env` file.*
+
+5. **Run Migrations & Seeders**
+   ```bash
+   php artisan migrate --seed
+   ```
+
+6. **Serve the Application**
+   ```bash
+   php artisan serve
+   ```
+   *Visit `http://localhost:8000` in your browser.*
+
+---
+
+<div align="center">
+  <p>Built with ❤️ for Ogechi Hospital</p>
+</div>
