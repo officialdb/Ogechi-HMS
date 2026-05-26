@@ -9,13 +9,13 @@
                     <h3 class="text-lg font-bold text-white">Subscribe to Our Newsletter</h3>
                     <p class="text-sm text-blue-200 mt-1">Get the latest health tips and hospital news delivered to your inbox.</p>
                 </div>
-                <form class="flex gap-3 w-full lg:w-auto" onsubmit="return false;">
+                <form class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto" onsubmit="return false;">
                     <input
                         type="email"
                         placeholder="Your email address"
-                        class="flex-1 lg:w-72 bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+                        class="w-full sm:flex-1 lg:w-72 bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
                     >
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-400 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 whitespace-nowrap">
+                    <button type="submit" class="w-full sm:w-auto bg-blue-500 hover:bg-blue-400 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 whitespace-nowrap">
                         Subscribe
                     </button>
                 </form>

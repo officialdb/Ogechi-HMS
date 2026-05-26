@@ -22,7 +22,7 @@
 
         <style>
             *, *::before, *::after { box-sizing: border-box; }
-            html { scroll-behavior: smooth; }
+            html { scroll-behavior: smooth; overflow-x: hidden; }
             body { font-family: 'Poppins', sans-serif; }
 
             /* Custom scrollbar */
