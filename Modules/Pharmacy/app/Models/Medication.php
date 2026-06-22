@@ -16,6 +16,7 @@ class Medication extends Model
         'category',
         'manufacturer',
         'quantity_in_stock',
+        'min_stock',
         'unit_price',
         'expiry_date',
         'status',
