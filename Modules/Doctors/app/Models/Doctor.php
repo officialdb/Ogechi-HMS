@@ -13,6 +13,7 @@ class Doctor extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
+        'user_id',
         'department_id',
         'first_name',
         'last_name',
@@ -43,5 +44,20 @@ class Doctor extends Model
     public function department()
     {
         return $this->belongsTo(\Modules\Departments\Models\Department::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
+
+    public function assignedPatients()
+    {
+        return $this->hasMany(\Modules\Patients\Models\Patient::class, 'assigned_doctor_id');
+    }
+
+    public function invite()
+    {
+        return $this->hasOne(DoctorInvite::class);
     }
 }

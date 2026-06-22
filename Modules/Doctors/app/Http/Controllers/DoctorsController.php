@@ -5,6 +5,10 @@ namespace Modules\Doctors\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Doctors\Models\Doctor;
+use Modules\Doctors\Models\DoctorInvite;
+use App\Notifications\DoctorInviteNotification;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Notification;
 
 class DoctorsController extends Controller
 {
@@ -58,8 +62,21 @@ class DoctorsController extends Controller
 
         $doctor = Doctor::create($validated);
 
+        if ($doctor->email) {
+            $token = Str::random(60);
+            
+            DoctorInvite::create([
+                'doctor_id' => $doctor->id,
+                'email' => $doctor->email,
+                'token' => $token,
+                'expires_at' => now()->addDays(7),
+            ]);
+
+            Notification::route('mail', $doctor->email)->notify(new DoctorInviteNotification($token, $doctor->first_name));
+        }
+
         return redirect()->route('modules.doctors.index')
-                         ->with('success', 'Doctor registered successfully.');
+                         ->with('success', 'Doctor registered and invite sent successfully.');
     }
 
     /**
@@ -94,10 +111,29 @@ class DoctorsController extends Controller
             'bio'            => 'nullable|string',
         ]);
 
+        $previousStatus = $doctor->status;
         $doctor->update($validated);
 
+        // Handle account access based on status change
+        if ($doctor->user) {
+            if ($validated['status'] === 'inactive') {
+                // Deactivate login and unassign all their patients
+                $doctor->user->update(['is_active' => false]);
+                $doctor->assignedPatients()->update(['assigned_doctor_id' => null]);
+            } elseif ($previousStatus === 'inactive' && $validated['status'] !== 'inactive') {
+                // Reactivate login when brought back
+                $doctor->user->update(['is_active' => true]);
+            }
+        }
+
+        $message = match($validated['status']) {
+            'inactive'  => 'Doctor marked as inactive. Their account has been deactivated and patients unassigned.',
+            'on_leave'  => 'Doctor updated and set on leave.',
+            default     => 'Doctor updated successfully.',
+        };
+
         return redirect()->route('modules.doctors.show', $doctor)
-                         ->with('success', 'Doctor updated successfully.');
+                         ->with('success', $message);
     }
 
     /**

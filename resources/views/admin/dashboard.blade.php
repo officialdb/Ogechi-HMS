@@ -81,7 +81,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-2xl font-black text-slate-900">${{ number_format($monthRevenue, 2) }}</p>
+                    <p class="text-2xl font-black text-slate-900">{{ $currency_symbol }}{{ number_format($monthRevenue, 2) }}</p>
                     <p class="text-xs font-semibold text-slate-500 mt-0.5">Revenue this Month</p>
                     <p class="text-[11px] mt-1 font-medium {{ $revenueGrowth >= 0 ? 'text-emerald-600' : 'text-rose-500' }}">
                         {{ $revenueGrowth > 0 ? '+' : '' }}{{ $revenueGrowth }}% vs last month

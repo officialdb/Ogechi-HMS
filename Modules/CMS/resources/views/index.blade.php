@@ -21,14 +21,14 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             <input type="search" name="search" value="{{ request('search') }}" placeholder="Search posts by title, author, or category…" 
                    class="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-colors">
-            @if(request('status'))
-                <input type="hidden" name="status" value="{{ request('status') }}">
+            @if(request('approval_status'))
+                <input type="hidden" name="approval_status" value="{{ request('approval_status') }}">
             @endif
         </form>
         <div class="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0 hide-scrollbar">
-            @foreach(['all'=>'All','published'=>'Published','draft'=>'Drafts'] as $val => $label)
-                @php $isActive = request('status', 'all') === $val; @endphp
-                <a href="{{ request()->fullUrlWithQuery(['status' => $val, 'page' => 1]) }}" 
+            @foreach(['all'=>'All','approved'=>'Published','submitted'=>'Approval Queue','draft'=>'Drafts', 'rejected'=>'Rejected'] as $val => $label)
+                @php $isActive = request('approval_status', 'all') === $val; @endphp
+                <a href="{{ request()->fullUrlWithQuery(['approval_status' => $val, 'page' => 1]) }}" 
                    class="whitespace-nowrap px-4 py-2 text-xs font-bold rounded-xl transition-colors border {{ $isActive ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50' }}">
                     {{ $label }}
                 </a>
@@ -88,14 +88,22 @@
                                     </td>
                                     <td class="px-6 py-3.5">
                                         <div class="text-xs">
-                                            <p class="font-medium text-slate-700">{{ $post->author }}</p>
-                                            <p class="text-slate-400 mt-0.5">{{ $post->author_role ?? '—' }}</p>
+                                            <p class="font-medium text-slate-700">{{ $post->author?->name ?? '—' }}</p>
+                                            <p class="text-slate-400 mt-0.5">{{ $post->author?->roles->first()->name ?? '—' }}</p>
                                         </div>
                                     </td>
                                     <td class="px-6 py-3.5">
-                                        @if($post->status === 'published')
+                                        @if($post->approval_status === 'approved')
                                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-100/50">
                                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Published
+                                            </span>
+                                        @elseif($post->approval_status === 'submitted')
+                                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-blue-50 text-blue-700 border border-blue-100/50">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span> In Review
+                                            </span>
+                                        @elseif($post->approval_status === 'rejected')
+                                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-red-50 text-red-700 border border-red-100/50">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Rejected
                                             </span>
                                         @else
                                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-50 text-amber-700 border border-amber-100/50">
@@ -108,14 +116,36 @@
                                             {{ $post->published_at ? $post->published_at->format('M d, Y') : '—' }}
                                         </p>
                                     </td>
-                                    <td class="px-6 py-3.5 text-right">
+                                     <td class="px-6 py-3.5 text-right">
                                         <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            @if($post->approval_status === 'submitted')
+                                                {{-- Resend Notification to Publishers --}}
+                                                <form method="POST" action="{{ route('modules.cms.resend-notification', $post) }}">
+                                                    @csrf
+                                                    <button type="submit" title="Resend Notification to Publishers"
+                                                            class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            @endif
                                             <a href="{{ route('website.blog.show', $post->slug ?? 'preview') }}" target="_blank" class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors" title="View Article">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                             </a>
                                             <a href="{{ route('modules.cms.edit', $post) }}" class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-slate-200 transition-colors" title="Edit Article">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                             </a>
+                                            <form method="POST" action="{{ route('modules.cms.destroy', $post) }}"
+                                                  onsubmit="return confirm('Delete this post? This cannot be undone.')">
+                                                @csrf @method('DELETE')
+                                                <button type="submit" title="Delete Post"
+                                                        class="w-8 h-8 rounded-lg bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                    </svg>
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>

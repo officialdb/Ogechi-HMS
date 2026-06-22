@@ -12,9 +12,10 @@ use Modules\Patients\Models\PatientVital;
 
 class PatientService
 {
-    public function paginatedPatients(?string $search = null, int $perPage = 12): LengthAwarePaginator
+    public function paginatedPatients(?string $search = null, ?\Modules\Doctors\Models\Doctor $doctor = null, int $perPage = 12): LengthAwarePaginator
     {
         return Patient::query()
+            ->when($doctor, fn($q) => $q->where('assigned_doctor_id', $doctor->id))
             ->when($search, function ($query, string $search): void {
                 $query->where(function ($patientQuery) use ($search): void {
                     $patientQuery
@@ -26,6 +27,7 @@ class PatientService
                         ->orWhere('email', 'like', "%{$search}%");
                 });
             })
+            ->with('assignedDoctor')
             ->latest('id')
             ->paginate($perPage)
             ->withQueryString();

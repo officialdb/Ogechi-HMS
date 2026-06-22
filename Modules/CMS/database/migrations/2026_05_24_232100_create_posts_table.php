@@ -19,12 +19,11 @@ return new class extends Migration
             $table->string('cat_color')->nullable();
             $table->text('excerpt')->nullable();
             $table->longText('body');
-            $table->string('author');
-            $table->string('author_role')->nullable();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('read_time')->nullable();
             $table->string('icon_path')->nullable();
             $table->string('grad')->nullable();
-            $table->enum('status', ['draft', 'published'])->default('draft');
+            $table->enum('approval_status', ['draft', 'submitted', 'approved', 'rejected'])->default('draft');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });

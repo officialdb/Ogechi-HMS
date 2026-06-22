@@ -11,6 +11,8 @@ return [
         'Pharmacist',
         'Accountant',
         'Patient',
+        'Writer',
+        'Publisher',
     ],
 
     'modules' => [
@@ -31,7 +33,11 @@ return [
     'permissions' => [
         'dashboard.view',
         'cms.view',
+        'cms.create',
         'cms.manage',
+        'cms.submit',
+        'cms.approve',
+        'cms.publish',
         'patients.view',
         'patients.create',
         'patients.update',

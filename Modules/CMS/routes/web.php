@@ -10,4 +10,10 @@ Route::middleware(['auth'])->prefix('dashboard/cms')->name('modules.cms.')->grou
     Route::get('/{post}/edit', [CMSController::class, 'edit'])->name('edit');
     Route::match(['put', 'patch'], '/{post}', [CMSController::class, 'update'])->name('update');
     Route::delete('/{post}', [CMSController::class, 'destroy'])->name('destroy');
+    
+    // Approval Workflow Routes
+    Route::post('/{post}/submit', [CMSController::class, 'submitForReview'])->name('submit')->middleware('permission:cms.submit');
+    Route::post('/{post}/approve', [CMSController::class, 'approve'])->name('approve')->middleware('permission:cms.approve');
+    Route::post('/{post}/reject', [CMSController::class, 'reject'])->name('reject')->middleware('permission:cms.approve');
+    Route::post('/{post}/resend-notification', [CMSController::class, 'resendNotification'])->name('resend-notification');
 });

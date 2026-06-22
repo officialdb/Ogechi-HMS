@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, \Spatie\Activitylog\Models\Concerns\LogsActivity;
 
     protected $fillable = [
         'title',
@@ -18,12 +18,11 @@ class Post extends Model
         'excerpt',
         'body',
         'thumbnail',
-        'author',
-        'author_role',
+        'user_id',
         'read_time',
         'icon_path',
         'grad',
-        'status',
+        'approval_status',
         'published_at',
     ];
 
@@ -40,5 +39,19 @@ class Post extends Model
                 $post->slug = Str::slug($post->title);
             }
         });
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'user_id');
+    }
+
+    public function getActivitylogOptions(): \Spatie\Activitylog\Support\LogOptions
+    {
+        return \Spatie\Activitylog\Support\LogOptions::defaults()
+            ->useLogName('posts')
+            ->logOnly(['title', 'approval_status'])
+            ->logOnlyDirty()
+            ->dontLogEmptyChanges();
     }
 }

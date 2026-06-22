@@ -25,6 +25,13 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Super Admin User Management
+    Route::middleware(['role:Super Admin'])->group(function () {
+        Route::get('/users', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.users.index');
+        Route::get('/users/{user}/roles', [\App\Http\Controllers\Admin\UserController::class, 'editRoles'])->name('admin.users.roles');
+        Route::put('/users/{user}/roles', [\App\Http\Controllers\Admin\UserController::class, 'updateRoles'])->name('admin.users.roles.update');
+    });
 });
 
 require __DIR__.'/auth.php';

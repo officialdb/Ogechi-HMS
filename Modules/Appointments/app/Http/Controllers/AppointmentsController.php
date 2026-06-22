@@ -15,18 +15,27 @@ class AppointmentsController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Appointment::with(['patient', 'doctor']);
+        $user         = $request->user();
+        $doctorRecord = $user->hasRole('Doctor') ? $user->doctor : null;
+
+        $query = Appointment::with(['patient', 'doctor'])
+            ->when($doctorRecord, fn($q) => $q->where('doctor_id', $doctorRecord->id)
+                ->orWhereHas('patient', fn($p) => $p->where('assigned_doctor_id', $doctorRecord->id))
+            );
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->whereHas('patient', function ($q) use ($search) {
-                $q->where('first_name', 'like', "%{$search}%")
-                  ->orWhere('last_name', 'like', "%{$search}%")
-                  ->orWhere('patient_number', 'like', "%{$search}%");
-            })->orWhereHas('doctor', function ($q) use ($search) {
-                $q->where('first_name', 'like', "%{$search}%")
-                  ->orWhere('last_name', 'like', "%{$search}%");
-            });
+            $query->where(fn($q) => $q
+                ->whereHas('patient', fn($p) => $p
+                    ->where('first_name', 'like', "%{$search}%")
+                    ->orWhere('last_name', 'like', "%{$search}%")
+                    ->orWhere('patient_number', 'like', "%{$search}%")
+                )
+                ->orWhereHas('doctor', fn($d) => $d
+                    ->where('first_name', 'like', "%{$search}%")
+                    ->orWhere('last_name', 'like', "%{$search}%")
+                )
+            );
         }
 
         if ($request->filled('status') && $request->status !== 'all') {
@@ -35,29 +44,39 @@ class AppointmentsController extends Controller
 
         // Calendar View Logic
         if ($request->view === 'calendar') {
-            $allAppointments = $query->get()->map(function($apt) {
+            $allAppointments = $query->get()->map(function ($apt) {
                 $colors = [
-                    'pending' => '#f59e0b',   // amber-500
-                    'confirmed' => '#3b82f6', // blue-500
-                    'completed' => '#10b981', // emerald-500
-                    'cancelled' => '#94a3b8'  // slate-400
+                    'pending'   => '#f59e0b',
+                    'confirmed' => '#3b82f6',
+                    'completed' => '#10b981',
+                    'cancelled' => '#94a3b8',
                 ];
-                
-                // Format time carefully because appointment_time could be H:i:s
+
+                $patientName = $apt->patient
+                    ? ($apt->patient->first_name . ' ' . $apt->patient->last_name)
+                    : 'Unknown Patient';
+
+                $doctorName = $apt->doctor
+                    ? 'Dr. ' . $apt->doctor->last_name
+                    : 'Unassigned';
+
+                // Build a full ISO-8601 datetime string FullCalendar can parse
                 $time = \Carbon\Carbon::parse($apt->appointment_time)->format('H:i:s');
-                
+                $start = $apt->appointment_date->format('Y-m-d') . 'T' . $time;
+
                 return [
-                    'id' => $apt->id,
-                    'title' => $apt->patient->first_name . ' (' . $apt->doctor->last_name . ')',
-                    'start' => $apt->appointment_date->format('Y-m-d') . 'T' . $time,
-                    'url' => route('modules.appointments.show', $apt),
+                    'id'    => $apt->id,
+                    'title' => $patientName . ' — ' . $doctorName,
+                    'start' => $start,
+                    'url'   => route('modules.appointments.show', $apt),
                     'color' => $colors[$apt->status] ?? '#3b82f6',
                     'extendedProps' => [
                         'status' => $apt->status,
-                        'reason' => $apt->reason
-                    ]
+                        'reason' => $apt->reason ?? '',
+                    ],
                 ];
             });
+
             return view('appointments::calendar', compact('allAppointments'));
         }
 
@@ -71,9 +90,20 @@ class AppointmentsController extends Controller
      */
     public function create()
     {
-        $patients = Patient::select('id', 'first_name', 'last_name', 'patient_number')->orderBy('first_name')->get();
-        $doctors = Doctor::where('status', '!=', 'inactive')->select('id', 'first_name', 'last_name', 'specialization')->orderBy('first_name')->get();
-        
+        $user         = auth()->user();
+        $doctorRecord = $user->hasRole('Doctor') ? $user->doctor : null;
+
+        // Doctors only book for their own patients
+        $patients = Patient::select('id', 'first_name', 'last_name', 'patient_number')
+            ->when($doctorRecord, fn($q) => $q->where('assigned_doctor_id', $doctorRecord->id))
+            ->orderBy('first_name')
+            ->get();
+
+        $doctors = Doctor::where('status', '!=', 'inactive')
+            ->select('id', 'first_name', 'last_name', 'specialization')
+            ->orderBy('first_name')
+            ->get();
+
         return view('appointments::create', compact('patients', 'doctors'));
     }
 

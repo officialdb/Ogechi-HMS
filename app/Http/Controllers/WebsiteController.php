@@ -40,7 +40,7 @@ class WebsiteController extends Controller
     /** Blog listing page */
     public function blog()
     {
-        $posts = Post::where('status', 'published')
+        $posts = Post::where('approval_status', 'approved')
             ->latest('published_at')
             ->get();
         return view('website.pages.blog.index', compact('posts'));
@@ -49,9 +49,9 @@ class WebsiteController extends Controller
     /** Single blog post page */
     public function blogShow(string $slug)
     {
-        $post    = Post::where('slug', $slug)->where('status', 'published')->firstOrFail();
+        $post    = Post::where('slug', $slug)->where('approval_status', 'approved')->firstOrFail();
         $related = Post::where('slug', '!=', $slug)
-            ->where('status', 'published')
+            ->where('approval_status', 'approved')
             ->latest('published_at')
             ->take(3)
             ->get();

@@ -19,15 +19,15 @@
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm">
             <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Total Revenue</p>
-            <p class="text-2xl font-black text-emerald-600">${{ number_format(\Modules\Billing\Models\Invoice::where('status', 'paid')->sum('total_amount'), 2) }}</p>
+            <p class="text-2xl font-black text-emerald-600">{{ $currency_symbol }}{{ number_format(\Modules\Billing\Models\Invoice::where('status', 'paid')->sum('total_amount'), 2) }}</p>
         </div>
         <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm">
             <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Pending Unpaid</p>
-            <p class="text-2xl font-black text-amber-600">${{ number_format(\Modules\Billing\Models\Invoice::where('status', 'pending')->sum('total_amount'), 2) }}</p>
+            <p class="text-2xl font-black text-amber-600">{{ $currency_symbol }}{{ number_format(\Modules\Billing\Models\Invoice::where('status', 'pending')->sum('total_amount'), 2) }}</p>
         </div>
         <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm">
             <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Overdue Amount</p>
-            <p class="text-2xl font-black text-red-600">${{ number_format(\Modules\Billing\Models\Invoice::where('status', 'overdue')->sum('total_amount'), 2) }}</p>
+            <p class="text-2xl font-black text-red-600">{{ $currency_symbol }}{{ number_format(\Modules\Billing\Models\Invoice::where('status', 'overdue')->sum('total_amount'), 2) }}</p>
         </div>
     </div>
 
@@ -78,7 +78,7 @@
                                     <p class="text-[11px] text-slate-500 mt-0.5 font-mono">{{ $inv->patient->patient_number }}</p>
                                 </td>
                                 <td class="px-6 py-3.5">
-                                    <p class="font-black text-slate-900">${{ number_format($inv->total_amount, 2) }}</p>
+                                    <p class="font-black text-slate-900">{{ $currency_symbol }}{{ number_format($inv->total_amount, 2) }}</p>
                                 </td>
                                 <td class="px-6 py-3.5">
                                     <p class="text-xs text-slate-600"><span class="font-semibold">Issued:</span> {{ $inv->issue_date->format('M d, Y') }}</p>

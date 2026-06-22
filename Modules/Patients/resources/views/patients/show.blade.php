@@ -23,20 +23,20 @@
             <div class="absolute inset-0 opacity-20" style="background-image:radial-gradient(circle at 20% 50%,rgba(255,255,255,0.4) 0%,transparent 60%);"></div>
         </div>
 
-        <div class="px-6 pb-6">
-            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 -mt-8">
+        <div class="px-6 pb-6 relative z-10">
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                 {{-- Avatar --}}
-                <div class="flex items-end gap-4">
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br {{ $grad }} text-white font-black text-xl flex items-center justify-center shadow-xl border-4 border-white flex-shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="-mt-8 w-16 h-16 rounded-2xl bg-gradient-to-br {{ $grad }} text-white font-black text-xl flex items-center justify-center shadow-md border-4 border-white flex-shrink-0">
                         {{ $initials }}
                     </div>
-                    <div class="mb-1">
+                    <div class="pt-2">
                         <h1 class="text-lg font-black text-slate-900 leading-none">{{ $patient->full_name }}</h1>
                         <p class="text-xs text-slate-500 mt-1 capitalize">{{ $patient->gender }} · {{ $patient->date_of_birth?->age ?? '—' }} years old</p>
                     </div>
                 </div>
                 {{-- Actions --}}
-                <div class="flex items-center gap-2 mt-2 sm:mt-0 sm:mb-1">
+                <div class="flex items-center gap-2 mt-2 sm:mt-0 pt-2">
                     @can('patients.update')
                         <a href="{{ route('patients.edit', $patient) }}"
                            class="flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-white rounded-xl shadow-md transition-all hover:opacity-90"

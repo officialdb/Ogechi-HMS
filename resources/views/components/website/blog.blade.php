@@ -37,7 +37,7 @@
         {{-- Blog Cards --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @php
-                $posts = \Modules\CMS\Models\Post::where('status', 'published')->latest('published_at')->take(3)->get();
+                $posts = \Modules\CMS\Models\Post::where('approval_status', 'approved')->latest('published_at')->take(3)->get();
             @endphp
 
             @foreach($posts as $post)

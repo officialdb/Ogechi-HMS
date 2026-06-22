@@ -42,7 +42,8 @@ class StorePatientRequest extends FormRequest
             'next_of_kin_relationship' => ['nullable', 'string', 'max:100'],
             'emergency_contact_name' => ['nullable', 'string', 'max:150'],
             'emergency_contact_phone' => ['nullable', 'string', 'max:30'],
-            'notes' => ['nullable', 'string', 'max:3000'],
+            'notes'                    => ['nullable', 'string', 'max:3000'],
+            'assigned_doctor_id'        => ['nullable', 'integer', 'exists:doctors,id'],
         ];
     }
 }

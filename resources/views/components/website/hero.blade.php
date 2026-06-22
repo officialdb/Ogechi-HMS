@@ -19,27 +19,25 @@
             {{-- Left: Content --}}
             <div class="pb-12 lg:pb-28 pt-8 lg:pt-0 flex flex-col gap-6" data-aos="fade-right">
 
-                {{-- Trust Badge --}}
-                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 w-fit mt-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                    </svg>
-                    <span class="text-xs font-semibold text-white/80 uppercase tracking-widest">Health & Medical</span>
-                </div>
-
                 @php
                     $heroHeadline = \Modules\Settings\Models\Setting::where('key', 'home_hero_headline')->value('value') ?: 'Best Caring, Better Doctors';
-                    // We split the headline assuming the last two words should be blue.
+                    // Split headline: last two words go blue, rest is white. Strip trailing comma from the white part.
                     $words = explode(' ', $heroHeadline);
                     if (count($words) > 2) {
                         $lastTwo = array_slice($words, -2);
-                        $rest = array_slice($words, 0, count($words) - 2);
-                        $formattedHeadline = implode(' ', $rest) . ',<br><span class="text-blue-300">' . implode(' ', $lastTwo) . '</span>';
+                        $rest    = array_slice($words, 0, count($words) - 2);
+                        $restStr = rtrim(implode(' ', $rest), ','); // remove any trailing comma
+                        $formattedHeadline = $restStr . ',<br><span class="text-blue-300">' . implode(' ', $lastTwo) . '</span>';
                     } else {
                         $formattedHeadline = $heroHeadline;
                     }
-                    $heroDesc = \Modules\Settings\Models\Setting::where('key', 'home_hero_description')->value('value') ?: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.';
+                    $heroDesc     = \Modules\Settings\Models\Setting::where('key', 'home_hero_description')->value('value') ?: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.';
                     $contactPhone = \Modules\Settings\Models\Setting::where('key', 'contact_phone')->value('value') ?: '+234 800 123 4567';
+                    // Floating cards
+                    $card1Title = \Modules\Settings\Models\Setting::where('key', 'hero_card1_title')->value('value') ?: '24/7 Emergency Services';
+                    $card1Desc  = \Modules\Settings\Models\Setting::where('key', 'hero_card1_desc')->value('value')  ?: 'Round-the-clock emergency care available for every patient, every day.';
+                    $card2Title = \Modules\Settings\Models\Setting::where('key', 'hero_card2_title')->value('value') ?: 'Skilled Medical Professionals';
+                    $card2Desc  = \Modules\Settings\Models\Setting::where('key', 'hero_card2_desc')->value('value')  ?: 'Our certified specialists bring world-class expertise to every consultation.';
                 @endphp
 
                 {{-- Headline --}}
@@ -99,36 +97,30 @@
                     </div>
                 </div>
 
-                {{-- Floating Card 1: Emergency Services --}}
+                {{-- Floating Card 1 --}}
                 <div class="float-anim absolute -left-2 sm:-left-4 lg:-left-8 bottom-16 sm:bottom-32 lg:bottom-40 bg-white rounded-2xl shadow-xl shadow-blue-900/20 p-3 sm:p-4 w-40 sm:w-48 border border-blue-50 z-20" data-aos="zoom-in" data-aos-delay="400">
                     <div class="flex items-center gap-3 mb-2">
-                        <div class="w-9 h-9 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <div class="w-9 h-9 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                         </div>
-                        <div>
-                            <p class="text-xs font-bold text-gray-900 leading-tight">24*7 Emergency</p>
-                            <p class="text-xs font-bold text-gray-900">Services</p>
-                        </div>
+                        <p class="text-xs font-bold text-gray-900 leading-snug">{{ $card1Title }}</p>
                     </div>
-                    <p class="text-[10px] text-gray-500 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p class="text-[10px] text-gray-500 leading-relaxed">{{ $card1Desc }}</p>
                 </div>
 
-                {{-- Floating Card 2: Skilled Professionals --}}
+                {{-- Floating Card 2 --}}
                 <div class="float-anim-delay absolute -right-2 lg:-right-4 bottom-32 sm:bottom-48 lg:bottom-56 bg-white rounded-2xl shadow-xl shadow-blue-900/20 p-3 sm:p-4 w-40 sm:w-48 border border-blue-50 z-20" data-aos="zoom-in" data-aos-delay="600">
                     <div class="flex items-center gap-3 mb-2">
-                        <div class="w-9 h-9 bg-green-100 rounded-xl flex items-center justify-center">
+                        <div class="w-9 h-9 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                             </svg>
                         </div>
-                        <div>
-                            <p class="text-xs font-bold text-gray-900 leading-tight">Skilled Medical</p>
-                            <p class="text-xs font-bold text-gray-900">Professionals</p>
-                        </div>
+                        <p class="text-xs font-bold text-gray-900 leading-snug">{{ $card2Title }}</p>
                     </div>
-                    <p class="text-[10px] text-gray-500 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p class="text-[10px] text-gray-500 leading-relaxed">{{ $card2Desc }}</p>
                 </div>
             </div>
         </div>

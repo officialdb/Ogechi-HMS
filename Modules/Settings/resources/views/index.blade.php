@@ -191,43 +191,32 @@
 
                 {{-- Tab: Mail Settings --}}
                 <div x-show="activeTab === 'mail'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-cloak>
-                    <h2 class="text-lg font-black text-slate-900 mb-6 pb-4 border-b border-slate-100">Mail Configuration (SMTP)</h2>
-                    
+                    <h2 class="text-lg font-black text-slate-900 mb-6 pb-4 border-b border-slate-100">Mail Configuration (Resend)</h2>
+
                     <div class="bg-blue-50 text-blue-800 p-4 rounded-xl border border-blue-100 mb-6 flex items-start gap-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0 mt-0.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <p class="text-sm font-medium">These settings override the default system email configuration. Leave blank to use defaults.</p>
+                        <div class="text-sm font-medium">
+                            <p>This system uses <a href="https://resend.com" target="_blank" class="underline font-bold">Resend</a> for email delivery. Enter your API key from your Resend dashboard.</p>
+                            <p class="mt-1 text-blue-700">Get your API key at <span class="font-mono font-bold">resend.com/api-keys</span></p>
+                        </div>
                     </div>
 
                     <div class="space-y-6">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-2">Mail Host</label>
-                                <input type="text" name="mail_host" value="{{ $settings['mail_host'] ?? '' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white text-slate-900 font-medium" placeholder="smtp.mailtrap.io">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-2">Mail Port</label>
-                                <input type="text" name="mail_port" value="{{ $settings['mail_port'] ?? '' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white text-slate-900 font-medium" placeholder="2525">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-2">Mail Username</label>
-                                <input type="text" name="mail_username" value="{{ $settings['mail_username'] ?? '' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white text-slate-900 font-medium">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-2">Mail Password</label>
-                                <input type="password" name="mail_password" value="{{ $settings['mail_password'] ?? '' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white text-slate-900 font-medium">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-2">Mail Encryption</label>
-                                <select name="mail_encryption" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white text-slate-900 font-medium appearance-none">
-                                    <option value="" {{ ($settings['mail_encryption'] ?? '') == '' ? 'selected' : '' }}>None</option>
-                                    <option value="tls" {{ ($settings['mail_encryption'] ?? '') == 'tls' ? 'selected' : '' }}>TLS</option>
-                                    <option value="ssl" {{ ($settings['mail_encryption'] ?? '') == 'ssl' ? 'selected' : '' }}>SSL</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-2">From Address</label>
-                                <input type="email" name="mail_from_address" value="{{ $settings['mail_from_address'] ?? '' }}" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white text-slate-900 font-medium" placeholder="noreply@domain.com">
-                            </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Resend API Key</label>
+                            <input type="password" name="resend_api_key"
+                                   value="{{ $settings['resend_api_key'] ?? '' }}"
+                                   class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white text-slate-900 font-medium font-mono"
+                                   placeholder="re_xxxxxxxxxxxxxxxxxxxxxxxx">
+                            <p class="text-xs text-slate-500 mt-1.5">Keep this key secret. It grants access to send emails on your behalf.</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">From Address</label>
+                            <input type="email" name="mail_from_address"
+                                   value="{{ $settings['mail_from_address'] ?? '' }}"
+                                   class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white text-slate-900 font-medium"
+                                   placeholder="no-reply@yourdomain.com">
+                            <p class="text-xs text-slate-500 mt-1.5">Must be from a verified domain on Resend. Use <span class="font-mono">no-reply@resend.dev</span> for testing.</p>
                         </div>
                     </div>
                 </div>
@@ -321,8 +310,44 @@
                                     <label class="block text-sm font-bold text-slate-700 mb-2">Hero Description</label>
                                     <textarea name="home_hero_description" rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-white font-medium">{{ $settings['home_hero_description'] ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' }}</textarea>
                                 </div>
+
+                                {{-- Floating Cards --}}
+                                <div class="pt-2 border-t border-slate-200">
+                                    <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Floating Info Cards</p>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div class="bg-white border border-blue-100 rounded-xl p-4 space-y-3">
+                                            <p class="text-xs font-bold text-blue-700 flex items-center gap-1.5">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                                Card 1 (left — blue)
+                                            </p>
+                                            <div>
+                                                <label class="block text-xs font-semibold text-slate-600 mb-1">Title</label>
+                                                <input type="text" name="hero_card1_title" value="{{ $settings['hero_card1_title'] ?? '24/7 Emergency Services' }}" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50">
+                                            </div>
+                                            <div>
+                                                <label class="block text-xs font-semibold text-slate-600 mb-1">Description</label>
+                                                <textarea name="hero_card1_desc" rows="2" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 resize-none">{{ $settings['hero_card1_desc'] ?? 'Round-the-clock emergency care available for every patient, every day.' }}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="bg-white border border-green-100 rounded-xl p-4 space-y-3">
+                                            <p class="text-xs font-bold text-green-700 flex items-center gap-1.5">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                                Card 2 (right — green)
+                                            </p>
+                                            <div>
+                                                <label class="block text-xs font-semibold text-slate-600 mb-1">Title</label>
+                                                <input type="text" name="hero_card2_title" value="{{ $settings['hero_card2_title'] ?? 'Skilled Medical Professionals' }}" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50">
+                                            </div>
+                                            <div>
+                                                <label class="block text-xs font-semibold text-slate-600 mb-1">Description</label>
+                                                <textarea name="hero_card2_desc" rows="2" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 resize-none">{{ $settings['hero_card2_desc'] ?? 'Our certified specialists bring world-class expertise to every consultation.' }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
 
                         {{-- About Section --}}
                         <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
