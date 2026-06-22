@@ -17,12 +17,9 @@ class BillingServiceProvider extends ModuleServiceProvider
      */
     protected string $nameLower = 'billing';
 
-    /**
-     * Command classes to register.
-     *
-     * @var string[]
-     */
-    // protected array $commands = [];
+    protected array $commands = [
+        \Modules\Billing\Console\MarkOverdueInvoices::class,
+    ];
 
     /**
      * Provider classes to register.

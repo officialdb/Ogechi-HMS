@@ -17,12 +17,10 @@ class AppointmentsServiceProvider extends ModuleServiceProvider
      */
     protected string $nameLower = 'appointments';
 
-    /**
-     * Command classes to register.
-     *
-     * @var string[]
-     */
-    // protected array $commands = [];
+    protected array $commands = [
+        \Modules\Appointments\Console\MarkMissedAppointments::class,
+        \Modules\Appointments\Console\SendAppointmentReminders::class,
+    ];
 
     /**
      * Provider classes to register.

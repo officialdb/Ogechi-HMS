@@ -17,12 +17,9 @@ class PharmacyServiceProvider extends ModuleServiceProvider
      */
     protected string $nameLower = 'pharmacy';
 
-    /**
-     * Command classes to register.
-     *
-     * @var string[]
-     */
-    // protected array $commands = [];
+    protected array $commands = [
+        \Modules\Pharmacy\Console\CheckMedicationStatus::class,
+    ];
 
     /**
      * Provider classes to register.
