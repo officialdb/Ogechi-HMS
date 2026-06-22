@@ -66,6 +66,16 @@ class RoleAndPermissionSeeder extends Seeder
             'Patient' => collect([
                 'dashboard.view',
             ]),
+            'Writer' => collect([
+                'cms.view',
+                'cms.create',
+                'cms.submit',
+            ]),
+            'Publisher' => collect([
+                'cms.view',
+                'cms.approve',
+                'cms.publish',
+            ]),
         ];
 
         foreach (config('hms.roles', []) as $roleName) {

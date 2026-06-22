@@ -84,24 +84,17 @@
             <div class="border-t border-slate-100 pt-6">
                 <h3 class="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2">
                     <div class="w-6 h-6 bg-violet-50 text-violet-600 rounded flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></div>
-                    Author & Publishing
+                    Publishing
                 </h3>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Author Name <span class="text-red-500">*</span></label>
-                        <input type="text" name="author" value="{{ old('author') }}" required 
-                               class="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-colors placeholder-slate-400" placeholder="e.g. Dr. Samuel">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Author Role</label>
-                        <input type="text" name="author_role" value="{{ old('author_role') }}" 
-                               class="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-colors placeholder-slate-400" placeholder="e.g. Cardiologist">
-                    </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1.5">Status <span class="text-red-500">*</span></label>
-                        <select name="status" required class="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-colors text-slate-700 font-bold">
-                            <option value="draft" {{ old('status')==='draft' ? 'selected':'' }}>Draft (Hidden)</option>
-                            <option value="published" {{ old('status')==='published' ? 'selected':'' }}>Published (Live)</option>
+                        <select name="approval_status" required class="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-colors text-slate-700 font-bold">
+                            <option value="draft" {{ old('approval_status')==='draft' ? 'selected':'' }}>Draft (Hidden)</option>
+                            <option value="submitted" {{ old('approval_status')==='submitted' ? 'selected':'' }}>Submit for Review</option>
+                            @can('cms.approve')
+                                <option value="approved" {{ old('approval_status')==='approved' ? 'selected':'' }}>Published (Live)</option>
+                            @endcan
                         </select>
                     </div>
                 </div>
@@ -118,11 +111,15 @@
 
 </div>
 
-{{-- Include Quill JS & CSS --}}
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    function initQuill() {
+        if (!document.getElementById('quill-editor')) return;
+        
+        // Prevent re-initialization
+        if (document.querySelector('.ql-toolbar')) return;
+
         var quill = new Quill('#quill-editor', {
             theme: 'snow',
             modules: {
@@ -140,16 +137,17 @@
 
         // Set hidden input before form submit
         var form = document.getElementById('cms-post-form');
-        form.onsubmit = function() {
-            var bodyInput = document.querySelector('#body-input');
-            // If the editor is practically empty, ensure it's validated or empty
-            var content = quill.root.innerHTML;
-            if(quill.getText().trim().length === 0 && !content.includes('<img')) {
-                bodyInput.value = '';
-            } else {
-                bodyInput.value = content;
-            }
-        };
+        if (form) {
+            form.onsubmit = function() {
+                var bodyInput = document.querySelector('#body-input');
+                var content = quill.root.innerHTML;
+                if(quill.getText().trim().length === 0 && !content.includes('<img')) {
+                    bodyInput.value = '';
+                } else {
+                    bodyInput.value = content;
+                }
+            };
+        }
         
         // Custom styling overrides for the quill toolbar to match our UI
         const toolbar = document.querySelector('.ql-toolbar');
@@ -160,7 +158,10 @@
             toolbar.style.borderTopLeftRadius = '0.75rem';
             toolbar.style.borderTopRightRadius = '0.75rem';
         }
-    });
+    }
+
+    document.addEventListener('DOMContentLoaded', initQuill);
+    document.addEventListener('turbo:load', initQuill);
 </script>
 
 </x-admin-layout>

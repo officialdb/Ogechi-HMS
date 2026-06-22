@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Modules\Doctors\Models\Doctor;
 use Modules\Patients\Http\Requests\StorePatientRequest;
 use Modules\Patients\Http\Requests\UpdatePatientRequest;
 use Modules\Patients\Models\Patient;
@@ -21,26 +22,40 @@ class PatientsController extends Controller
     public function index(Request $request): View
     {
         $search = trim((string) $request->string('search'));
+        $user   = $request->user();
+
+        // If logged in as a Doctor, scope stats and list to their assigned patients only
+        $doctorRecord = $user->hasRole('Doctor') ? $user->doctor : null;
+
+        $baseQuery = $doctorRecord
+            ? Patient::where('assigned_doctor_id', $doctorRecord->id)
+            : Patient::query();
 
         $stats = [
-            'total' => Patient::count(),
+            'total'          => (clone $baseQuery)->count(),
             'admitted_today' => \Illuminate\Support\Facades\DB::table('patient_visits')
                                     ->whereDate('visit_date', today())
                                     ->where('visit_type', 'admission')
+                                    ->when($doctorRecord, fn($q) => $q->whereIn('patient_id',
+                                        (clone $baseQuery)->pluck('id')))
                                     ->count(),
-            'outpatients' => \Illuminate\Support\Facades\DB::table('patient_visits')
+            'outpatients'    => \Illuminate\Support\Facades\DB::table('patient_visits')
                                     ->whereDate('visit_date', today())
                                     ->whereIn('visit_type', ['consultation', 'follow-up'])
+                                    ->when($doctorRecord, fn($q) => $q->whereIn('patient_id',
+                                        (clone $baseQuery)->pluck('id')))
                                     ->count(),
-            'discharged' => \Illuminate\Support\Facades\DB::table('patient_visits')
+            'discharged'     => \Illuminate\Support\Facades\DB::table('patient_visits')
                                     ->where('visit_type', 'routine-check')
+                                    ->when($doctorRecord, fn($q) => $q->whereIn('patient_id',
+                                        (clone $baseQuery)->pluck('id')))
                                     ->count(),
         ];
 
         return view('patients::patients.index', [
-            'patients' => $this->patientService->paginatedPatients($search),
-            'search' => $search,
-            'stats' => $stats,
+            'patients' => $this->patientService->paginatedPatients($search, $doctorRecord),
+            'search'   => $search,
+            'stats'    => $stats,
         ]);
     }
 
@@ -113,33 +128,31 @@ class PatientsController extends Controller
     {
         return [
             'genders' => [
-                'male' => 'Male',
+                'male'   => 'Male',
                 'female' => 'Female',
-                'other' => 'Other',
+                'other'  => 'Other',
             ],
             'maritalStatuses' => [
-                'single' => 'Single',
-                'married' => 'Married',
+                'single'   => 'Single',
+                'married'  => 'Married',
                 'divorced' => 'Divorced',
-                'widowed' => 'Widowed',
+                'widowed'  => 'Widowed',
             ],
             'bloodGroups' => [
-                'A+' => 'A+',
-                'A-' => 'A-',
-                'B+' => 'B+',
-                'B-' => 'B-',
-                'AB+' => 'AB+',
-                'AB-' => 'AB-',
-                'O+' => 'O+',
-                'O-' => 'O-',
+                'A+' => 'A+', 'A-' => 'A-',
+                'B+' => 'B+', 'B-' => 'B-',
+                'AB+' => 'AB+', 'AB-' => 'AB-',
+                'O+' => 'O+', 'O-' => 'O-',
             ],
             'genotypes' => [
-                'AA' => 'AA',
-                'AS' => 'AS',
-                'SS' => 'SS',
-                'AC' => 'AC',
-                'SC' => 'SC',
+                'AA' => 'AA', 'AS' => 'AS',
+                'SS' => 'SS', 'AC' => 'AC', 'SC' => 'SC',
             ],
+            'doctors' => Doctor::where('status', 'active')
+                ->orderBy('last_name')
+                ->get()
+                ->mapWithKeys(fn($d) => [$d->id => $d->full_name])
+                ->toArray(),
         ];
     }
 

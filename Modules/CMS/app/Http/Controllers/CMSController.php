@@ -6,25 +6,32 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\CMS\Models\Post;
 use Illuminate\Support\Str;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\PostSubmittedNotification;
+use App\Notifications\PostApprovedNotification;
+use App\Notifications\PostRejectedNotification;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CMSController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use AuthorizesRequests;
+
     public function index(Request $request)
     {
-        $query = Post::query();
+        $query = Post::query()->with('author');
 
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where('title', 'like', "%{$search}%")
-                  ->orWhere('author', 'like', "%{$search}%")
+                  ->orWhereHas('author', function($q) use ($search) {
+                      $q->where('name', 'like', "%{$search}%");
+                  })
                   ->orWhere('category', 'like', "%{$search}%");
         }
 
-        if ($request->filled('status') && $request->status !== 'all') {
-            $query->where('status', $request->status);
+        if ($request->filled('approval_status') && $request->approval_status !== 'all') {
+            $query->where('approval_status', $request->approval_status);
         }
 
         $posts = $query->latest()->paginate(10)->withQueryString();
@@ -32,37 +39,31 @@ class CMSController extends Controller
         return view('cms::index', compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('cms::create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title'       => 'required|string|max:255',
-            'slug'        => 'nullable|string|max:255|unique:posts,slug',
-            'category'    => 'required|string|max:255',
-            'author'      => 'required|string|max:255',
-            'author_role' => 'nullable|string|max:255',
-            'read_time'   => 'nullable|string|max:50',
-            'excerpt'     => 'nullable|string|max:1000',
-            'body'        => 'required|string',
-            'thumbnail'   => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'status'      => 'required|in:draft,published',
+            'title'           => 'required|string|max:255',
+            'slug'            => 'nullable|string|max:255|unique:posts,slug',
+            'category'        => 'required|string|max:255',
+            'read_time'       => 'nullable|string|max:50',
+            'excerpt'         => 'nullable|string|max:1000',
+            'body'            => 'required|string',
+            'thumbnail'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'approval_status' => 'required|in:draft,submitted,approved,rejected',
         ]);
+
+        $validated['user_id'] = auth()->id();
 
         if (empty($validated['slug'])) {
             $validated['slug'] = Str::slug($validated['title']);
         }
         
-        if ($validated['status'] === 'published') {
+        if ($validated['approval_status'] === 'approved') {
             $validated['published_at'] = now();
         }
 
@@ -70,63 +71,127 @@ class CMSController extends Controller
             $validated['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
         }
 
-        Post::create($validated);
+        $post = Post::create($validated);
+
+        if ($post->approval_status === 'submitted') {
+            $this->notifyPublishers($post);
+        }
 
         return redirect()->route('modules.cms.index')
                          ->with('success', 'Blog post created successfully.');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Post $post)
     {
         return view('cms::edit', compact('post'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Post $post)
     {
         $validated = $request->validate([
-            'title'       => 'required|string|max:255',
-            'slug'        => 'required|string|max:255|unique:posts,slug,' . $post->id,
-            'category'    => 'required|string|max:255',
-            'author'      => 'required|string|max:255',
-            'author_role' => 'nullable|string|max:255',
-            'read_time'   => 'nullable|string|max:50',
-            'excerpt'     => 'nullable|string|max:1000',
-            'body'        => 'required|string',
-            'thumbnail'   => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'status'      => 'required|in:draft,published',
+            'title'           => 'required|string|max:255',
+            'slug'            => 'required|string|max:255|unique:posts,slug,' . $post->id,
+            'category'        => 'required|string|max:255',
+            'read_time'       => 'nullable|string|max:50',
+            'excerpt'         => 'nullable|string|max:1000',
+            'body'            => 'required|string',
+            'thumbnail'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'approval_status' => 'required|in:draft,submitted,approved,rejected',
         ]);
 
-        if ($validated['status'] === 'published' && $post->status === 'draft') {
+        if ($validated['approval_status'] === 'approved' && $post->approval_status !== 'approved') {
             $validated['published_at'] = now();
         }
 
         if ($request->hasFile('thumbnail')) {
-            // Delete old thumbnail if exists (optional, keeping it simple for now or using Storage::delete)
             if ($post->thumbnail) {
                 \Illuminate\Support\Facades\Storage::disk('public')->delete($post->thumbnail);
             }
             $validated['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
         }
 
+        $wasSubmitted = $post->approval_status !== 'submitted' && $validated['approval_status'] === 'submitted';
+        
         $post->update($validated);
+
+        if ($wasSubmitted) {
+            $this->notifyPublishers($post);
+        }
 
         return redirect()->route('modules.cms.index')
                          ->with('success', 'Blog post updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Post $post)
     {
         $post->delete();
         return redirect()->route('modules.cms.index')
                          ->with('success', 'Blog post deleted successfully.');
+    }
+
+    public function submitForReview(Post $post)
+    {
+        $post->update(['approval_status' => 'submitted']);
+        $this->notifyPublishers($post);
+
+        return redirect()->back()->with('success', 'Post submitted for review.');
+    }
+
+    public function approve(Post $post)
+    {
+        $post->update([
+            'approval_status' => 'approved',
+            'published_at' => now(),
+        ]);
+
+        if ($post->author) {
+            try {
+                $post->author->notify(new PostApprovedNotification($post));
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::warning('Approved notification mail failed: ' . $e->getMessage());
+            }
+        }
+
+        return redirect()->back()->with('success', 'Post approved and published.');
+    }
+
+    public function reject(Post $post)
+    {
+        $post->update(['approval_status' => 'rejected']);
+
+        if ($post->author) {
+            try {
+                $post->author->notify(new PostRejectedNotification($post));
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::warning('Rejected notification mail failed: ' . $e->getMessage());
+            }
+        }
+
+        return redirect()->back()->with('success', 'Post rejected.');
+    }
+
+    public function resendNotification(Post $post)
+    {
+        $this->notifyPublishers($post);
+
+        return redirect()->back()->with('success', 'Notification resent to all Publishers.');
+    }
+
+    private function notifyPublishers(Post $post): void
+    {
+        $publishers = User::permission('cms.approve')->get();
+
+        foreach ($publishers as $publisher) {
+            // Always save the in-app (database) notification
+            try {
+                $publisher->notify(new PostSubmittedNotification($post));
+            } catch (\Symfony\Component\Mailer\Exception\TransportException $e) {
+                // Email failed (e.g. Resend domain not verified) — in-app notification was still stored.
+                // Log the issue silently so it doesn't crash the request.
+                \Illuminate\Support\Facades\Log::warning('Mail notification failed for publisher #' . $publisher->id . ': ' . $e->getMessage());
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::error('Notification error for publisher #' . $publisher->id . ': ' . $e->getMessage());
+            }
+        }
     }
 }

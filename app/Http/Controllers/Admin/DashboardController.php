@@ -10,8 +10,11 @@ use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-    public function __invoke(): View
+    public function __invoke(): View|\Illuminate\Http\Response
     {
+        if (auth()->user()->hasRole('Doctor')) {
+            return app(\App\Http\Controllers\DoctorDashboardController::class)();
+        }
         // ── KPI Headline Numbers ─────────────────────────────────────────
         $totalPatients     = $this->countTable('patients');
         $totalDoctors      = $this->countTable('doctors');

@@ -221,6 +221,19 @@
                             @endforeach
                         </select>
                     </div>
+                    @can('doctors.create')
+                    {{-- Assigned Doctor — visible to Admin only --}}
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-slate-700 mb-1.5">Assigned Doctor <span class="text-slate-400 font-normal">(optional)</span></label>
+                        <select name="assigned_doctor_id" class="w-full px-4 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-colors text-slate-700">
+                            <option value="">— Unassigned —</option>
+                            @foreach($selectOptions['doctors'] as $id => $name)
+                                <option value="{{ $id }}" {{ old('assigned_doctor_id', $patient->assigned_doctor_id) == $id ? 'selected' : '' }}>{{ $name }}</option>
+                            @endforeach
+                        </select>
+                        <p class="text-[11px] text-slate-400 mt-1">Only active doctors are listed.</p>
+                    </div>
+                    @endcan
                     <div class="sm:col-span-2">
                         <label class="block text-xs font-semibold text-slate-700 mb-1.5">Known Allergies</label>
                         <textarea name="allergies" rows="3" placeholder="List any known allergies (medications, foods, environmental)…"

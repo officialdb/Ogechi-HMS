@@ -79,7 +79,7 @@
                                 <div class="text-xs font-medium text-slate-500 uppercase tracking-wider">{{ $test->test_type }}</div>
                             </td>
                             <td class="px-6 py-4">
-                                <div class="font-bold text-sm text-slate-800">${{ number_format($test->cost, 2) }}</div>
+                                <div class="font-bold text-sm text-slate-800">{{ $currency_symbol }}{{ number_format($test->cost, 2) }}</div>
                             </td>
                             <td class="px-6 py-4">
                                 @php

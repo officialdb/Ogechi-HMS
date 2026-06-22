@@ -114,8 +114,8 @@
                         <tr class="bg-white print:text-black text-slate-700">
                             <td class="px-6 py-4 font-medium">{{ $item->description }}</td>
                             <td class="px-6 py-4 text-center tabular-nums">{{ $item->quantity }}</td>
-                            <td class="px-6 py-4 text-right tabular-nums">${{ number_format($item->unit_price, 2) }}</td>
-                            <td class="px-6 py-4 text-right font-bold text-slate-900 tabular-nums print:text-black">${{ number_format($item->total, 2) }}</td>
+                            <td class="px-6 py-4 text-right tabular-nums">{{ $currency_symbol }}{{ number_format($item->unit_price, 2) }}</td>
+                            <td class="px-6 py-4 text-right font-bold text-slate-900 tabular-nums print:text-black">{{ $currency_symbol }}{{ number_format($item->total, 2) }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -133,23 +133,23 @@
             <div class="w-full sm:w-72 space-y-3 text-sm">
                 <div class="flex justify-between items-center text-slate-600 print:text-slate-800">
                     <span class="font-semibold">Subtotal</span>
-                    <span class="tabular-nums">${{ number_format($invoice->subtotal, 2) }}</span>
+                    <span class="tabular-nums">{{ $currency_symbol }}{{ number_format($invoice->subtotal, 2) }}</span>
                 </div>
                 @if($invoice->tax_amount > 0)
                 <div class="flex justify-between items-center text-slate-600 print:text-slate-800">
                     <span class="font-semibold">Tax</span>
-                    <span class="tabular-nums">${{ number_format($invoice->tax_amount, 2) }}</span>
+                    <span class="tabular-nums">{{ $currency_symbol }}{{ number_format($invoice->tax_amount, 2) }}</span>
                 </div>
                 @endif
                 @if($invoice->discount_amount > 0)
                 <div class="flex justify-between items-center text-emerald-600">
                     <span class="font-semibold">Discount</span>
-                    <span class="tabular-nums">-${{ number_format($invoice->discount_amount, 2) }}</span>
+                    <span class="tabular-nums">-{{ $currency_symbol }}{{ number_format($invoice->discount_amount, 2) }}</span>
                 </div>
                 @endif
                 <div class="flex justify-between items-center border-t border-slate-200 pt-4 mt-2 print:border-slate-400">
                     <span class="font-black text-slate-900 text-lg uppercase tracking-wider print:text-black">Total Due</span>
-                    <span class="font-black text-blue-600 text-2xl tabular-nums print:text-black">${{ number_format($invoice->total_amount, 2) }}</span>
+                    <span class="font-black text-blue-600 text-2xl tabular-nums print:text-black">{{ $currency_symbol }}{{ number_format($invoice->total_amount, 2) }}</span>
                 </div>
             </div>
         </div>

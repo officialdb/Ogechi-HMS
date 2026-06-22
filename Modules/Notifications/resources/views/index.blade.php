@@ -13,13 +13,15 @@
             <p class="text-sm text-slate-500 mt-1">System alerts, updates, and messages.</p>
         </div>
         <div class="flex items-center gap-3">
-            {{-- Test Button for Development --}}
+            {{-- Test Button — Admins only --}}
+            @can('settings.manage')
             <form action="{{ route('modules.notifications.test') }}" method="POST">
                 @csrf
                 <button type="submit" class="px-4 py-2 text-xs font-bold text-slate-500 bg-white border border-slate-200 hover:bg-slate-50 rounded-xl transition-colors">
                     Send Test Alert
                 </button>
             </form>
+            @endcan
 
             @if(auth()->user()->unreadNotifications->count() > 0)
             <form action="{{ route('modules.notifications.readAll') }}" method="POST">

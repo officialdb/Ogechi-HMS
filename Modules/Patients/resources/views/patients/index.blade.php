@@ -186,6 +186,12 @@
                             <td class="px-4 py-4 hidden lg:table-cell">
                                 <p class="text-xs text-slate-700">{{ $patient->created_at->format('M d, Y') }}</p>
                                 <p class="text-[11px] text-slate-400 mt-0.5">{{ $patient->registeredBy?->name ?? 'System' }}</p>
+                                @if($patient->assignedDoctor)
+                                    <span class="inline-flex items-center gap-1 mt-1 px-1.5 py-0.5 rounded-md text-[10px] font-semibold bg-blue-50 text-blue-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                        {{ $patient->assignedDoctor->full_name }}
+                                    </span>
+                                @endif
                             </td>
                             <td class="px-4 py-4">
                                 <div class="flex items-center justify-end gap-1.5 opacity-60 group-hover:opacity-100 transition-opacity">

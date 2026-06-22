@@ -21,19 +21,23 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-            'can' => Authorize::class,
-            'csrf' => ValidateCsrfToken::class,
-            'guest' => RedirectIfAuthenticated::class,
-            'password.confirm' => RequirePassword::class,
-            'permission' => PermissionMiddleware::class,
-            'role' => RoleMiddleware::class,
-            'role_or_permission' => RoleOrPermissionMiddleware::class,
-            'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
-            'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-            'verified' => EnsureEmailIsVerified::class,
-            'bindings' => SubstituteBindings::class,
+            'auth'              => \Illuminate\Auth\Middleware\Authenticate::class,
+            'can'               => Authorize::class,
+            'csrf'              => ValidateCsrfToken::class,
+            'guest'             => RedirectIfAuthenticated::class,
+            'password.confirm'  => RequirePassword::class,
+            'permission'        => PermissionMiddleware::class,
+            'role'              => RoleMiddleware::class,
+            'role_or_permission'=> RoleOrPermissionMiddleware::class,
+            'signed'            => \Illuminate\Routing\Middleware\ValidateSignature::class,
+            'throttle'          => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+            'verified'          => EnsureEmailIsVerified::class,
+            'bindings'          => SubstituteBindings::class,
+            'active'            => \App\Http\Middleware\EnsureUserIsActive::class,
         ]);
+
+        // Block deactivated users on every authenticated web request
+        $middleware->appendToGroup('web', \App\Http\Middleware\EnsureUserIsActive::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

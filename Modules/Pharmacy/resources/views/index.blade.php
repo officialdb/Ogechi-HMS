@@ -77,7 +77,7 @@
                                     </td>
                                     <td class="px-6 py-3.5">
                                         <p class="font-bold {{ $med->quantity_in_stock <= 20 ? 'text-amber-600' : 'text-slate-700' }}">{{ $med->quantity_in_stock }} Units</p>
-                                        <p class="text-[11px] text-slate-500 mt-0.5">${{ number_format($med->unit_price, 2) }} / unit</p>
+                                        <p class="text-[11px] text-slate-500 mt-0.5">{{ $currency_symbol }}{{ number_format($med->unit_price, 2) }} / unit</p>
                                     </td>
                                     <td class="px-6 py-3.5">
                                         @if($med->expiry_date)

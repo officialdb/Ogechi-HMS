@@ -41,6 +41,7 @@ class Patient extends Model
         'emergency_contact_phone',
         'notes',
         'registered_by',
+        'assigned_doctor_id',
     ];
 
     protected function casts(): array
@@ -53,6 +54,11 @@ class Patient extends Model
     public function registeredBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'registered_by');
+    }
+
+    public function assignedDoctor(): BelongsTo
+    {
+        return $this->belongsTo(\Modules\Doctors\Models\Doctor::class, 'assigned_doctor_id');
     }
 
     public function vitals(): HasMany

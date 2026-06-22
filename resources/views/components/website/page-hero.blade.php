@@ -18,14 +18,7 @@
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col items-center text-center gap-5">
 
-            {{-- Icon --}}
-            @if(!empty($icon))
-                <div class="w-16 h-16 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="{{ $icon }}"/>
-                    </svg>
-                </div>
-            @endif
+
 
             {{-- Title --}}
             <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">

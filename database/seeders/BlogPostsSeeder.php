@@ -91,6 +91,6 @@ class BlogPostsSeeder extends Seeder
             Post::firstOrCreate(['slug' => $post['slug']], $post);
         }
 
-        $this->command->info('Seeded ' . Post::where('status', 'published')->count() . ' published blog posts.');
+        $this->command->info('Seeded ' . Post::where('approval_status', 'approved')->count() . ' published blog posts.');
     }
 }
