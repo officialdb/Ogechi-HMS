@@ -77,7 +77,12 @@
                                class="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-colors text-slate-700 font-bold">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Unit Price ($) <span class="text-red-500">*</span></label>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Minimum Stock Level <span class="text-red-500">*</span></label>
+                        <input type="number" name="min_stock" value="{{ old('min_stock', $medication->min_stock) }}" min="0" required 
+                               class="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-colors text-slate-700">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Unit Price ({{ $currency_symbol ?? '$' }}) <span class="text-red-500">*</span></label>
                         <input type="number" step="0.01" name="unit_price" value="{{ old('unit_price', number_format($medication->unit_price, 2, '.', '')) }}" min="0" required 
                                class="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-colors text-slate-700">
                     </div>
