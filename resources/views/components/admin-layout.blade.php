@@ -78,9 +78,7 @@
         <div class="logo-container px-4 flex items-center gap-3 py-4 border-b border-slate-100 flex-shrink-0 transition-all duration-300">
             <a href="{{ route('dashboard') }}" class="logo-link flex-1 flex items-center gap-3 min-w-0 transition-all duration-300">
                 <div class="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                    </svg>
+                    <x-fas-hospital class="w-5 h-5 text-white" />
                 </div>
                 <div class="hide-when-collapsed leading-tight min-w-0 transition-opacity">
                     <p class="text-sm font-bold text-slate-900 truncate">Ogechi HMS</p>
@@ -135,10 +133,7 @@
                         <a href="{{ route($item['route']) }}"
                            title="{{ $item['label'] }}"
                            class="nav-link admin-sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 mb-0.5 {{ $isActive ? 'nav-item-active' : 'nav-item-inactive' }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="admin-sidebar-icon flex-shrink-0 {{ $isActive ? 'text-white' : 'text-slate-400' }}"
-                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.9">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="{{ $item['icon'] }}"/>
-                            </svg>
+                            <svg class="admin-sidebar-icon flex-shrink-0 {{ $isActive ? 'text-white' : 'text-slate-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $item['icon'] }}"/></svg>
                             <span class="hide-when-collapsed flex-1 leading-none truncate">{{ $item['label'] }}</span>
                             @if(!empty($item['badge']))
                                 <span class="hide-when-collapsed text-[10px] font-bold px-1.5 py-0.5 rounded-full {{ $isActive ? 'bg-white/25 text-white' : 'bg-blue-100 text-blue-600' }}">{{ $item['badge'] }}</span>
@@ -167,20 +162,18 @@
         {{-- Header --}}
         <header class="bg-white border-b border-slate-100 pl-4 pr-6 py-3.5 flex items-center gap-4 flex-shrink-0 z-20 shadow-sm">
             <button @click="$store.sidebar.open = !$store.sidebar.open" class="lg:hidden w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-blue-100 hover:text-blue-600 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <x-fas-bars class="w-5 h-5" />
             </button>
             <button @click="$store.sidebar.toggle()" type="button" class="hidden lg:flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform duration-200" :class="$store.sidebar.collapsed ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-                </svg>
+                <x-fas-bars class="w-4 h-4 transition-transform duration-200" />
             </button>
             <div class="flex-1 max-w-sm relative lg:ml-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <x-fas-plus class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <input type="search" placeholder="Search patients, doctors, reports…" class="w-full pl-9 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-colors placeholder-slate-400 text-slate-700">
             </div>
             <div class="flex items-center gap-2.5 ml-auto">
                 <a href="{{ route('modules.notifications.index') }}" class="relative w-9 h-9 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                    <x-fas-bell class="w-[18px] h-[18px]" />
                     @auth
                         @php
                             $unreadCount = auth()->user()->unreadNotifications()->count();
@@ -199,7 +192,7 @@
                             <p class="text-[13px] font-semibold text-slate-800 leading-none">{{ Auth::user()->name ?? 'Admin' }}</p>
                             <p class="text-[11px] text-slate-400 mt-0.5">Administrator</p>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 transition-transform" :class="userMenuOpen ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                        <x-fas-chevron-down class="w-4 h-4 text-slate-400 transition-transform" />
                     </div>
 
                     {{-- Dropdown Menu --}}

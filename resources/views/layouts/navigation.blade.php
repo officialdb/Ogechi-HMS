@@ -24,10 +24,7 @@
             @click="open = !open"
             class="rounded-full border border-slate-300 bg-white/80 p-3 text-slate-700"
         >
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path :class="{ 'hidden': open, 'block': !open }" class="block" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h16" />
-                <path :class="{ 'hidden': !open, 'block': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 6l12 12M18 6 6 18" />
-            </svg>
+            <x-fas-eye class="h-5 w-5" />
         </button>
     </div>
 

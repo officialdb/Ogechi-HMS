@@ -12,9 +12,9 @@
             {{-- Breadcrumb --}}
             <nav aria-label="Breadcrumb" class="flex items-center justify-center gap-2 text-sm mb-6">
                 <a href="{{ route('home') }}" class="text-blue-200 hover:text-white transition-colors font-medium">Home</a>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                <x-fas-tachometer-alt class="w-3.5 h-3.5 text-blue-300" />
                 <a href="{{ route('website.blog') }}" class="text-blue-200 hover:text-white transition-colors font-medium">Blog</a>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                <x-fas-tachometer-alt class="w-3.5 h-3.5 text-blue-300" />
                 <span class="text-white font-semibold">Article</span>
             </nav>
 
@@ -22,7 +22,7 @@
             <div class="flex items-center justify-center gap-3 mb-5">
                 <span class="{{ $post->cat_color ?? 'bg-blue-100 text-blue-600' }} text-xs font-bold px-3 py-1 rounded-full bg-white shadow-sm">{{ $post->category }}</span>
                 <span class="text-blue-200 text-xs font-medium flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <x-fas-chart-bar class="w-3.5 h-3.5" />
                     {{ $post->read_time ?? '5 min read' }}
                 </span>
             </div>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="w-px h-8 bg-white/20"></div>
                 <time datetime="{{ $post->published_at?->format('Y-m-d') }}" class="text-blue-200 text-xs flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <x-fas-tachometer-alt class="w-3.5 h-3.5" />
                     {{ $post->published_at?->format('M d, Y') ?? '—' }}
                 </time>
             </div>
@@ -52,9 +52,7 @@
 
         {{-- Bottom wave --}}
         <div class="absolute bottom-0 left-0 right-0 overflow-hidden leading-none">
-            <svg viewBox="0 0 1440 40" class="w-full" fill="white" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                <path d="M0,40 C360,0 1080,0 1440,40 L1440,40 L0,40 Z"/>
-            </svg>
+            <x-fas-home class="w-full" />
         </div>
     </section>
 
@@ -76,9 +74,7 @@
                             <img src="{{ Storage::url($post->thumbnail) }}" alt="{{ $post->title }}" class="absolute inset-0 w-full h-full object-cover">
                         @else
                             <div class="w-24 h-24 bg-white/15 backdrop-blur-sm rounded-3xl flex items-center justify-center border border-white/25">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="{{ $iconPath }}"/>
-                                </svg>
+                                <x-fas-eye class="w-12 h-12 text-white" />
                             </div>
                         @endif
                         <div class="absolute bottom-4 left-4 flex gap-2">
@@ -109,13 +105,13 @@
                                     ['label'=>'LinkedIn','bg'=>'bg-blue-800 hover:bg-blue-900','icon'=>'M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 4m-2 0a2 2 0 104 0 2 2 0 10-4 0'],
                                 ] as $s)
                                     <a href="#" aria-label="{{ $s['label'] }}" class="{{ $s['bg'] }} text-white w-9 h-9 rounded-xl flex items-center justify-center transition-colors shadow-sm">
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="{{ $s['icon'] }}"/></svg>
+                                        <x-fas-tachometer-alt class="w-4 h-4" />
                                     </a>
                                 @endforeach
                             </div>
                         </div>
                         <a href="{{ route('website.blog') }}" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                            <x-fas-tachometer-alt class="w-4 h-4" />
                             Back to Blog
                         </a>
                     </div>
@@ -126,7 +122,7 @@
                     {{-- Author card --}}
                     <div class="bg-[#F5F9FF] rounded-2xl p-5 border border-blue-50">
                         <h3 class="text-sm font-bold text-gray-900 mb-4 flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                            <x-fas-tachometer-alt class="w-4 h-4 text-blue-600" />
                             About the Author
                         </h3>
                         <div class="flex items-center gap-3 mb-3">
@@ -140,13 +136,13 @@
                         </div>
                         <p class="text-xs text-gray-500 leading-relaxed">Board-certified specialist at Ogechi Hospital with extensive clinical experience and a passion for patient education and preventive medicine.</p>
                         <a href="{{ route('website.doctors') }}" class="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-                            View Doctors <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                            View Doctors <x-fas-eye class="w-3.5 h-3.5" />
                         </a>
                     </div>
 
                     {{-- Book appointment mini CTA --}}
                     <div class="rounded-2xl p-5 text-white" style="background: linear-gradient(135deg, #062C77, #0B5ED7);">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-200 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        <x-fas-tachometer-alt class="w-8 h-8 text-blue-200 mb-3" />
                         <h3 class="font-bold text-base mb-2">Need a Consultation?</h3>
                         <p class="text-blue-100 text-xs leading-relaxed mb-4">Speak directly with a specialist. Same-day appointments available.</p>
                         <a href="{{ route('website.contact') }}" class="block w-full text-center bg-white text-blue-700 font-bold text-xs py-2.5 rounded-xl hover:bg-blue-50 transition-colors shadow-md">
@@ -166,9 +162,7 @@
                                     @endphp
                                     <a href="{{ route('website.blog.show', $rel->slug) }}" class="flex gap-3 group">
                                         <div class="w-16 h-16 rounded-xl bg-gradient-to-br {{ $relGrad }} flex-shrink-0 flex items-center justify-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="{{ $relIconPath }}"/>
-                                            </svg>
+                                            <x-fas-home class="w-7 h-7 text-white" />
                                         </div>
                                         <div class="flex-1 min-w-0">
                                             <p class="text-xs font-bold text-gray-900 group-hover:text-blue-700 transition-colors line-clamp-2 leading-snug">{{ $rel->title }}</p>
@@ -191,7 +185,7 @@
                                 @foreach($sideDepts as $deptName)
                                     <a href="{{ route('website.services') }}" class="flex items-center justify-between text-xs font-medium text-gray-600 hover:text-blue-600 py-1.5 border-b border-gray-100 last:border-0 transition-colors group">
                                         {{ $deptName }}
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-gray-400 group-hover:text-blue-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                                        <x-fas-tachometer-alt class="w-3.5 h-3.5 text-gray-400 group-hover:text-blue-600 transition-colors" />
                                     </a>
                                 @endforeach
                             </div>

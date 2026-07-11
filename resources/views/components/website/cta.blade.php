@@ -23,15 +23,7 @@
                 </div>
                 {{-- Doctor 2 (larger) --}}
                 <div class="w-44 h-64 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 -mt-12">
-                    <svg viewBox="0 0 176 256" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="176" height="256" fill="rgba(255,255,255,0.08)"/>
-                        <ellipse cx="88" cy="190" rx="60" ry="80" fill="#2563EB"/>
-                        <rect x="63" y="148" width="50" height="100" rx="5" fill="white" opacity="0.15"/>
-                        <circle cx="88" cy="108" r="35" fill="#FDE68A"/>
-                        <ellipse cx="88" cy="78" rx="35" ry="22" fill="#1E3A5F"/>
-                        <rect x="74" y="140" width="28" height="20" rx="4" fill="#F59E0B"/>
-                        <path d="M70 165 Q58 195 63 215 Q68 235 88 238 Q108 235 113 215 Q118 195 106 165" fill="none" stroke="rgba(200,210,255,0.6)" stroke-width="3.5" stroke-linecap="round"/>
-                    </svg>
+                    <x-fas-user-md class="w-full h-full" />
                 </div>
             </div>
 
@@ -51,9 +43,7 @@
             <div class="flex-1 flex flex-col gap-6 text-center lg:text-left" data-aos="fade-up">
                 <div>
                     <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1 text-xs font-semibold text-white/80 uppercase tracking-wider mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-blue-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                        </svg>
+                        <x-fas-tachometer-alt class="w-3.5 h-3.5 text-blue-200" />
                         Caring For You
                     </div>
                     <h2 class="text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight">
@@ -91,9 +81,7 @@
                         >
                     </div>
                     <button class="w-full bg-white text-blue-700 font-semibold text-sm py-3 rounded-xl hover:bg-blue-50 transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
+                        <x-fas-tachometer-alt class="w-4 h-4" />
                         Book Appointment Now
                     </button>
                 </div>
@@ -102,15 +90,7 @@
             {{-- Right: Extra Doctor --}}
             <div class="relative hidden xl:flex items-end" data-aos="fade-left">
                 <div class="w-44 h-64 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20">
-                    <svg viewBox="0 0 176 256" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="176" height="256" fill="rgba(255,255,255,0.06)"/>
-                        <ellipse cx="88" cy="195" rx="55" ry="75" fill="#5B21B6"/>
-                        <rect x="65" y="155" width="46" height="95" rx="5" fill="white" opacity="0.1"/>
-                        <circle cx="88" cy="110" r="32" fill="#FBBF24"/>
-                        <ellipse cx="88" cy="83" rx="32" ry="19" fill="#3730A3"/>
-                        <rect x="75" y="138" width="26" height="20" rx="4" fill="#F59E0B"/>
-                        <path d="M72 162 Q60 192 66 212 Q72 232 88 235 Q104 232 110 212 Q116 192 104 162" fill="none" stroke="rgba(180,190,255,0.6)" stroke-width="3.5" stroke-linecap="round"/>
-                    </svg>
+                    <x-fas-user-md class="w-full h-full" />
                 </div>
             </div>
         </div>

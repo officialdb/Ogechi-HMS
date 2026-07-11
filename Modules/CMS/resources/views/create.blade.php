@@ -5,9 +5,9 @@
     <div>
         <div class="flex items-center gap-2 text-xs text-slate-400 mb-3">
             <a href="{{ route('dashboard') }}" class="hover:text-blue-600 transition-colors">Dashboard</a>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            <x-fas-tachometer-alt class="w-3 h-3" />
             <a href="{{ route('modules.cms.index') }}" class="hover:text-blue-600 transition-colors">Blog / CMS</a>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            <x-fas-tachometer-alt class="w-3 h-3" />
             <span class="text-slate-600 font-semibold">Write New Post</span>
         </div>
         <h1 class="text-2xl font-black text-slate-900 tracking-tight">Write New Post</h1>
@@ -83,7 +83,7 @@
             {{-- Metadata Section --}}
             <div class="border-t border-slate-100 pt-6">
                 <h3 class="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <div class="w-6 h-6 bg-violet-50 text-violet-600 rounded flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></div>
+                    <div class="w-6 h-6 bg-violet-50 text-violet-600 rounded flex items-center justify-center"><x-fas-tachometer-alt class="w-3.5 h-3.5" /></div>
                     Publishing
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">

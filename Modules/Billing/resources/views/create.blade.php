@@ -5,9 +5,9 @@
     <div>
         <div class="flex items-center gap-2 text-xs text-slate-400 mb-3">
             <a href="{{ route('dashboard') }}" class="hover:text-blue-600 transition-colors">Dashboard</a>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            <x-fas-tachometer-alt class="w-3 h-3" />
             <a href="{{ route('modules.billing.index') }}" class="hover:text-blue-600 transition-colors">Billing</a>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            <x-fas-tachometer-alt class="w-3 h-3" />
             <span class="text-slate-600 font-semibold">New Invoice</span>
         </div>
         <h1 class="text-2xl font-black text-slate-900 tracking-tight">Create Invoice</h1>
@@ -32,7 +32,7 @@
             {{-- Invoice Meta --}}
             <div>
                 <h3 class="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2 border-b border-slate-100 pb-2">
-                    <div class="w-6 h-6 bg-blue-50 text-blue-600 rounded flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+                    <div class="w-6 h-6 bg-blue-50 text-blue-600 rounded flex items-center justify-center"><x-fas-tachometer-alt class="w-3.5 h-3.5" /></div>
                     Invoice Details
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -77,11 +77,11 @@
             <div>
                 <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-4">
                     <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2">
-                        <div class="w-6 h-6 bg-violet-50 text-violet-600 rounded flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg></div>
+                        <div class="w-6 h-6 bg-violet-50 text-violet-600 rounded flex items-center justify-center"><x-fas-tachometer-alt class="w-3.5 h-3.5" /></div>
                         Line Items
                     </h3>
                     <button type="button" @click="addItem()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg transition-colors flex items-center gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg> Add Row
+                        <x-fas-calendar-alt class="w-3 h-3" /> Add Row
                     </button>
                 </div>
                 
@@ -114,7 +114,7 @@
                                 <label class="sm:hidden block text-xs font-bold text-slate-500 mt-2">Line Total</label>
                                 <div class="font-bold text-slate-700 tabular-nums">$<span x-text="formatMoney(item.quantity * item.unit_price)"></span></div>
                                 <button type="button" @click="removeItem(index)" x-show="items.length > 1" class="w-7 h-7 bg-red-50 text-red-500 rounded flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors absolute top-3 right-3 sm:relative sm:top-0 sm:right-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                                    <x-fas-tachometer-alt class="w-4 h-4" />
                                 </button>
                             </div>
                         </div>

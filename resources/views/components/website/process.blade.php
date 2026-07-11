@@ -16,9 +16,7 @@
         @endphp
         <div class="text-center mb-16" data-aos="fade-up">
             <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-600 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-                </svg>
+                <x-fas-eye class="w-3.5 h-3.5" />
                 How We Work
             </div>
             <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
