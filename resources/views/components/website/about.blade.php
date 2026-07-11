@@ -41,24 +41,14 @@
                             {{-- Play button --}}
                             <div class="absolute inset-0 z-20 flex items-center justify-center">
                                 <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform cursor-pointer hover:bg-white/30">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M8 5v14l11-7z"/>
-                                    </svg>
+                                    <x-fas-user-md class="w-6 h-6 text-white ml-1" />
                                 </div>
                             </div>
                         </div>
 
                         {{-- Small Image 2 (Indigo) --}}
                         <div class="hidden sm:block rounded-2xl overflow-hidden h-40 bg-gradient-to-br from-blue-500 to-indigo-700 relative">
-                            <svg viewBox="0 0 150 160" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="150" height="160" fill="#4F46E5"/>
-                                <circle cx="75" cy="50" r="80" fill="#4338CA" opacity="0.4"/>
-                                <circle cx="75" cy="55" r="22" fill="#C7D2FE"/>
-                                <ellipse cx="75" cy="125" rx="45" ry="45" fill="#3730A3"/>
-                                <rect x="62" y="75" width="26" height="60" rx="5" fill="#312E81" opacity="0.8"/>
-                                {{-- stethoscope --}}
-                                <path d="M60 85 Q50 110 55 125 Q60 140 75 143 Q90 140 95 125 Q100 110 90 85" fill="none" stroke="#A5B4FC" stroke-width="3" stroke-linecap="round"/>
-                            </svg>
+                            <x-fas-user-md class="w-full h-full" />
                         </div>
                     </div>
 
@@ -78,11 +68,7 @@
 
                         {{-- Small Image 3 (Heartbeat pulse, now h-80) --}}
                         <div class="rounded-2xl overflow-hidden h-80 bg-gradient-to-br from-rose-500 to-red-700 relative flex items-center justify-center">
-                            <svg viewBox="0 0 150 160" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="150" height="160" fill="#E11D48"/>
-                                <circle cx="75" cy="80" r="50" fill="#BE123C" opacity="0.6"/>
-                                <path d="M35 85 L55 85 L65 60 L85 115 L95 85 L115 85" fill="none" stroke="#FFE4E6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <x-fas-user-md class="w-full h-full" />
                         </div>
                     </div>
                 </div>
@@ -111,9 +97,7 @@
             <div class="flex flex-col gap-6" data-aos="fade-left">
                 <div>
                     <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-600 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                        </svg>
+                        <x-fas-tachometer-alt class="w-3.5 h-3.5" />
                         Introduction To Us
                     </div>
                     <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
@@ -135,9 +119,7 @@
                     ] as $benefit)
                         <li class="flex items-start gap-3">
                             <div class="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-                                </svg>
+                                <x-fas-eye class="w-3 h-3 text-white" />
                             </div>
                             <span class="text-sm text-gray-700">{{ $benefit }}</span>
                         </li>
@@ -147,9 +129,7 @@
                 {{-- Opening Hours Card --}}
                 <div class="bg-blue-600 rounded-2xl p-5 text-white">
                     <div class="flex items-center gap-2 mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
+                        <x-fas-chart-bar class="w-5 h-5 text-blue-200" />
                         <h3 class="font-bold text-base">Opening Hours</h3>
                     </div>
                     <p class="text-blue-100 text-xs mb-4 leading-relaxed">Orci quis tat longucat cubitur et pulvinar hugi. Amet non facilisis.</p>

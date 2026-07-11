@@ -41,6 +41,7 @@ class DoctorInviteNotification extends Notification
         $url = route('doctor.invite.show', ['token' => $this->token]);
 
         return (new MailMessage)
+                    ->from(env('MAIL_FROM_ADDRESS', 'no-reply@ogechihospital.org'), env('MAIL_FROM_NAME', 'Ogechi Hospital'))
                     ->subject('Welcome to Ogechi HMS - Doctor Registration')
                     ->greeting("Hello {$this->doctorName},")
                     ->line('You have been invited to join the Ogechi Hospital Management System as a Doctor.')

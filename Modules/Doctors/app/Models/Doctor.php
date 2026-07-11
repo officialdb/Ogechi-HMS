@@ -23,7 +23,18 @@ class Doctor extends Model
         'license_number',
         'status',
         'bio',
+        'profile_photo',
     ];
+
+    /**
+     * Get the public URL for the doctor's profile photo, or null.
+     */
+    public function getProfilePhotoUrlAttribute(): ?string
+    {
+        return $this->profile_photo
+            ? \Illuminate\Support\Facades\Storage::url($this->profile_photo)
+            : null;
+    }
 
     /**
      * Get the doctor's full name.

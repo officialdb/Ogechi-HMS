@@ -38,7 +38,7 @@
                             'label' => 'Email',
                             'value' => $contactEmail,
                             'sub'   => 'Reply within 24 hours',
-                            'color' => 'bg-indigo-600',
+                            'color' => 'bg-blue-600',
                             'href'  => 'mailto:' . $contactEmail,
                         ],
                         [
@@ -46,7 +46,7 @@
                             'label' => 'Address',
                             'value' => $addressMain,
                             'sub'   => $addressSub,
-                            'color' => 'bg-violet-600',
+                            'color' => 'bg-blue-600',
                             'href'  => '#map',
                         ],
                         [
@@ -54,7 +54,7 @@
                             'label' => 'Emergency',
                             'value' => '+234 800 911 0000',
                             'sub'   => 'Available 24 / 7',
-                            'color' => 'bg-red-600',
+                            'color' => 'bg-blue-600',
                             'href'  => 'tel:+2348009110000',
                         ],
                     ];
@@ -64,8 +64,8 @@
                     <a href="{{ $card['href'] }}"
                        class="group flex flex-col items-center text-center gap-3 bg-[#F5F9FF] hover:bg-white rounded-2xl p-6 border border-blue-50 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-900/10 transition-all duration-300 hover:-translate-y-1">
                         <div class="{{ $card['color'] }} w-13 h-13 w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-900/20 group-hover:scale-110 transition-transform duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="{{ $card['icon'] }}"/>
+                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="{{ $card['icon'] }}" />
                             </svg>
                         </div>
                         <div>
@@ -142,9 +142,7 @@
                             {{-- Success state --}}
                             <div x-show="submitted" x-transition class="bg-green-50 border border-green-200 rounded-2xl p-5 text-center" style="display:none;">
                                 <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-                                    </svg>
+                                    <x-fas-check-circle class="w-6 h-6 text-green-600" />
                                 </div>
                                 <h3 class="font-bold text-green-800 text-sm">Appointment Booked Successfully!</h3>
                                 <p class="text-green-600 text-xs mt-1">We will contact you shortly to confirm your slot. Thank you!</p>
@@ -279,18 +277,9 @@
                                 </div>
 
                                 {{-- Submit --}}
-                                <button
-                                    type="submit"
-                                    :disabled="loading"
-                                    class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-bold text-sm py-3.5 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-blue-600/30 flex items-center justify-center gap-2"
-                                >
-                                    <svg x-show="loading" class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-                                    </svg>
-                                    <svg x-show="!loading" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                                    </svg>
+                                <button type="submit" :disabled="loading" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 hover:shadow-lg hover:shadow-blue-600/30 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed">
+                                    <x-fas-spinner class="w-4 h-4 animate-spin" x-show="loading" />
+                                    <x-fas-paper-plane class="w-4 h-4" x-show="!loading" />
                                     <span x-text="loading ? 'Sending...' : 'Send Message & Book Appointment'"></span>
                                 </button>
 
@@ -309,9 +298,7 @@
                     <div class="bg-blue-600 rounded-2xl p-6 text-white shadow-xl shadow-blue-600/25">
                         <div class="flex items-center gap-2 mb-5">
                             <div class="w-9 h-9 bg-white/15 rounded-xl flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
+                                <x-fas-clock class="w-5 h-5 text-white" />
                             </div>
                             <h3 class="font-bold text-base">Opening Hours</h3>
                         </div>
@@ -345,9 +332,7 @@
                         ] as $item)
                             <div class="flex items-start gap-3">
                                 <div class="w-8 h-8 {{ $item['color'] }} rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="{{ $item['icon'] }}"/>
-                                    </svg>
+                                    <x-fas-check class="w-4 h-4" />
                                 </div>
                                 <p class="text-xs text-gray-600 leading-relaxed">{{ $item['text'] }}</p>
                             </div>
@@ -365,7 +350,7 @@
                                 ['label'=>'YouTube','color'=>'bg-red-600 hover:bg-red-700','sub'=>'Ogechi Hospital','icon'=>'M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z M9.75 15.02 15.5 12 9.75 8.98 9.75 15.02'],
                             ] as $s)
                                 <a href="#" class="{{ $s['color'] }} text-white rounded-xl p-3 flex items-center gap-2.5 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5">
-                                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="{{ $s['icon'] }}"/></svg>
+                                    <x-fas-share-alt class="w-4 h-4 flex-shrink-0" />
                                     <div>
                                         <p class="text-xs font-bold leading-none">{{ $s['label'] }}</p>
                                         <p class="text-[10px] opacity-70 mt-0.5 leading-none">{{ $s['sub'] }}</p>
@@ -405,19 +390,15 @@
 
                         {{-- Pin --}}
                         <div class="relative z-10 flex flex-col items-center gap-3">
-                            <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-2xl shadow-blue-600/40 animate-bounce">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                </svg>
+                            <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center flex-shrink-0 backdrop-blur-sm border border-white/20">
+                                <x-fas-headset class="w-8 h-8 text-white" />
                             </div>
                             <div class="bg-white rounded-2xl shadow-xl px-6 py-3 text-center border border-blue-100">
                                 <p class="font-bold text-gray-900 text-sm">{{ \Modules\Settings\Models\Setting::where('key', 'app_name')->value('value') ?: 'Ogechi Hospital' }}</p>
                                 <p class="text-blue-600 text-xs font-medium mt-0.5">{{ $contactAddress }}</p>
-                                <a href="https://maps.google.com/?q={{ urlencode($contactAddress) }}" target="_blank" rel="noopener noreferrer"
-                                   class="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-                                    Open in Google Maps
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                <a href="https://maps.google.com/?q={{ urlencode($contactAddress) }}" target="_blank" class="inline-flex items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold px-4 py-2 rounded-xl transition-colors text-sm">
+                                    <x-fas-map-marker-alt class="w-4 h-4" />
+                                    Get Directions
                                 </a>
                             </div>
                         </div>

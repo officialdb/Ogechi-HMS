@@ -9,7 +9,7 @@
         </div>
         <div class="flex items-center gap-3">
             <button onclick="window.print()" class="flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white rounded-xl shadow-md transition-all hover:opacity-90" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                <x-fas-chart-bar class="w-5 h-5" />
                 Print Report
             </button>
         </div>
@@ -24,7 +24,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm relative overflow-hidden group print:border-slate-300">
             <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                <x-fas-user-injured class="w-16 h-16 text-blue-600" />
             </div>
             <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 relative z-10">Total Patients</p>
             <p class="text-3xl font-black text-slate-900 relative z-10">{{ number_format($totalPatients) }}</p>
@@ -32,7 +32,7 @@
         
         <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm relative overflow-hidden group print:border-slate-300">
             <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <x-fas-chart-bar class="w-16 h-16 text-emerald-600" />
             </div>
             <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 relative z-10">Collected Revenue</p>
             <p class="text-3xl font-black text-emerald-600 relative z-10">{{ $currency_symbol }}{{ number_format($totalRevenue, 2) }}</p>
@@ -40,7 +40,7 @@
 
         <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm relative overflow-hidden group print:border-slate-300">
             <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <x-fas-chart-bar class="w-16 h-16 text-amber-600" />
             </div>
             <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 relative z-10">Pending Revenue</p>
             <p class="text-3xl font-black text-amber-600 relative z-10">{{ $currency_symbol }}{{ number_format($pendingRevenue, 2) }}</p>
@@ -48,7 +48,7 @@
         
         <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm relative overflow-hidden group print:border-slate-300">
             <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                <x-fas-user-injured class="w-16 h-16 text-indigo-600" />
             </div>
             <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 relative z-10">Apt. Completion Rate</p>
             <p class="text-3xl font-black text-indigo-600 relative z-10">{{ $completionRate }}%</p>
@@ -94,7 +94,7 @@
         {{-- Empty Placeholder for future chart --}}
         <div class="bg-slate-50 border border-slate-100 border-dashed rounded-2xl p-6 flex flex-col items-center justify-center text-center print:hidden">
             <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm border border-slate-100">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                <x-fas-chart-bar class="w-6 h-6 text-slate-300" />
             </div>
             <p class="text-sm font-bold text-slate-700">Custom Widget Space</p>
             <p class="text-xs text-slate-500 mt-1 max-w-xs">Additional charts like Pharmacy Top Sellers or Doctor Performance can be added here.</p>

@@ -44,49 +44,49 @@
             <nav class="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0" aria-label="Tabs">
                 {{-- General --}}
                 <button @click="activeTab = 'general'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'general', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'general' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <x-fas-cog class="w-5 h-5" />
                     General Settings
                 </button>
                 
                 {{-- Branding --}}
                 <button @click="activeTab = 'branding'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'branding', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'branding' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <x-fas-plus class="w-5 h-5" />
                     Branding & Logo
                 </button>
 
                 {{-- Contact & Location --}}
                 <button @click="activeTab = 'contact'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'contact', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'contact' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <x-fas-eye class="w-5 h-5" />
                     Contact & Location
                 </button>
 
                 {{-- Mail Settings --}}
                 <button @click="activeTab = 'mail'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'mail', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'mail' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    <x-fas-eye class="w-5 h-5" />
                     Mail Configuration
                 </button>
 
                 {{-- SEO --}}
                 <button @click="activeTab = 'seo'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'seo', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'seo' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                    <x-fas-cog class="w-5 h-5" />
                     SEO & Meta
                 </button>
 
                 {{-- Social Media --}}
                 <button @click="activeTab = 'social'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'social', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'social' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                    <x-fas-cog class="w-5 h-5" />
                     Social Media
                 </button>
 
                 {{-- System Preferences --}}
                 <button @click="activeTab = 'preferences'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'preferences', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'preferences' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+                    <x-fas-cog class="w-5 h-5" />
                     System Preferences
                 </button>
 
                 {{-- Homepage Content --}}
                 <button @click="activeTab = 'homepage'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'homepage', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'homepage' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    <x-fas-cog class="w-5 h-5" />
                     Homepage Content
                 </button>
             </nav>
@@ -137,7 +137,7 @@
                                     <img :src="logoPreview" class="absolute inset-0 w-full h-full object-contain p-4 z-10" />
                                 </template>
                                 <div class="text-center z-0" :class="{ 'opacity-0': logoPreview }">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-slate-400 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                    <x-fas-plus class="w-10 h-10 text-slate-400 mx-auto mb-2" />
                                     <p class="text-xs font-semibold text-slate-500">Click to upload logo</p>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@
                                     <img :src="faviconPreview" class="absolute inset-0 w-full h-full object-contain p-4 z-10" />
                                 </template>
                                 <div class="text-center z-0" :class="{ 'opacity-0': faviconPreview }">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-slate-400 mx-auto mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                    <x-fas-plus class="w-8 h-8 text-slate-400 mx-auto mb-1" />
                                     <p class="text-[10px] font-semibold text-slate-500">Upload Icon</p>
                                 </div>
                             </div>
@@ -194,7 +194,7 @@
                     <h2 class="text-lg font-black text-slate-900 mb-6 pb-4 border-b border-slate-100">Mail Configuration (Resend)</h2>
 
                     <div class="bg-blue-50 text-blue-800 p-4 rounded-xl border border-blue-100 mb-6 flex items-start gap-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0 mt-0.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <x-fas-eye class="w-5 h-5 shrink-0 mt-0.5 text-blue-600" />
                         <div class="text-sm font-medium">
                             <p>This system uses <a href="https://resend.com" target="_blank" class="underline font-bold">Resend</a> for email delivery. Enter your API key from your Resend dashboard.</p>
                             <p class="mt-1 text-blue-700">Get your API key at <span class="font-mono font-bold">resend.com/api-keys</span></p>
@@ -317,7 +317,7 @@
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div class="bg-white border border-blue-100 rounded-xl p-4 space-y-3">
                                             <p class="text-xs font-bold text-blue-700 flex items-center gap-1.5">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                                <x-fas-chart-bar class="w-3.5 h-3.5" />
                                                 Card 1 (left — blue)
                                             </p>
                                             <div>
@@ -331,7 +331,7 @@
                                         </div>
                                         <div class="bg-white border border-green-100 rounded-xl p-4 space-y-3">
                                             <p class="text-xs font-bold text-green-700 flex items-center gap-1.5">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                                <x-fas-cog class="w-3.5 h-3.5" />
                                                 Card 2 (right — green)
                                             </p>
                                             <div>
@@ -480,8 +480,8 @@
                 {{-- Submit Button --}}
                 <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end">
                     <button type="submit" :disabled="isSaving" class="flex items-center gap-2 px-6 py-3 text-sm font-bold text-white rounded-xl shadow-md shadow-blue-500/20 transition-all hover:opacity-90 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-                        <svg x-show="!isSaving" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                        <svg x-show="isSaving" x-cloak class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                        <x-fas-eye class="w-5 h-5" />
+                        <x-fas-cog class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" />
                         <span x-text="isSaving ? 'Saving...' : 'Save Settings'"></span>
                     </button>
                 </div>
@@ -500,7 +500,7 @@
          x-transition:leave-end="opacity-0 translate-y-4"
          x-cloak
          class="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-6 py-4 bg-slate-900 text-white rounded-2xl shadow-xl shadow-slate-900/20">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <x-fas-plus class="w-6 h-6 text-emerald-400" />
         <span class="font-medium" x-text="toastMessage"></span>
     </div>
 

@@ -35,9 +35,7 @@
                 <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-sm">
                     @foreach($breadcrumbs as $i => $crumb)
                         @if($i > 0)
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                            </svg>
+                            <x-fas-chevron-right class="w-3 h-3 text-blue-300" />
                         @endif
                         @if(isset($crumb['route']))
                             <a href="{{ route($crumb['route']) }}" class="text-blue-200 hover:text-white transition-colors font-medium">{{ $crumb['label'] }}</a>
@@ -51,9 +49,9 @@
     </div>
 
     {{-- Bottom wave --}}
-    <div class="absolute bottom-0 left-0 right-0 overflow-hidden leading-none">
-        <svg viewBox="0 0 1440 40" class="w-full" fill="white" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0,40 C360,0 1080,0 1440,40 L1440,40 L0,40 Z"/>
+    <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none">
+        <svg class="block w-full h-[30px] lg:h-[50px] text-white" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118,130.4,120,192.6,104.9,235.6,94.39,280.4,76.54,321.39,56.44Z" fill="currentColor"></path>
         </svg>
     </div>
 </section>

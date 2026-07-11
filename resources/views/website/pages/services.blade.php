@@ -39,7 +39,7 @@
             @if($departments->isEmpty())
                 <div class="text-center py-20">
                     <div class="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-blue-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $deptIcon }}"/></svg>
+                        <x-fas-eye class="w-10 h-10 text-blue-300" />
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Departments Coming Soon</h3>
                     <p class="text-gray-500 text-sm max-w-sm mx-auto">Our department listings will appear here once configured. Please check back soon.</p>
@@ -51,9 +51,7 @@
                         <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl hover:shadow-blue-900/10 p-6 border border-gray-100 hover:border-blue-100 transition-all duration-300 hover:-translate-y-2 flex flex-col gap-4">
                             <span class="text-4xl font-black {{ $c['num'] }} opacity-40 leading-none select-none">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
                             <div class="{{ $c['bg'] }} {{ $c['text'] }} w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 {{ $c['hover'] }} group-hover:text-white group-hover:shadow-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="{{ $deptIcon }}"/>
-                                </svg>
+                                <x-fas-eye class="w-7 h-7" />
                             </div>
                             <div>
                                 <h3 class="font-bold text-gray-900 text-base mb-2 group-hover:text-blue-700 transition-colors">{{ $dept->name }}</h3>
@@ -67,14 +65,14 @@
                                 @endif
                                 @if($dept->location)
                                     <p class="text-xs text-gray-400 mt-1 flex items-center gap-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                        <x-fas-eye class="w-3 h-3" />
                                         {{ $dept->location }}
                                     </p>
                                 @endif
                             </div>
                             <a href="{{ route('website.contact') }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors mt-auto">
                                 Book Appointment
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                                <x-fas-eye class="w-4 h-4" />
                             </a>
                         </div>
                     @endforeach

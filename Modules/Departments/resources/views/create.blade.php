@@ -5,7 +5,7 @@
     <div class="flex items-center gap-4">
         <a href="{{ route('modules.departments.index') }}"
            class="w-9 h-9 flex items-center justify-center rounded-xl bg-white border border-slate-200 text-slate-500 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 transition-colors shadow-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            <x-fas-eye class="w-4 h-4" />
         </a>
         <div>
             <h1 class="text-2xl font-black text-slate-900 tracking-tight">New Department</h1>
@@ -22,7 +22,7 @@
             @if($errors->any())
                 <div class="bg-red-50 border border-red-200 rounded-2xl p-4 text-sm text-red-700 space-y-1">
                     @foreach($errors->all() as $error)
-                        <p class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>{{ $error }}</p>
+                        <p class="flex items-center gap-2"><x-fas-eye class="w-4 h-4 shrink-0" />{{ $error }}</p>
                     @endforeach
                 </div>
             @endif
@@ -86,7 +86,7 @@
                 <button type="submit"
                         class="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-white rounded-xl shadow-md shadow-blue-500/20 transition-all hover:opacity-90 hover:scale-[1.02]"
                         style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    <x-fas-eye class="w-4 h-4" />
                     Create Department
                 </button>
             </div>

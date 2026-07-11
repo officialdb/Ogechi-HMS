@@ -5,9 +5,9 @@
     <div>
         <div class="flex items-center gap-2 text-xs text-slate-400 mb-3">
             <a href="{{ route('dashboard') }}" class="hover:text-blue-600 transition-colors">Dashboard</a>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            <x-fas-tachometer-alt class="w-3 h-3" />
             <a href="{{ route('modules.appointments.index') }}" class="hover:text-blue-600 transition-colors">Appointments</a>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            <x-fas-tachometer-alt class="w-3 h-3" />
             <span class="text-slate-600 font-semibold">Appointment #{{ $appointment->id }}</span>
         </div>
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -17,7 +17,7 @@
             </div>
             <div class="flex items-center gap-2">
                 <a href="{{ route('modules.appointments.edit', $appointment) }}" class="flex items-center gap-2 px-5 py-2 text-sm font-bold text-white rounded-xl shadow-md transition-all hover:opacity-90" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                    <x-fas-tachometer-alt class="w-4 h-4" />
                     Reschedule / Edit
                 </a>
             </div>
@@ -40,22 +40,22 @@
             <div class="flex items-center gap-2.5">
                 @if($appointment->status === 'completed')
                     <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        <x-fas-eye class="w-5 h-5" />
                     </div>
                     <span class="font-bold uppercase tracking-wide text-sm">Completed Appointment</span>
                 @elseif($appointment->status === 'confirmed')
                     <div class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        <x-fas-tachometer-alt class="w-5 h-5" />
                     </div>
                     <span class="font-bold uppercase tracking-wide text-sm">Confirmed Appointment</span>
                 @elseif($appointment->status === 'cancelled')
                     <div class="w-8 h-8 rounded-full bg-slate-400 text-white flex items-center justify-center shadow-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                        <x-fas-tachometer-alt class="w-5 h-5" />
                     </div>
                     <span class="font-bold uppercase tracking-wide text-sm">Cancelled Appointment</span>
                 @else
                     <div class="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center shadow-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <x-fas-chart-bar class="w-5 h-5" />
                     </div>
                     <span class="font-bold uppercase tracking-wide text-sm">Pending Confirmation</span>
                 @endif
@@ -75,7 +75,7 @@
                 {{-- Patient Info --}}
                 <div>
                     <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                        <x-fas-tachometer-alt class="w-4 h-4 text-slate-300" />
                         Patient
                     </h3>
                     <div class="flex items-center gap-4">
@@ -93,7 +93,7 @@
                     </div>
                     <div class="mt-4">
                         <a href="{{ route('patients.show', $appointment->patient->uuid) }}" class="text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1">
-                            View Full Medical Record <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            View Full Medical Record <x-fas-tachometer-alt class="w-3 h-3" />
                         </a>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                 {{-- Doctor Info --}}
                 <div>
                     <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                        <x-fas-tachometer-alt class="w-4 h-4 text-slate-300" />
                         Doctor
                     </h3>
                     <div class="flex items-center gap-4">
@@ -121,7 +121,7 @@
                     </div>
                     <div class="mt-4">
                         <a href="{{ route('modules.doctors.show', $appointment->doctor) }}" class="text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1">
-                            View Doctor Profile <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            View Doctor Profile <x-fas-tachometer-alt class="w-3 h-3" />
                         </a>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
             {{-- Appointment Details --}}
             <div class="pt-8 border-t border-slate-100">
                 <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-5 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    <x-fas-tachometer-alt class="w-4 h-4 text-slate-300" />
                     Reason & Notes
                 </h3>
                 

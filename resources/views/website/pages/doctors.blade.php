@@ -18,7 +18,7 @@
                 {{-- Empty state --}}
                 <div class="text-center py-20">
                     <div class="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-blue-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                        <x-fas-tachometer-alt class="w-10 h-10 text-blue-300" />
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">No Doctors Listed Yet</h3>
                     <p class="text-gray-500 text-sm max-w-sm mx-auto">Our team profiles will appear here once added by the admin. Please check back soon.</p>
@@ -54,20 +54,9 @@
                         <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl hover:shadow-blue-900/10 overflow-hidden border border-gray-100 hover:border-blue-100 transition-all duration-300 hover:-translate-y-2">
                             {{-- Illustrated Avatar Card --}}
                             <div class="relative h-56 bg-gradient-to-br {{ $grad }} overflow-hidden">
-                                <svg viewBox="0 0 200 224" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="200" height="224" fill="{{ $rectFill }}"/>
-                                    <circle cx="100" cy="270" r="130" fill="rgba(255,255,255,0.08)"/>
-                                    <ellipse cx="100" cy="190" rx="65" ry="80" fill="{{ $coatHex }}"/>
-                                    <rect x="70" y="155" width="60" height="85" rx="5" fill="white" opacity="0.15"/>
-                                    <circle cx="100" cy="115" r="38" fill="{{ $skinHex }}"/>
-                                    <ellipse cx="100" cy="83" rx="38" ry="20" fill="#1E3A5F"/>
-                                    <rect x="88" y="148" width="24" height="20" rx="4" fill="{{ $skinHex }}"/>
-                                    <path d="M82 168 Q72 195 77 210 Q82 225 100 228 Q118 225 123 210 Q128 195 118 168" fill="none" stroke="rgba(200,200,255,0.6)" stroke-width="3" stroke-linecap="round"/>
-                                    <rect x="86" y="175" width="28" height="10" rx="3" fill="white" opacity="0.5"/>
-                                    {{-- Initials badge --}}
-                                    <circle cx="100" cy="115" r="22" fill="rgba(255,255,255,0.25)"/>
-                                    <text x="100" y="121" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="white">{{ $initials }}</text>
-                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center text-white/30">
+                                    <x-fas-user-md class="w-24 h-24" />
+                                </div>
 
                                 {{-- Department badge --}}
                                 @if($doctor->department)
@@ -90,11 +79,11 @@
                                 @endif
                                 <div class="flex justify-center gap-0.5 mt-3">
                                     @for($s=0;$s<5;$s++)
-                                        <svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        <x-fas-star class="w-3.5 h-3.5 text-yellow-400" />
                                     @endfor
                                 </div>
                                 <a href="{{ route('website.contact') }}" class="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-                                    Book Appointment <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                                    Book Appointment <x-fas-chevron-right class="w-3 h-3" />
                                 </a>
                             </div>
                         </div>

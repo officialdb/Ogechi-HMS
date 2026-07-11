@@ -85,9 +85,7 @@
             class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg shadow-blue-600/30 flex items-center justify-center opacity-0 translate-y-4 transition-all duration-300 hover:bg-blue-700 hover:scale-110"
             aria-label="Back to top"
         >
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
-            </svg>
+            <x-fas-flask class="w-5 h-5" />
         </button>
 
         <script>
