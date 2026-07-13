@@ -35,10 +35,10 @@
             <div class="flex items-center justify-center gap-4 text-sm">
                 <div class="flex items-center gap-2">
                     <div class="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center text-white font-bold text-xs">
-                        {{ strtoupper(substr($post->author ?? 'A', 0, 1)) }}
+                        {{ strtoupper(substr(is_string($post->author) ? $post->author : ($post->author->name ?? 'A'), 0, 1)) }}
                     </div>
                     <div class="text-left">
-                        <p class="text-white font-semibold text-xs leading-none">{{ $post->author }}</p>
+                        <p class="text-white font-semibold text-xs leading-none">{{ is_string($post->author) ? $post->author : ($post->author->name ?? '') }}</p>
                         <p class="text-blue-200 text-xs mt-0.5">{{ $post->author_role ?? '' }}</p>
                     </div>
                 </div>
@@ -129,10 +129,10 @@
                         </h3>
                         <div class="flex items-center gap-3 mb-3">
                             <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-base shadow-md shadow-blue-600/30">
-                                {{ strtoupper(substr($post->author ?? 'A', 0, 1)) }}
+                                {{ strtoupper(substr(is_string($post->author) ? $post->author : ($post->author->name ?? 'A'), 0, 1)) }}
                             </div>
                             <div>
-                                <p class="font-bold text-gray-900 text-sm">{{ $post->author }}</p>
+                                <p class="font-bold text-gray-900 text-sm">{{ is_string($post->author) ? $post->author : ($post->author->name ?? '') }}</p>
                                 <p class="text-blue-600 text-xs font-semibold">{{ $post->author_role ?? '' }}</p>
                             </div>
                         </div>
