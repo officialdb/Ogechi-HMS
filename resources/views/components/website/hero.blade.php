@@ -1,5 +1,5 @@
 {{-- HERO SECTION --}}
-<section id="home" class="relative overflow-hidden min-h-[90vh] flex items-center bg-blue-900">
+<section id="home" class="relative overflow-hidden min-h-[90vh] flex items-stretch bg-blue-900">
 
     {{-- Full-width Background Image --}}
     <div class="absolute inset-0 z-0">
@@ -35,11 +35,11 @@
         <span class="text-[120px] font-black text-white/5 uppercase tracking-widest leading-none">OGECHI</span>
     </div>
 
-    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-24 lg:py-0 lg:min-h-[90vh] flex items-center">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center w-full h-full">
+    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full min-h-[90vh] flex flex-col pt-24 pb-0 lg:py-0">
+        <div class="flex flex-col lg:flex-row gap-10 w-full h-full flex-1">
 
             {{-- Left: Content --}}
-            <div class="flex flex-col gap-6 pt-10" data-aos="fade-right">
+            <div class="flex flex-col justify-center gap-6 pt-0 lg:pt-10 flex-shrink-0 lg:w-1/2" data-aos="fade-right">
                 @php
                     $heroHeadline = \Modules\Settings\Models\Setting::where('key', 'home_hero_headline')->value('value') ?: 'Best Caring, Better Doctors';
                     $words = explode(' ', $heroHeadline);
@@ -102,7 +102,7 @@
             </div>
 
             {{-- Right: Doctor Image (doc_1.png) --}}
-            <div class="relative flex justify-center lg:justify-end items-end h-full pt-10" data-aos="fade-up">
+            <div class="relative flex justify-center lg:justify-end items-end h-full flex-1 lg:w-1/2 pt-10" data-aos="fade-up">
                 
                 {{-- Decorative artistic sketch behind doctor --}}
                 <svg class="absolute top-1/4 right-0 w-32 h-32 text-white/20 pointer-events-none" viewBox="0 0 120 120" fill="none">
@@ -114,7 +114,7 @@
                 <img
                     src="{{ asset('images/doc_1.png') }}"
                     alt="Ogechi Hospital Doctor"
-                    class="relative z-10 w-full max-w-sm sm:max-w-md lg:max-w-none lg:w-[900px] xl:w-[1100px] object-contain object-bottom drop-shadow-2xl -mb-10 lg:-mb-24 xl:-mr-16"
+                    class="relative z-10 w-full max-w-sm sm:max-w-md lg:max-w-none lg:w-[900px] xl:w-[1100px] object-contain object-bottom drop-shadow-2xl -mb-0 lg:-mb-24 xl:-mr-16"
                 />
             </div>
         </div>
