@@ -16,7 +16,7 @@
         @endphp
         <div class="text-center mb-14" data-aos="fade-up">
             <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-600 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-4">
-                <x-fas-eye class="w-3.5 h-3.5" />
+                <x-fas-comment-dots class="w-3.5 h-3.5" />
                 Testimonials
             </div>
             <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
@@ -82,13 +82,13 @@
                     >
                         {{-- Quote Icon --}}
                         <div class="absolute top-5 right-5 opacity-10 {{ isset($review['dark']) ? 'text-white' : 'text-blue-600' }}">
-                            <x-fas-eye class="w-12 h-12" />
+                            <x-fas-quote-left class="w-12 h-12" />
                         </div>
 
                         {{-- Stars --}}
                         <div class="flex gap-0.5">
                             @for($i = 0; $i < $review['rating']; $i++)
-                                <x-fas-eye class="w-4 h-4 text-yellow-400" />
+                                <x-fas-star class="w-4 h-4 text-yellow-400" />
                             @endfor
                         </div>
 
@@ -113,7 +113,7 @@
                             {{-- Verified badge --}}
                             <div class="ml-auto">
                                 <div class="w-7 h-7 bg-green-100 rounded-full flex items-center justify-center">
-                                    <x-fas-eye class="w-4 h-4 text-green-600" />
+                                    <x-fas-check-circle class="w-4 h-4 text-green-600" />
                                 </div>
                             </div>
                         </div>

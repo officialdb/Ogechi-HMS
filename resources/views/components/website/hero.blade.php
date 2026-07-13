@@ -114,7 +114,7 @@
                 <img
                     src="{{ asset('images/doc_1.png') }}"
                     alt="Ogechi Hospital Doctor"
-                    class="relative z-10 w-[500px] sm:w-[600px] lg:w-[900px] xl:w-[1100px] max-w-none object-contain object-bottom drop-shadow-2xl -mb-10 lg:-mb-24 xl:-mr-16"
+                    class="relative z-10 w-full max-w-sm sm:max-w-md lg:max-w-none lg:w-[900px] xl:w-[1100px] object-contain object-bottom drop-shadow-2xl -mb-10 lg:-mb-24 xl:-mr-16"
                 />
             </div>
         </div>

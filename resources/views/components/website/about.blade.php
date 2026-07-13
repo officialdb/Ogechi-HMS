@@ -97,7 +97,7 @@
             <div class="flex flex-col gap-6" data-aos="fade-left">
                 <div>
                     <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-600 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-4">
-                        <x-fas-tachometer-alt class="w-3.5 h-3.5" />
+                        <x-fas-arrow-right class="w-3.5 h-3.5" />
                         Introduction To Us
                     </div>
                     <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
@@ -119,7 +119,7 @@
                     ] as $benefit)
                         <li class="flex items-start gap-3">
                             <div class="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
-                                <x-fas-eye class="w-3 h-3 text-white" />
+                                <x-fas-check class="w-3 h-3 text-white" />
                             </div>
                             <span class="text-sm text-gray-700">{{ $benefit }}</span>
                         </li>

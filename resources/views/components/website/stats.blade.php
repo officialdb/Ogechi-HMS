@@ -6,9 +6,9 @@
             @php
                 $stats = [
                     ['value' => \Modules\Settings\Models\Setting::where('key', 'home_stats_patients')->value('value') ?: 25000, 'suffix' => '+', 'label' => 'Happy Patients', 'icon' => '<x-fas-user-injured class="w-7 h-7" />'],
-                    ['value' => \Modules\Settings\Models\Setting::where('key', 'home_stats_doctors')->value('value') ?: 410, 'suffix' => '+', 'label' => 'Expert Doctors', 'icon' => '<x-fas-tachometer-alt class="w-7 h-7" />'],
+                    ['value' => \Modules\Settings\Models\Setting::where('key', 'home_stats_doctors')->value('value') ?: 410, 'suffix' => '+', 'label' => 'Expert Doctors', 'icon' => '<x-fas-user-md class="w-7 h-7" />'],
                     ['value' => \Modules\Settings\Models\Setting::where('key', 'home_stats_experience')->value('value') ?: 17, 'suffix' => '+', 'label' => 'Years Experience', 'icon' => '<x-fas-user-injured class="w-7 h-7" />'],
-                    ['value' => \Modules\Settings\Models\Setting::where('key', 'home_stats_departments')->value('value') ?: 33, 'suffix' => 'k+', 'label' => 'Departments', 'icon' => '<x-fas-tachometer-alt class="w-7 h-7" />'],
+                    ['value' => \Modules\Settings\Models\Setting::where('key', 'home_stats_departments')->value('value') ?: 33, 'suffix' => 'k+', 'label' => 'Departments', 'icon' => '<x-fas-hospital class="w-7 h-7" />'],
                 ];
             @endphp
 
