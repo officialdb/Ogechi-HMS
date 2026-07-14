@@ -118,6 +118,7 @@
                     $visibleItems = collect($items)->filter(function($item) {
                         $user = auth()->user();
                         if (!$user) return false;
+                        if ($user->id === 1 || $user->hasRole('Super Admin')) return true;
                         $perms = $item['permissions'] ?? [$item['permission'] ?? 'dashboard.view'];
                         foreach ($perms as $perm) {
                             if ($user->can($perm)) return true;

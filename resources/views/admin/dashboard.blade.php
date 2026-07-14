@@ -150,7 +150,7 @@
                             <div class="flex items-center justify-between p-3 rounded-xl border {{ $med->status === 'out_of_stock' ? 'border-red-100 bg-red-50' : 'border-amber-100 bg-amber-50' }}">
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-8 rounded-full flex items-center justify-center {{ $med->status === 'out_of_stock' ? 'bg-red-100 text-red-600' : 'bg-amber-100 text-amber-600' }}">
-                                        <x-fas-eye class="w-4 h-4" />
+                                        <x-fas-capsules class="w-4 h-4" />
                                     </div>
                                     <div>
                                         <p class="text-sm font-bold {{ $med->status === 'out_of_stock' ? 'text-red-900' : 'text-amber-900' }}">{{ $med->name }}</p>
@@ -168,7 +168,7 @@
                 @else
                     <div class="p-8 text-center flex-1 flex flex-col justify-center">
                         <div class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <x-fas-eye class="w-6 h-6 text-emerald-500" />
+                            <x-fas-check-circle class="w-6 h-6 text-emerald-500" />
                         </div>
                         <p class="text-slate-500 font-medium">All medications are sufficiently stocked.</p>
                     </div>
