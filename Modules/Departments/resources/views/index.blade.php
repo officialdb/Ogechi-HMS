@@ -28,7 +28,7 @@
         {{-- Total --}}
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);">
-                <x-fas-tachometer-alt class="w-6 h-6 text-blue-600" />
+                <x-fas-calendar-check class="w-6 h-6 text-blue-600" />
             </div>
             <div>
                 <p class="text-2xl font-black text-slate-900">{{ $stats['total'] }}</p>
@@ -124,7 +124,7 @@
                         {{-- Doctors count --}}
                         <td class="px-6 py-4">
                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-blue-50 text-blue-700">
-                                <x-fas-tachometer-alt class="w-3.5 h-3.5" />
+                                <x-fas-pen class="w-3.5 h-3.5" />
                                 {{ $dept->doctors_count }}
                             </span>
                         </td>
@@ -145,7 +145,7 @@
                             <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <a href="{{ route('modules.departments.edit', $dept) }}"
                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-blue-700 bg-blue-50 border border-blue-100 rounded-lg hover:bg-blue-100 transition-colors">
-                                    <x-fas-tachometer-alt class="w-3.5 h-3.5" />
+                                    <x-fas-pen class="w-3.5 h-3.5" />
                                     Edit
                                 </a>
                                 <form method="POST" action="{{ route('modules.departments.destroy', $dept) }}" onsubmit="return confirm('Delete this department? Doctors assigned to it will be unassigned.')">
@@ -174,7 +174,7 @@
         {{-- Empty state --}}
         <div class="flex flex-col items-center justify-center py-20 text-center">
             <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);">
-                <x-fas-tachometer-alt class="w-8 h-8 text-blue-500" />
+                <x-fas-building class="w-8 h-8 text-blue-500" />
             </div>
             <p class="text-lg font-black text-slate-700 mb-1">No departments yet</p>
             <p class="text-sm text-slate-400 mb-6">Create your first department to get started.</p>

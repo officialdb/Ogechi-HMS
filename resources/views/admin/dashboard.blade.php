@@ -20,7 +20,7 @@
                 <p class="text-sm text-slate-500 mt-0.5">Here's what's happening at Ogechi Hospital today.</p>
             </div>
             <div class="hidden sm:flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-600 shadow-sm">
-                <x-fas-tachometer-alt class="w-4 h-4 text-blue-500" />
+                <x-fas-calendar class="w-4 h-4 text-blue-500" />
                 {{ now()->format('l, d M Y') }}
             </div>
         </div>
@@ -30,7 +30,7 @@
             {{-- Patients --}}
             <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-4">
                 <div class="bg-blue-50 w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <x-fas-tachometer-alt class="w-7 h-7 text-blue-600" />
+                    <x-fas-users class="w-7 h-7 text-blue-600" />
                 </div>
                 <div>
                     <p class="text-2xl font-black text-slate-900">{{ number_format($totalPatients) }}</p>
@@ -41,7 +41,7 @@
             {{-- Doctors --}}
             <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-4">
                 <div class="bg-amber-50 w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <x-fas-tachometer-alt class="w-7 h-7 text-amber-500" />
+                    <x-fas-user-md class="w-7 h-7 text-amber-500" />
                 </div>
                 <div>
                     <p class="text-2xl font-black text-slate-900">{{ number_format($totalDoctors) }}</p>
@@ -52,7 +52,7 @@
             {{-- Appointments Today --}}
             <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-4">
                 <div class="bg-teal-50 w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <x-fas-tachometer-alt class="w-7 h-7 text-teal-600" />
+                    <x-fas-calendar-check class="w-7 h-7 text-teal-600" />
                 </div>
                 <div>
                     <p class="text-2xl font-black text-slate-900">{{ number_format($todayAppointments) }}</p>
@@ -131,7 +131,7 @@
                     </div>
                 @else
                     <div class="p-8 text-center flex-1 flex flex-col justify-center">
-                        <x-fas-tachometer-alt class="w-12 h-12 text-slate-200 mx-auto mb-3" />
+                        <x-fas-folder-open class="w-12 h-12 text-slate-200 mx-auto mb-3" />
                         <p class="text-slate-500 font-medium">No upcoming appointments found.</p>
                     </div>
                 @endif

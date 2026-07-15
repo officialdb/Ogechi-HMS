@@ -97,7 +97,7 @@
                                     <td class="px-6 py-3.5 text-right">
                                         <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                             <a href="{{ route('modules.pharmacy.edit', $med) }}" class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-slate-200 transition-colors" title="Edit / Restock">
-                                                <x-fas-tachometer-alt class="w-4 h-4" />
+                                                <x-fas-pen class="w-4 h-4" />
                                             </a>
                                         </div>
                                     </td>

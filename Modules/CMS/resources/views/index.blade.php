@@ -132,14 +132,14 @@
                                                 <x-fas-eye class="w-4 h-4" />
                                             </a>
                                             <a href="{{ route('modules.cms.edit', $post) }}" class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-slate-200 transition-colors" title="Edit Article">
-                                                <x-fas-tachometer-alt class="w-4 h-4" />
+                                                <x-fas-pen class="w-4 h-4" />
                                             </a>
                                             <form method="POST" action="{{ route('modules.cms.destroy', $post) }}"
                                                   onsubmit="return confirm('Delete this post? This cannot be undone.')">
                                                 @csrf @method('DELETE')
                                                 <button type="submit" title="Delete Post"
                                                         class="w-8 h-8 rounded-lg bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors">
-                                                    <x-fas-plus class="w-4 h-4" />
+                                                    <x-fas-trash class="w-4 h-4" />
                                                 </button>
                                             </form>
                                         </div>

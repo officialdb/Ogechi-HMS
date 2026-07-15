@@ -16,7 +16,7 @@
         
         <div class="p-8 text-center bg-slate-50 border-b border-slate-100">
             <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-md" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-                <x-fas-tachometer-alt class="w-8 h-8 text-white" />
+                <x-fas-user-md class="w-8 h-8 text-white" />
             </div>
             <h1 class="text-2xl font-black text-slate-900 tracking-tight">Complete Registration</h1>
             <p class="text-sm text-slate-500 mt-2">Welcome, <span class="font-bold text-slate-700">Dr. {{ $doctor->first_name }} {{ $doctor->last_name }}</span>!</p>

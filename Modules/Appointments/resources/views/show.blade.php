@@ -5,9 +5,9 @@
     <div>
         <div class="flex items-center gap-2 text-xs text-slate-400 mb-3">
             <a href="{{ route('dashboard') }}" class="hover:text-blue-600 transition-colors">Dashboard</a>
-            <x-fas-tachometer-alt class="w-3 h-3" />
+            <x-fas-chevron-right class="w-3 h-3" />
             <a href="{{ route('modules.appointments.index') }}" class="hover:text-blue-600 transition-colors">Appointments</a>
-            <x-fas-tachometer-alt class="w-3 h-3" />
+            <x-fas-chevron-right class="w-3 h-3" />
             <span class="text-slate-600 font-semibold">Appointment #{{ $appointment->id }}</span>
         </div>
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -17,7 +17,7 @@
             </div>
             <div class="flex items-center gap-2">
                 <a href="{{ route('modules.appointments.edit', $appointment) }}" class="flex items-center gap-2 px-5 py-2 text-sm font-bold text-white rounded-xl shadow-md transition-all hover:opacity-90" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-                    <x-fas-tachometer-alt class="w-4 h-4" />
+                    <x-fas-pen class="w-4 h-4" />
                     Reschedule / Edit
                 </a>
             </div>
@@ -45,12 +45,12 @@
                     <span class="font-bold uppercase tracking-wide text-sm">Completed Appointment</span>
                 @elseif($appointment->status === 'confirmed')
                     <div class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-sm">
-                        <x-fas-tachometer-alt class="w-5 h-5" />
+                        <x-fas-pen class="w-5 h-5" />
                     </div>
                     <span class="font-bold uppercase tracking-wide text-sm">Confirmed Appointment</span>
                 @elseif($appointment->status === 'cancelled')
                     <div class="w-8 h-8 rounded-full bg-slate-400 text-white flex items-center justify-center shadow-sm">
-                        <x-fas-tachometer-alt class="w-5 h-5" />
+                        <x-fas-pen class="w-5 h-5" />
                     </div>
                     <span class="font-bold uppercase tracking-wide text-sm">Cancelled Appointment</span>
                 @else
@@ -75,7 +75,7 @@
                 {{-- Patient Info --}}
                 <div>
                     <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-                        <x-fas-tachometer-alt class="w-4 h-4 text-slate-300" />
+                        <x-fas-file-alt class="w-4 h-4 text-slate-300" />
                         Patient
                     </h3>
                     <div class="flex items-center gap-4">
@@ -93,7 +93,7 @@
                     </div>
                     <div class="mt-4">
                         <a href="{{ route('patients.show', $appointment->patient->uuid) }}" class="text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1">
-                            View Full Medical Record <x-fas-tachometer-alt class="w-3 h-3" />
+                            View Full Medical Record <x-fas-file-medical class="w-3 h-3" />
                         </a>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                 {{-- Doctor Info --}}
                 <div>
                     <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-                        <x-fas-tachometer-alt class="w-4 h-4 text-slate-300" />
+                        <x-fas-file-alt class="w-4 h-4 text-slate-300" />
                         Doctor
                     </h3>
                     <div class="flex items-center gap-4">
@@ -121,7 +121,7 @@
                     </div>
                     <div class="mt-4">
                         <a href="{{ route('modules.doctors.show', $appointment->doctor) }}" class="text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1">
-                            View Doctor Profile <x-fas-tachometer-alt class="w-3 h-3" />
+                            View Doctor Profile <x-fas-user-md class="w-3 h-3" />
                         </a>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
             {{-- Appointment Details --}}
             <div class="pt-8 border-t border-slate-100">
                 <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-5 flex items-center gap-2">
-                    <x-fas-tachometer-alt class="w-4 h-4 text-slate-300" />
+                    <x-fas-file-alt class="w-4 h-4 text-slate-300" />
                     Reason & Notes
                 </h3>
                 

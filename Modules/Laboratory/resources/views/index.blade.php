@@ -112,7 +112,7 @@
                         <tr>
                             <td colspan="5" class="px-6 py-12 text-center">
                                 <div class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-slate-100">
-                                    <x-fas-tachometer-alt class="w-8 h-8 text-slate-400" />
+                                    <x-fas-flask class="w-8 h-8 text-slate-400" />
                                 </div>
                                 <h3 class="text-sm font-bold text-slate-900 mb-1">No lab tests found</h3>
                                 <p class="text-sm text-slate-500">There are no lab tests matching your criteria.</p>

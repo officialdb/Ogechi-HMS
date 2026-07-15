@@ -6,7 +6,7 @@
         <div>
             <div class="flex items-center gap-2 mb-1">
                 <a href="{{ route('dashboard') }}" class="text-xs text-slate-400 hover:text-blue-600 transition-colors">Dashboard</a>
-                <x-fas-tachometer-alt class="w-3 h-3 text-slate-300" />
+                <x-fas-chevron-right class="w-3 h-3 text-slate-300" />
                 <span class="text-xs text-blue-600 font-semibold">Patients</span>
             </div>
             <h1 class="text-xl font-bold text-slate-900">Patient Registry</h1>
@@ -17,11 +17,11 @@
             <div class="flex items-center bg-white border border-slate-200 rounded-xl p-1 shadow-sm">
                 <button @click="view='table'" :class="view==='table' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-600'"
                         class="p-2 rounded-lg transition-all duration-150">
-                    <x-fas-tachometer-alt class="w-4 h-4" />
+                    <x-fas-list class="w-4 h-4" />
                 </button>
                 <button @click="view='grid'" :class="view==='grid' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-600'"
                         class="p-2 rounded-lg transition-all duration-150">
-                    <x-fas-tachometer-alt class="w-4 h-4" />
+                    <x-fas-th-large class="w-4 h-4" />
                 </button>
             </div>
             @can('patients.create')
@@ -57,7 +57,7 @@
         @foreach($miniStats as $s)
             <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-4">
                 <div class="{{ $s['bg'] }} w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <x-fas-tachometer-alt class="w-6 h-6 {{ $s['color'] }}" />
+                    <svg class="w-6 h-6 {{ $s['color'] }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $s['icon'] }}"/></svg>
                 </div>
                 <div>
                     <p class="text-xl font-black text-slate-900">{{ $s['value'] }}</p>
@@ -188,7 +188,7 @@
                                 <p class="text-[11px] text-slate-400 mt-0.5">{{ $patient->registeredBy?->name ?? 'System' }}</p>
                                 @if($patient->assignedDoctor)
                                     <span class="inline-flex items-center gap-1 mt-1 px-1.5 py-0.5 rounded-md text-[10px] font-semibold bg-blue-50 text-blue-700">
-                                        <x-fas-tachometer-alt class="w-2.5 h-2.5" />
+                                        <x-fas-user-md class="w-2.5 h-2.5" />
                                         {{ $patient->assignedDoctor->full_name }}
                                     </span>
                                 @endif
@@ -197,13 +197,13 @@
                                 <div class="flex items-center justify-end gap-1.5 opacity-60 group-hover:opacity-100 transition-opacity">
                                     <a href="{{ route('patients.show', $patient) }}"
                                        class="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white rounded-lg text-xs font-bold transition-colors">
-                                        <x-fas-tachometer-alt class="w-3.5 h-3.5" />
+                                        <x-fas-eye class="w-3.5 h-3.5" />
                                         View
                                     </a>
                                     @can('patients.update')
                                         <a href="{{ route('patients.edit', $patient) }}"
                                            class="w-8 h-8 bg-slate-100 text-slate-500 hover:bg-amber-500 hover:text-white rounded-lg flex items-center justify-center transition-colors">
-                                            <x-fas-tachometer-alt class="w-3.5 h-3.5" />
+                                            <x-fas-pen class="w-3.5 h-3.5" />
                                         </a>
                                     @endcan
                                     @can('patients.delete')
@@ -211,7 +211,7 @@
                                               x-data x-on:submit.prevent="confirm('Archive {{ addslashes($patient->full_name) }}?') && $el.submit()">
                                             @csrf @method('DELETE')
                                             <button type="submit" class="w-8 h-8 bg-slate-100 text-slate-500 hover:bg-red-500 hover:text-white rounded-lg flex items-center justify-center transition-colors">
-                                                <x-fas-plus class="w-3.5 h-3.5" />
+                                                <x-fas-trash class="w-3.5 h-3.5" />
                                             </button>
                                         </form>
                                     @endcan
@@ -222,7 +222,7 @@
                         <tr>
                             <td colspan="6" class="px-6 py-20 text-center">
                                 <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                                    <x-fas-tachometer-alt class="w-8 h-8 text-blue-400" />
+                                    <x-fas-folder-open class="w-8 h-8 text-blue-400" />
                                 </div>
                                 <p class="text-base font-bold text-slate-800">No patients found</p>
                                 <p class="text-sm text-slate-400 mt-1 mb-4">{{ $search ? 'Try adjusting your search.' : 'Register the first patient to get started.' }}</p>
@@ -272,7 +272,7 @@
                         @if($patient->blood_group) <span class="px-2 py-0.5 text-[10px] font-bold bg-red-50 text-red-600 rounded-lg">{{ $patient->blood_group }}</span> @endif
                     </div>
                     <p class="text-xs text-slate-500 mt-3 truncate">
-                        <x-fas-tachometer-alt class="w-3 h-3 inline mr-1 text-slate-400" />
+                        <x-fas-phone class="w-3 h-3 inline mr-1 text-slate-400" />
                         {{ $patient->phone }}
                     </p>
                     <div class="flex items-center gap-2 mt-4 pt-4 border-t border-slate-100">
