@@ -66,7 +66,7 @@
             {{-- Monthly Revenue --}}
             <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-4">
                 <div class="bg-rose-50 w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <x-fas-chart-bar class="w-7 h-7 text-rose-500" />
+                    <x-fas-coins class="w-7 h-7 text-rose-500" />
                 </div>
                 <div>
                     <p class="text-2xl font-black text-slate-900">{{ $currency_symbol }}{{ number_format($monthRevenue, 2) }}</p>

@@ -8,7 +8,8 @@
             <p class="text-sm text-slate-500 mt-0.5">Manage and track patient lab tests and results.</p>
         </div>
         <a href="{{ route('modules.laboratory.create') }}" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-bold text-white rounded-xl shadow-md transition-all hover:opacity-90 hover:scale-[1.02]" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-            <x-fas-calendar-alt class="w-4 h-4" />
+           <!-- <x-fas-calendar-alt class="w-4 h-4" /> -->
+            <x-fas-vial class="w-4 h-4" />
             New Lab Test
         </a>
     </div>
@@ -16,21 +17,21 @@
     {{-- ── STATS ── --}}
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         @foreach([
-            ['label'=>'Total Tests', 'val'=>$stats['total'], 'color'=>'text-blue-600', 'bg'=>'bg-blue-50', 'icon'=>'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z'],
-            ['label'=>'Pending', 'val'=>$stats['pending'], 'color'=>'text-amber-500', 'bg'=>'bg-amber-50', 'icon'=>'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'],
-            ['label'=>'Processing', 'val'=>$stats['processing'], 'color'=>'text-teal-500', 'bg'=>'bg-teal-50', 'icon'=>'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z'],
-            ['label'=>'Completed', 'val'=>$stats['completed'], 'color'=>'text-emerald-500', 'bg'=>'bg-emerald-50', 'icon'=>'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'],
-        ] as $stat)
-            <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-100 shadow-sm flex items-center gap-4">
-                <div class="{{ $stat['bg'] }} w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <x-fas-flask class="w-6 h-6 sm:w-7 sm:h-7 {{ $stat['color'] }}" />
-                </div>
-                <div>
-                    <p class="text-xl sm:text-2xl font-black text-slate-900 leading-none">{{ number_format($stat['val']) }}</p>
-                    <p class="text-xs sm:text-sm font-semibold text-slate-500 mt-1">{{ $stat['label'] }}</p>
-                </div>
-            </div>
-        @endforeach
+    ['label'=>'Total Tests', 'val'=>$stats['total'], 'color'=>'text-blue-600', 'bg'=>'bg-blue-50', 'icon'=>'fas-file-medical'],
+    ['label'=>'Pending', 'val'=>$stats['pending'], 'color'=>'text-amber-500', 'bg'=>'bg-amber-50', 'icon'=>'fas-clock'],
+    ['label'=>'Processing', 'val'=>$stats['processing'], 'color'=>'text-teal-500', 'bg'=>'bg-teal-50', 'icon'=>'fas-sync-alt'],
+    ['label'=>'Completed', 'val'=>$stats['completed'], 'color'=>'text-emerald-500', 'bg'=>'bg-emerald-50', 'icon'=>'fas-check-circle'],
+] as $stat)
+    <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-100 shadow-sm flex items-center gap-4">
+        <div class="{{ $stat['bg'] }} w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center flex-shrink-0">
+            <x-dynamic-component :component="$stat['icon']" class="w-6 h-6 sm:w-7 sm:h-7 {{ $stat['color'] }}" />
+        </div>
+        <div>
+            <p class="text-xl sm:text-2xl font-black text-slate-900 leading-none">{{ number_format($stat['val']) }}</p>
+            <p class="text-xs sm:text-sm font-semibold text-slate-500 mt-1">{{ $stat['label'] }}</p>
+        </div>
+    </div>
+@endforeach
     </div>
 
     {{-- ── FILTERS & LIST ── --}}
@@ -39,7 +40,7 @@
         <div class="p-4 sm:p-6 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <form action="{{ route('modules.laboratory.index') }}" method="GET" class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
                 <div class="relative flex-1 sm:w-64">
-                    <x-fas-plus class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <x-fas-search class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <input type="search" name="search" value="{{ request('search') }}" placeholder="Search tests or patients..." class="w-full pl-9 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors">
                 </div>
                 <select name="status" class="py-2 pl-3 pr-8 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors appearance-none">
@@ -104,7 +105,7 @@
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <a href="{{ route('modules.laboratory.edit', $test) }}" class="inline-flex items-center justify-center w-9 h-9 rounded-xl text-slate-400 hover:bg-blue-50 hover:text-blue-600 transition-colors">
-                                    <x-fas-flask class="w-5 h-5" />
+                                    <x-fas-file-medical class="w-5 h-5" />
                                 </a>
                             </td>
                         </tr>
@@ -112,7 +113,7 @@
                         <tr>
                             <td colspan="5" class="px-6 py-12 text-center">
                                 <div class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-slate-100">
-                                    <x-fas-flask class="w-8 h-8 text-slate-400" />
+                                    <x-fas-file-medical class="w-8 h-8 text-slate-400" />
                                 </div>
                                 <h3 class="text-sm font-bold text-slate-900 mb-1">No lab tests found</h3>
                                 <p class="text-sm text-slate-500">There are no lab tests matching your criteria.</p>

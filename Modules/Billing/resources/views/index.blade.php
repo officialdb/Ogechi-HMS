@@ -9,7 +9,7 @@
         </div>
         <div class="flex items-center gap-3">
             <a href="{{ route('modules.billing.create') }}" class="flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white rounded-xl shadow-md transition-all hover:opacity-90" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-                <x-fas-calendar-alt class="w-5 h-5" />
+                <x-fas-file-invoice-dollar class="w-5 h-5" />
                 Create Invoice
             </a>
         </div>
@@ -34,7 +34,7 @@
     {{-- ── FILTER / SEARCH BAR ────────────────────────── --}}
     <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col sm:flex-row gap-4 items-center justify-between">
         <form method="GET" action="{{ route('modules.billing.index') }}" class="flex-1 w-full sm:w-auto relative" id="search-form">
-            <x-fas-plus class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <x-fas-magnifying-glass class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input type="search" name="search" value="{{ request('search') }}" placeholder="Search by patient name, ID, or invoice number…" 
                    class="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-colors">
             @if(request('status'))

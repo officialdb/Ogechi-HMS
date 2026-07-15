@@ -18,7 +18,7 @@
     {{-- ── FILTER / SEARCH BAR ────────────────────────── --}}
     <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col sm:flex-row gap-4 items-center justify-between">
         <form method="GET" action="{{ route('modules.pharmacy.index') }}" class="flex-1 w-full sm:w-auto relative" id="search-form">
-            <x-fas-plus class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <x-fas-magnifying-glass class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input type="search" name="search" value="{{ request('search') }}" placeholder="Search by name, generic name, or category…" 
                    class="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-colors">
             @if(request('status'))

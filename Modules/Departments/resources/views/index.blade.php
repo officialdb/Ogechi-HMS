@@ -10,7 +10,7 @@
         <a href="{{ route('modules.departments.create') }}"
            class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white rounded-xl shadow-md shadow-blue-500/20 transition-all hover:opacity-90 hover:scale-[1.02]"
            style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-            <x-fas-calendar-alt class="w-4 h-4" />
+            <x-fas-building class="w-4 h-4" />
             New Department
         </a>
     </div>
@@ -28,7 +28,7 @@
         {{-- Total --}}
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);">
-                <x-fas-calendar-check class="w-6 h-6 text-blue-600" />
+                <x-fas-layer-group class="w-6 h-6 text-blue-600" />
             </div>
             <div>
                 <p class="text-2xl font-black text-slate-900">{{ $stats['total'] }}</p>
@@ -38,7 +38,7 @@
         {{-- Active --}}
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);">
-                <x-fas-plus class="w-6 h-6 text-emerald-600" />
+                <x-fas-building class="w-6 h-6 text-emerald-600" />
             </div>
             <div>
                 <p class="text-2xl font-black text-slate-900">{{ $stats['active'] }}</p>
@@ -48,7 +48,7 @@
         {{-- Inactive --}}
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style="background:linear-gradient(135deg,#F8FAFC,#F1F5F9);">
-                <x-fas-plus class="w-6 h-6 text-slate-400" />
+                <x-fas-pause-circle class="w-6 h-6 text-slate-400" />
             </div>
             <div>
                 <p class="text-2xl font-black text-slate-900">{{ $stats['inactive'] }}</p>
@@ -61,7 +61,7 @@
     <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
         <form method="GET" action="{{ route('modules.departments.index') }}" class="flex flex-col sm:flex-row gap-3">
             <div class="relative flex-1">
-                <x-fas-plus class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <x-fas-magnifying-glass class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Search departments, heads, locations…"
                        class="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors">
             </div>
@@ -124,7 +124,7 @@
                         {{-- Doctors count --}}
                         <td class="px-6 py-4">
                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-blue-50 text-blue-700">
-                                <x-fas-pen class="w-3.5 h-3.5" />
+                                <x-fas-stethoscope class="w-3.5 h-3.5" />
                                 {{ $dept->doctors_count }}
                             </span>
                         </td>
@@ -151,7 +151,7 @@
                                 <form method="POST" action="{{ route('modules.departments.destroy', $dept) }}" onsubmit="return confirm('Delete this department? Doctors assigned to it will be unassigned.')">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-red-700 bg-red-50 border border-red-100 rounded-lg hover:bg-red-100 transition-colors">
-                                        <x-fas-plus class="w-3.5 h-3.5" />
+                                        <x-fas-trash class="w-3.5 h-3.5" />
                                         Delete
                                     </button>
                                 </form>

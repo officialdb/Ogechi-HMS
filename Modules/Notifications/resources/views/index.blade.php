@@ -52,15 +52,15 @@
                         <div class="shrink-0 pt-1">
                             @if($iconType === 'warning')
                                 <div class="w-10 h-10 rounded-full flex items-center justify-center {{ $isRead ? 'bg-slate-100 text-slate-400' : 'bg-amber-100 text-amber-600' }}">
-                                    <x-fas-eye class="w-5 h-5" />
+                                    <x-fas-exclamation-triangle class="w-5 h-5" />
                                 </div>
                             @elseif($iconType === 'success')
                                 <div class="w-10 h-10 rounded-full flex items-center justify-center {{ $isRead ? 'bg-slate-100 text-slate-400' : 'bg-emerald-100 text-emerald-600' }}">
-                                    <x-fas-eye class="w-5 h-5" />
+                                    <x-fas-check-circle class="w-5 h-5" />
                                 </div>
                             @elseif($iconType === 'error')
                                 <div class="w-10 h-10 rounded-full flex items-center justify-center {{ $isRead ? 'bg-slate-100 text-slate-400' : 'bg-red-100 text-red-600' }}">
-                                    <x-fas-eye class="w-5 h-5" />
+                                    <x-fas-times-circle class="w-5 h-5" />
                                 </div>
                             @else
                                 <div class="w-10 h-10 rounded-full flex items-center justify-center {{ $isRead ? 'bg-slate-100 text-slate-400' : 'bg-blue-100 text-blue-600' }}">
@@ -107,7 +107,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="w-8 h-8 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-red-50 hover:text-red-600 transition-colors" title="Delete">
-                                    <x-fas-plus class="w-4 h-4" />
+                                    <x-fas-trash class="w-4 h-4" />
                                 </button>
                             </form>
                         </div>

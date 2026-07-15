@@ -72,7 +72,7 @@
     <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-4">
         <form method="GET" action="{{ route('patients.index') }}" class="flex flex-col sm:flex-row gap-3">
             <div class="flex-1 relative">
-                <x-fas-plus class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <x-fas-magnifying-glass class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <input name="search" type="search" value="{{ $search }}"
                        placeholder="Search by name, patient number, phone or email…"
                        class="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-colors placeholder-slate-400">
@@ -188,7 +188,7 @@
                                 <p class="text-[11px] text-slate-400 mt-0.5">{{ $patient->registeredBy?->name ?? 'System' }}</p>
                                 @if($patient->assignedDoctor)
                                     <span class="inline-flex items-center gap-1 mt-1 px-1.5 py-0.5 rounded-md text-[10px] font-semibold bg-blue-50 text-blue-700">
-                                        <x-fas-user-md class="w-2.5 h-2.5" />
+                                        <x-fas-user class="w-2.5 h-2.5" />
                                         {{ $patient->assignedDoctor->full_name }}
                                     </span>
                                 @endif
@@ -228,7 +228,7 @@
                                 <p class="text-sm text-slate-400 mt-1 mb-4">{{ $search ? 'Try adjusting your search.' : 'Register the first patient to get started.' }}</p>
                                 @can('patients.create')
                                     <a href="{{ route('patients.create') }}" class="inline-flex items-center gap-2 px-5 py-2.5 text-white text-sm font-bold rounded-xl shadow-md" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-                                        <x-fas-calendar-alt class="w-4 h-4" />
+                                        <x-fas-file-signature class="w-4 h-4" />
                                         Register First Patient
                                     </a>
                                 @endcan
