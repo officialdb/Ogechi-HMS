@@ -18,7 +18,7 @@
     {{-- ── FILTER / SEARCH BAR ────────────────────────── --}}
     <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col sm:flex-row gap-4 items-center justify-between">
         <form method="GET" action="{{ route('modules.cms.index') }}" class="flex-1 w-full sm:w-auto relative" id="search-form">
-            <x-fas-plus class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <x-fas-magnifying-glass class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input type="search" name="search" value="{{ request('search') }}" placeholder="Search posts by title, author, or category…" 
                    class="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-colors">
             @if(request('approval_status'))
@@ -72,7 +72,7 @@
                                                 <img src="{{ Storage::url($post->thumbnail) }}" alt="" class="w-10 h-10 rounded-lg object-cover shadow-sm flex-shrink-0">
                                             @else
                                                 <div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center flex-shrink-0">
-                                                    <x-fas-plus class="w-5 h-5 text-slate-400" />
+                                                    <x-fas-hospital class="w-5 h-5 text-slate-400" />
                                                 </div>
                                             @endif
                                             <div>
@@ -132,14 +132,14 @@
                                                 <x-fas-eye class="w-4 h-4" />
                                             </a>
                                             <a href="{{ route('modules.cms.edit', $post) }}" class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-slate-200 transition-colors" title="Edit Article">
-                                                <x-fas-tachometer-alt class="w-4 h-4" />
+                                                <x-fas-pen class="w-4 h-4" />
                                             </a>
                                             <form method="POST" action="{{ route('modules.cms.destroy', $post) }}"
                                                   onsubmit="return confirm('Delete this post? This cannot be undone.')">
                                                 @csrf @method('DELETE')
                                                 <button type="submit" title="Delete Post"
                                                         class="w-8 h-8 rounded-lg bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors">
-                                                    <x-fas-plus class="w-4 h-4" />
+                                                    <x-fas-trash class="w-4 h-4" />
                                                 </button>
                                             </form>
                                         </div>

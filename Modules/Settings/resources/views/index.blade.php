@@ -40,57 +40,57 @@
     <div class="flex flex-col lg:flex-row gap-8">
         
         {{-- ── SIDEBAR TABS ─────────────────────────────── --}}
-        <div class="w-full lg:w-64 shrink-0">
-            <nav class="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0" aria-label="Tabs">
-                {{-- General --}}
-                <button @click="activeTab = 'general'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'general', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'general' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <x-fas-cog class="w-5 h-5" />
-                    General Settings
-                </button>
-                
-                {{-- Branding --}}
-                <button @click="activeTab = 'branding'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'branding', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'branding' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <x-fas-plus class="w-5 h-5" />
-                    Branding & Logo
-                </button>
+<div class="w-full lg:w-64 shrink-0">
+    <nav class="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0" aria-label="Tabs">
+        {{-- General (System-wide configurations) --}}
+        <button @click="activeTab = 'general'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'general', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'general' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
+            <x-fas-sliders class="w-5 h-5" />
+            General Settings
+        </button>
+        
+        {{-- Branding (Logo and Visual Identity) --}}
+        <button @click="activeTab = 'branding'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'branding', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'branding' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
+            <x-fas-image-portrait class="w-5 h-5" />
+            Logo & Branding
+        </button>
 
-                {{-- Contact & Location --}}
-                <button @click="activeTab = 'contact'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'contact', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'contact' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <x-fas-eye class="w-5 h-5" />
-                    Contact & Location
-                </button>
+        {{-- Contact & Location (Physical Addresses and Forms) --}}
+        <button @click="activeTab = 'contact'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'contact', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'contact' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
+            <x-fas-map-location-dot class="w-5 h-5" />
+            Contact & Contact
+        </button>
 
-                {{-- Mail Settings --}}
-                <button @click="activeTab = 'mail'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'mail', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'mail' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <x-fas-eye class="w-5 h-5" />
-                    Mail Configuration
-                </button>
+        {{-- Mail Configuration (SMTP, Templates, etc.) --}}
+        <button @click="activeTab = 'mail'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'mail', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'mail' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
+            <x-fas-envelope-open-text class="w-5 h-5" />
+            SMTP & Email
+        </button>
 
-                {{-- SEO --}}
-                <button @click="activeTab = 'seo'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'seo', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'seo' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <x-fas-cog class="w-5 h-5" />
-                    SEO & Meta
-                </button>
+        {{-- SEO & Meta (Search Engine Metadata) --}}
+        <button @click="activeTab = 'seo'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'seo', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'seo' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
+            <x-fas-chart-line class="w-5 h-5" />
+            SEO & Meta
+        </button>
 
-                {{-- Social Media --}}
-                <button @click="activeTab = 'social'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'social', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'social' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <x-fas-cog class="w-5 h-5" />
-                    Social Media
-                </button>
+        {{-- Social Media (Platform Links and OpenGraph) --}}
+        <button @click="activeTab = 'social'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'social', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'social' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
+            <x-fas-hashtag class="w-5 h-5" />
+            Social Media
+        </button>
 
-                {{-- System Preferences --}}
-                <button @click="activeTab = 'preferences'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'preferences', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'preferences' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <x-fas-cog class="w-5 h-5" />
-                    System Preferences
-                </button>
+        {{-- System Preferences (Deep Maintenance/Wrench) --}}
+        <button @click="activeTab = 'preferences'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'preferences', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'preferences' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
+            <x-fas-wrench class="w-5 h-5" />
+            System Preferences
+        </button>
 
-                {{-- Homepage Content --}}
-                <button @click="activeTab = 'homepage'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'homepage', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'homepage' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
-                    <x-fas-cog class="w-5 h-5" />
-                    Homepage Content
-                </button>
-            </nav>
-        </div>
+        {{-- Homepage Content (Editing the front page) --}}
+        <button @click="activeTab = 'homepage'" :class="{ 'bg-white shadow-sm text-blue-600 font-bold border-slate-200': activeTab === 'homepage', 'text-slate-500 hover:bg-slate-50 border-transparent': activeTab !== 'homepage' }" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl border transition-all whitespace-nowrap lg:whitespace-normal">
+            <x-fas-brush class="w-5 h-5" />
+            Homepage Content
+        </button>
+    </nav>
+</div>
 
         {{-- ── FORM CONTENT ─────────────────────────────── --}}
         <div class="flex-1">
@@ -478,13 +478,18 @@
                 </div>
 
                 {{-- Submit Button --}}
-                <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end">
-                    <button type="submit" :disabled="isSaving" class="flex items-center gap-2 px-6 py-3 text-sm font-bold text-white rounded-xl shadow-md shadow-blue-500/20 transition-all hover:opacity-90 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-                        <x-fas-eye class="w-5 h-5" />
-                        <x-fas-cog class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" />
-                        <span x-text="isSaving ? 'Saving...' : 'Save Settings'"></span>
-                    </button>
-                </div>
+            <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end">
+                <button type="submit" :disabled="isSaving" class="flex items-center gap-2 px-6 py-3 text-sm font-bold text-white rounded-xl shadow-md shadow-blue-500/20 transition-all hover:opacity-90 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
+                    
+                    {{-- Show save icon when NOT saving --}}
+                    <x-fas-save x-show="!isSaving" class="w-5 h-5" />
+                    
+                    {{-- Show spinning cog when saving --}}
+                    <x-fas-cog x-show="isSaving" class="animate-spin w-5 h-5" />
+                    
+                    <span x-text="isSaving ? 'Saving...' : 'Save Settings'"></span>
+                </button>
+            </div>
 
             </form>
         </div>

@@ -125,7 +125,7 @@
                                                 <x-fas-eye class="w-4 h-4" />
                                             </a>
                                             <a href="{{ route('modules.appointments.edit', $apt) }}" class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-slate-200 transition-colors" title="Reschedule / Edit">
-                                                <x-fas-tachometer-alt class="w-4 h-4" />
+                                                <x-fas-pen class="w-4 h-4" />
                                             </a>
                                         </div>
                                     </td>
@@ -143,7 +143,7 @@
             @else
                 <div class="py-16 px-6 text-center">
                     <div class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-slate-100">
-                        <x-fas-tachometer-alt class="w-8 h-8 text-slate-300" />
+                        <x-fas-folder-open class="w-8 h-8 text-slate-300" />
                     </div>
                     <h3 class="text-sm font-bold text-slate-900 mb-1">No Appointments Found</h3>
                     <p class="text-xs text-slate-500 mb-4 max-w-sm mx-auto">There are no appointments matching your search criteria. Schedule a new appointment to get started.</p>

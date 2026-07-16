@@ -17,7 +17,7 @@
             @endphp
             <div>
                 <div class="inline-flex items-center gap-2 bg-blue-50 text-blue-600 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-3">
-                    <x-fas-tachometer-alt class="w-3.5 h-3.5" />
+                    <x-fas-arrow-right class="w-3.5 h-3.5" />
                     Our Department
                 </div>
                 <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
@@ -30,7 +30,7 @@
                 </p>
                 <a href="{{ route('website.services') }}" class="inline-flex items-center gap-2 border-2 border-blue-600 text-blue-600 font-semibold text-sm px-5 py-2.5 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300 w-fit">
                     More Department
-                    <x-fas-eye class="w-4 h-4" />
+                    <x-fas-arrow-right class="w-4 h-4" />
                 </a>
             </div>
         </div>
@@ -61,7 +61,7 @@
 
                     {{-- Icon --}}
                     <div class="{{ $c['bg'] }} {{ $c['text'] }} w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 {{ $c['hover'] }} group-hover:text-white group-hover:shadow-lg">
-                        <x-fas-eye class="w-7 h-7" />
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $department['icon_path'] }}"/></svg>
                     </div>
 
                     {{-- Content --}}
@@ -72,7 +72,7 @@
 
                     <a href="{{ route('website.contact') }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors mt-auto">
                         Learn More
-                        <x-fas-eye class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        <x-fas-arrow-right class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </a>
                 </div>
             @endforeach

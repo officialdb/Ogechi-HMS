@@ -4,9 +4,9 @@
     {{-- ── BREADCRUMB ─────────────────────────────────── --}}
     <div class="flex items-center gap-2 flex-wrap">
         <a href="{{ route('dashboard') }}" class="text-xs text-slate-400 hover:text-blue-600 transition-colors">Dashboard</a>
-        <x-fas-tachometer-alt class="w-3 h-3 text-slate-300" />
+        <x-fas-chevron-right class="w-3 h-3 text-slate-300" />
         <a href="{{ route('patients.index') }}" class="text-xs text-slate-400 hover:text-blue-600 transition-colors">Patients</a>
-        <x-fas-tachometer-alt class="w-3 h-3 text-slate-300" />
+        <x-fas-chevron-right class="w-3 h-3 text-slate-300" />
         <span class="text-xs text-blue-600 font-semibold truncate max-w-[160px]">{{ $patient->full_name }}</span>
     </div>
 
@@ -41,13 +41,13 @@
                         <a href="{{ route('patients.edit', $patient) }}"
                            class="flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-white rounded-xl shadow-md transition-all hover:opacity-90"
                            style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-                            <x-fas-tachometer-alt class="w-4 h-4" />
+                            <x-fas-pen class="w-4 h-4" />
                             Edit Patient
                         </a>
                     @endcan
                     <a href="{{ route('patients.index') }}"
                        class="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors">
-                        <x-fas-tachometer-alt class="w-4 h-4" />
+                        <x-fas-arrow-left class="w-4 h-4" />
                         Back
                     </a>
                 </div>
@@ -56,7 +56,7 @@
             {{-- Status badges row --}}
             <div class="flex items-center flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100">
                 <span class="flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-blue-700 rounded-lg text-xs font-bold">
-                    <x-fas-tachometer-alt class="w-3.5 h-3.5" />
+                    <x-fas-pen class="w-3.5 h-3.5" />
                     {{ $patient->patient_number ?? 'ID Pending' }}
                 </span>
                 @if($patient->blood_group)
@@ -85,7 +85,7 @@
             <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
                 <h2 class="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2">
                     <div class="w-7 h-7 bg-blue-50 rounded-lg flex items-center justify-center">
-                        <x-fas-tachometer-alt class="w-4 h-4 text-blue-600" />
+                        <x-fas-user class="w-4 h-4 text-blue-600" />
                     </div>
                     Personal Details
                 </h2>
@@ -110,7 +110,7 @@
                 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
                     <h2 class="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2">
                         <div class="w-7 h-7 bg-violet-50 rounded-lg flex items-center justify-center">
-                            <x-fas-tachometer-alt class="w-4 h-4 text-violet-600" />
+                            <x-fas-calendar-day class="w-4 h-4 text-violet-600" />
                         </div>
                         Address
                     </h2>
@@ -125,7 +125,7 @@
                 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
                     <h2 class="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2">
                         <div class="w-7 h-7 bg-amber-50 rounded-lg flex items-center justify-center">
-                            <x-fas-tachometer-alt class="w-4 h-4 text-amber-600" />
+                            <x-fas-tint class="w-4 h-4 text-amber-600" />
                         </div>
                         Next of Kin
                     </h2>
@@ -148,7 +148,7 @@
             @if($patient->emergency_contact_name)
                 <div class="bg-red-50 border border-red-100 rounded-2xl p-5">
                     <h2 class="text-sm font-bold text-red-800 mb-3 flex items-center gap-2">
-                        <x-fas-tachometer-alt class="w-4 h-4 text-red-600" />
+                        <x-fas-exclamation-triangle class="w-4 h-4 text-red-600" />
                         Emergency Contact
                     </h2>
                     <p class="text-xs font-bold text-red-800">{{ $patient->emergency_contact_name }}</p>
@@ -164,7 +164,7 @@
             <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
                 <h2 class="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2">
                     <div class="w-7 h-7 bg-rose-50 rounded-lg flex items-center justify-center">
-                        <x-fas-tachometer-alt class="w-4 h-4 text-rose-600" />
+                        <x-fas-address-book class="w-4 h-4 text-rose-600" />
                     </div>
                     Medical Summary
                 </h2>
@@ -277,7 +277,7 @@
                                                 'admission'=>'bg-violet-50 text-violet-600',
                                                 default=>'bg-blue-50 text-blue-600'
                                             } }}">
-                                    <x-fas-tachometer-alt class="w-4 h-4" />
+                                    <x-fas-pen class="w-4 h-4" />
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <div class="flex items-start justify-between gap-2">

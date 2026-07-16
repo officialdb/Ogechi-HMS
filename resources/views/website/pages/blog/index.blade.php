@@ -17,7 +17,7 @@
                 {{-- Empty state --}}
                 <div class="text-center py-20">
                     <div class="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-blue-100">
-                        <x-fas-eye class="w-10 h-10 text-blue-300" />
+                        <x-fas-newspaper class="w-10 h-10 text-blue-300" />
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">No Articles Published Yet</h3>
                     <p class="text-gray-500 text-sm max-w-sm mx-auto">Our team is working on health articles. Please check back soon for expert insights and tips.</p>
@@ -55,11 +55,11 @@
                             {{-- Thumbnail --}}
                             <a href="{{ route('website.blog.show', $post->slug) }}" class="h-52 bg-gradient-to-br {{ $grad }} relative overflow-hidden flex-shrink-0 block">
                                 @if($post->thumbnail)
-                                    <img src="{{ Storage::url($post->thumbnail) }}" alt="{{ $post->title }}" class="w-full h-full object-cover">
+                                    <img src="{{ Storage::url($post->thumbnail) }}" alt="{{ $post->title }}" class="absolute inset-0 w-full h-full object-cover text-transparent">
                                 @else
                                     <div class="absolute inset-0 flex items-center justify-center">
                                         <div class="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/20">
-                                            <x-fas-eye class="w-10 h-10 text-white" />
+                                            <x-fas-image class="w-10 h-10 text-white" />
                                         </div>
                                     </div>
                                 @endif
@@ -77,10 +77,13 @@
                             <div class="p-5 flex flex-col gap-3 flex-1">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-1.5 text-gray-400">
-                                        <x-fas-tachometer-alt class="w-3.5 h-3.5" />
+                                        <x-fas-calendar-alt class="w-3.5 h-3.5" />
                                         <time datetime="{{ $post->published_at?->format('Y-m-d') }}" class="text-xs font-medium">{{ $post->published_at?->format('M d, Y') ?? '—' }}</time>
                                     </div>
-                                    <span class="text-xs text-blue-600 font-semibold">By {{ $post->author }}</span>
+                                    @php
+                                        $authorName = is_string($post->author) ? (json_decode($post->author)->name ?? $post->author) : ($post->author->name ?? 'Admin');
+                                    @endphp
+                                    <span class="text-xs text-blue-600 font-semibold">By {{ $authorName }}</span>
                                 </div>
                                 <h2 class="font-bold text-gray-900 text-sm leading-snug group-hover:text-blue-700 transition-colors line-clamp-2">
                                     <a href="{{ route('website.blog.show', $post->slug) }}">{{ $post->title }}</a>
@@ -88,7 +91,7 @@
                                 <p class="text-xs text-gray-500 leading-relaxed line-clamp-3 flex-1">{{ $post->excerpt }}</p>
                                 <a href="{{ route('website.blog.show', $post->slug) }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors mt-auto pt-3 border-t border-gray-100 group/link">
                                     Read More
-                                    <x-fas-eye class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                                    <x-fas-arrow-right class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
                                 </a>
                             </div>
                         </article>
