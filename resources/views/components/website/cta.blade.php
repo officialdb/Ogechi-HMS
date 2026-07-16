@@ -9,23 +9,14 @@
         <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
 
             {{-- Left: Doctor Illustration --}}
-            <div class="relative hidden lg:flex gap-4 items-end" data-aos="fade-right">
-                {{-- Doctor 1 --}}
-                <div class="w-36 h-52 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20">
-                    <svg viewBox="0 0 144 208" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="144" height="208" fill="rgba(255,255,255,0.05)"/>
-                        <ellipse cx="72" cy="155" rx="50" ry="65" fill="#1E3A8A"/>
-                        <rect x="52" y="120" width="40" height="80" rx="5" fill="white" opacity="0.15"/>
-                        <circle cx="72" cy="88" r="30" fill="#FCD34D"/>
-                        <ellipse cx="72" cy="63" rx="30" ry="18" fill="#1E3A5F"/>
-                        <rect x="60" y="114" width="24" height="18" rx="3" fill="#F59E0B"/>
-                    </svg>
-                </div>
+                        {{-- Doctor 1 --}}
+                    <div class="w-36 h-52 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20">
+                        <img src="{{ asset('/images/doc n patient.jfif') }}" alt="Doctor" class="w-full h-full object-cover">
+                    </div>
                 {{-- Doctor 2 (larger) --}}
                 <div class="w-44 h-64 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 -mt-12">
-                    <x-fas-user-md class="w-full h-full" />
+                    <img src="{{ asset('/images/small doc1.jfif') }}" alt="Doctors" class="w-full h-full object-cover">
                 </div>
-            </div>
 
             {{-- Center/Right: CTA Content --}}
             @php
@@ -88,11 +79,16 @@
             </div>
 
             {{-- Right: Extra Doctor --}}
-            <div class="relative hidden xl:flex items-end" data-aos="fade-left">
-                <div class="w-44 h-64 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20">
-                    <x-fas-user-md class="w-full h-full" />
+                <div class="w-44 h-64 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 -mt-12">
+    <img src="{{ asset('/images/female doctor.jfif') }}" alt="Doctors" class="w-full h-full object-cover">
+</div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+ <!--<div class="w-44 h-64 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 -mt-12">
+                    <x-fas-user-md class="w-full h-full" />
+                </div>-->

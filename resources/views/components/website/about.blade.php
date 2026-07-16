@@ -10,65 +10,38 @@
                     {{-- Column 1 --}}
                     <div class="flex flex-col gap-4 flex-1">
                         {{-- Large Image --}}
-                        <div class="rounded-2xl overflow-hidden h-64 sm:h-80 bg-gradient-to-br from-blue-800 to-blue-600 relative group">
-                            <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 to-transparent z-10"></div>
-                            {{-- Medical team SVG illustration --}}
-                            <svg viewBox="0 0 300 320" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="300" height="320" fill="#1E40AF"/>
-                                {{-- Background shapes --}}
-                                <circle cx="250" cy="50" r="80" fill="#2563EB" opacity="0.4"/>
-                                <circle cx="50" cy="280" r="60" fill="#1D4ED8" opacity="0.3"/>
-                                {{-- Figure 1 --}}
-                                <ellipse cx="100" cy="220" rx="45" ry="80" fill="#1E3A8A"/>
-                                <circle cx="100" cy="130" r="28" fill="#FCD34D"/>
-                                <rect cx="100" cy="155" width="20" height="25" fill="#F59E0B"/>
-                                {{-- Figure 2 (doctor) --}}
-                                <ellipse cx="190" cy="230" rx="50" ry="85" fill="#2563EB"/>
-                                <circle cx="190" cy="135" r="30" fill="#FDE68A"/>
-                                <rect x="175" y="160" width="15" height="28" rx="3" fill="#F59E0B"/>
-                                {{-- Lab coats --}}
-                                <rect x="165" y="180" width="50" height="110" rx="5" fill="#3B82F6" opacity="0.5"/>
-                                <rect x="75" y="175" width="50" height="110" rx="5" fill="#1E3A8A" opacity="0.5"/>
-                                {{-- Clipboard --}}
-                                <rect x="195" y="210" width="25" height="35" rx="3" fill="white" opacity="0.8"/>
-                                <line x1="200" y1="220" x2="214" y2="220" stroke="#94A3B8" stroke-width="2"/>
-                                <line x1="200" y1="228" x2="214" y2="228" stroke="#94A3B8" stroke-width="2"/>
-                                <line x1="200" y1="236" x2="210" y2="236" stroke="#94A3B8" stroke-width="2"/>
-                                {{-- Cross symbol --}}
-                                <rect x="182" y="195" width="12" height="4" rx="1" fill="white" opacity="0.9"/>
-                                <rect x="186" y="191" width="4" height="12" rx="1" fill="white" opacity="0.9"/>
-                            </svg>
-                            {{-- Play button --}}
-                            <div class="absolute inset-0 z-20 flex items-center justify-center">
-                                <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform cursor-pointer hover:bg-white/30">
-                                    <x-fas-user-md class="w-6 h-6 text-white ml-1" />
-                                </div>
+                        <div class="relative">
+                            <div class="rounded-2xl overflow-hidden h-64 sm:h-80 relative group">
+                                <img src="{{ asset('/images/emergency room.jfif') }}" alt="Medical team" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 to-transparent z-10"></div>
+                            </div>
+
+                            {{-- Smaller stacked image overlay --}}
+                            <div class="absolute -bottom-6 -right-6 w-32 h-32 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border-4 border-white shadow-xl z-20">
+                                <img src="{{ asset('/images/female doctor.jfif') }}" alt="Doctor" class="w-full h-full object-cover">
                             </div>
                         </div>
 
                         {{-- Small Image 2 (Indigo) --}}
-                        <div class="hidden sm:block rounded-2xl overflow-hidden h-40 bg-gradient-to-br from-blue-500 to-indigo-700 relative">
-                            <x-fas-user-md class="w-full h-full" />
-                        </div>
+                    <div class="hidden sm:block rounded-2xl overflow-hidden h-40 bg-gradient-to-br from-blue-500 to-indigo-700 relative">
+                        <img 
+                            src="{{ asset('/images/Drip.jfif') }}" 
+                            alt="Doctors" 
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
                     </div>
 
                     {{-- Column 2 --}}
                     <div class="hidden sm:flex flex-col gap-4 flex-1">
                         {{-- Small Image 1 (Teal) --}}
-                        <div class="rounded-2xl overflow-hidden h-40 bg-gradient-to-br from-cyan-600 to-blue-700 relative">
-                            <svg viewBox="0 0 150 160" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="150" height="160" fill="#0891B2"/>
-                                <circle cx="75" cy="60" r="35" fill="#0E7490" opacity="0.7"/>
-                                <ellipse cx="75" cy="130" rx="50" ry="40" fill="#155E75"/>
-                                <circle cx="75" cy="55" r="20" fill="#FDE68A"/>
-                                <rect x="60" y="72" width="30" height="55" rx="5" fill="#0C4A6E" opacity="0.8"/>
-                                <rect x="60" y="72" width="30" height="55" rx="5" fill="white" opacity="0.2"/>
-                            </svg>
+                        <div class="rounded-2xl overflow-hidden h-40 relative">
+                            <img src="{{ asset('/images/operating room.jfif') }}" alt="Doctor consultation" class="w-full h-full object-cover object-[50%_20%]">
                         </div>
 
-                        {{-- Small Image 3 (Heartbeat pulse, now h-80) --}}
-                        <div class="rounded-2xl overflow-hidden h-80 bg-gradient-to-br from-rose-500 to-red-700 relative flex items-center justify-center">
-                            <x-fas-user-md class="w-full h-full" />
+                        {{-- Small Image 3 --}}
+                        <div class="rounded-2xl overflow-hidden h-80 relative">
+                            <img src="{{ asset('images/small doc1.jfif') }}" alt="Patient care" class="w-full h-full object-cover">
                         </div>
                     </div>
                 </div>
