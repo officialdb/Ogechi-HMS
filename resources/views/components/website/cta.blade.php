@@ -10,13 +10,14 @@
 
             {{-- Left: Doctor Illustration --}}
                         {{-- Doctor 1 --}}
-                    <div class="w-36 h-52 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20">
-                        <img src="{{ asset('/images/doc n patient.jfif') }}" alt="Doctor" class="w-full h-full object-cover">
-                    </div>
-                {{-- Doctor 2 (larger) --}}
-                <div class="w-44 h-64 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 -mt-12">
-                    <img src="{{ asset('/images/small doc1.jfif') }}" alt="Doctors" class="w-full h-full object-cover">
-                </div>
+                        <div class="w-32 h-48 sm:w-36 sm:h-52 md:w-40 md:h-56 lg:w-44 lg:h-64 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20">
+                            <img src="{{ asset('images/doc n patient.jfif') }}" alt="Doctor" class="w-full h-full object-cover">
+                        </div>
+
+                        {{-- Doctor 2 (larger) --}}
+                        <div class="w-36 h-56 sm:w-40 sm:h-60 md:w-44 md:h-64 lg:w-52 lg:h-72 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 -mt-8 sm:-mt-10 lg:-mt-12">
+                            <img src="{{ asset('images/small doc1.jfif') }}" alt="Doctors" class="w-full h-full object-cover">
+                        </div>
 
             {{-- Center/Right: CTA Content --}}
             @php
@@ -87,8 +88,3 @@
         </div>
     </div>
 </section>
-
-
- <!--<div class="w-44 h-64 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 -mt-12">
-                    <x-fas-user-md class="w-full h-full" />
-                </div>-->
