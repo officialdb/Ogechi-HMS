@@ -134,7 +134,7 @@
         </div>
 
         {{-- Card 2 --}}
-        <div class="float-anim-delay bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-blue-900/30 p-4 w-52 border border-white/60" data-aos="zoom-in" data-aos-delay="600">
+       <div class="float-anim-delay bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-blue-900/30 p-4 w-52 border border-white/60" data-aos="zoom-in" data-aos-delay="600">
             <div class="flex items-center gap-3 mb-2">
                 <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
                     <x-fas-user-md class="w-5 h-5 text-green-600" />

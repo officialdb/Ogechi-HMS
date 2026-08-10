@@ -7,11 +7,10 @@
             <h1 class="text-2xl font-black text-slate-900 tracking-tight">Laboratory</h1>
             <p class="text-sm text-slate-500 mt-0.5">Manage and track patient lab tests and results.</p>
         </div>
-        <a href="{{ route('modules.laboratory.create') }}" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-bold text-white rounded-xl shadow-md transition-all hover:opacity-90 hover:scale-[1.02]" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
-           <!-- <x-fas-calendar-alt class="w-4 h-4" /> -->
-            <x-fas-vial class="w-4 h-4" />
-            New Lab Test
-        </a>
+        <a href="{{ route('modules.laboratory.create') }}" class="inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-bold text-white rounded-xl shadow-md transition-all hover:opacity-90 hover:scale-[1.02]" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
+    <x-fas-calendar class="w-4 h-4" />
+    New Lab Test
+</a>
     </div>
 
     {{-- ── STATS ── --}}
