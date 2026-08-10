@@ -2,56 +2,48 @@
 <section id="about" class="py-20 lg:py-28 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
 
             {{-- Left: Images Grid --}}
-            <div class="relative" data-aos="fade-right">
-                <div class="flex gap-4">
-                    {{-- Column 1 --}}
-                    <div class="flex flex-col gap-4 flex-1">
-                        {{-- Large Image --}}
-                        <div class="relative">
-                            <div class="rounded-2xl overflow-hidden h-64 sm:h-80 relative group">
-                                <img src="{{ asset('/images/emergency room.jfif') }}" alt="Medical team" class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 to-transparent z-10"></div>
-                            </div>
-
-                            {{-- Smaller stacked image overlay --}}
-                            <div class="absolute -bottom-6 -right-6 w-32 h-32 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border-4 border-white shadow-xl z-20">
-                                <img src="{{ asset('/images/female doctor.jfif') }}" alt="Doctor" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-
-                        {{-- Small Image 2 (Indigo) --}}
-                    <div class="hidden sm:block rounded-2xl overflow-hidden h-40 bg-gradient-to-br from-blue-500 to-indigo-700 relative">
-                        <img 
-                            src="{{ asset('/images/Drip.jfif') }}" 
-                            alt="Doctors" 
-                            class="w-full h-full object-cover"
-                        />
-                    </div>
-                    </div>
-
-                    {{-- Column 2 --}}
-                    <div class="hidden sm:flex flex-col gap-4 flex-1">
-                        {{-- Small Image 1 (Teal) --}}
-                        <div class="rounded-2xl overflow-hidden h-40 relative">
-                            <img src="{{ asset('/images/operating room.jfif') }}" alt="Doctor consultation" class="w-full h-full object-cover object-[50%_20%]">
-                        </div>
-
-                        {{-- Small Image 3 --}}
-                        <div class="rounded-2xl overflow-hidden h-80 relative">
-                            <img src="{{ asset('images/small doc1.jfif') }}" alt="Patient care" class="w-full h-full object-cover">
-                        </div>
-                    </div>
+<div class="relative" data-aos="fade-right">
+    <div class="flex flex-col sm:flex-row gap-4">
+        {{-- Column 1 --}}
+        <div class="flex flex-col gap-4 flex-1">
+            {{-- Large Image --}}
+            <div class="relative">
+                <div class="rounded-2xl overflow-hidden h-64 sm:h-80 relative group">
+                    <img src="{{ asset('images/emergency room.jfif') }}" alt="Medical team" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 to-transparent z-10"></div>
                 </div>
-
-                {{-- Experience badge --}}
-                <div class="absolute -bottom-4 left-4 bg-blue-600 text-white rounded-2xl px-5 py-3 shadow-xl shadow-blue-600/30 float-anim">
-                    <p class="text-2xl font-black">17+</p>
-                    <p class="text-xs font-medium opacity-80">Years of Excellence</p>
+                {{-- Smaller stacked image overlay --}}
+                <div class="absolute -bottom-6 -right-6 w-32 h-32 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border-4 border-white shadow-xl z-20">
+                    <img src="{{ asset('images/female doctor.jfif') }}" alt="Doctor" class="w-full h-full object-cover">
                 </div>
             </div>
+            {{-- Small Image 2 (Indigo) --}}
+            <div class="block rounded-2xl overflow-hidden h-40 bg-gradient-to-br from-blue-500 to-indigo-700 relative mt-8 sm:mt-0">
+                <img src="{{ asset('images/Drip.jfif') }}" alt="Doctors" class="w-full h-full object-cover" />
+            </div>
+        </div>
+        {{-- Column 2 --}}
+        <div class="flex flex-col gap-4 flex-1">
+            {{-- Small Image 1 (Teal) --}}
+            <div class="rounded-2xl overflow-hidden h-40 relative">
+                <img src="{{ asset('images/operating room.jfif') }}" alt="Doctor consultation" class="w-full h-full object-cover object-[50%_20%]">
+            </div>
+            {{-- Small Image 3 --}}
+            <div class="rounded-2xl overflow-hidden h-80 relative">
+                <img src="{{ asset('images/small doc1.jfif') }}" alt="Patient care" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </div>
+
+    {{-- Experience badge --}}
+    <div class="absolute -bottom-4 left-4 bg-blue-600 text-white rounded-2xl px-5 py-3 shadow-xl shadow-blue-600/30 float-anim">
+        <p class="text-2xl font-black">17+</p>
+        <p class="text-xs font-medium opacity-80">Years of Excellence</p>
+    </div>
+</div>
 
             {{-- Right: Content --}}
             @php
