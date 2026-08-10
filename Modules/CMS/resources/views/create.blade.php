@@ -5,9 +5,9 @@
     <div>
         <div class="flex items-center gap-2 text-xs text-slate-400 mb-3">
             <a href="{{ route('dashboard') }}" class="hover:text-blue-600 transition-colors">Dashboard</a>
-            <x-fas-tachometer-alt class="w-3 h-3" />
+            <x-fas-chevron-right class="w-3 h-3" />
             <a href="{{ route('modules.cms.index') }}" class="hover:text-blue-600 transition-colors">Blog / CMS</a>
-            <x-fas-tachometer-alt class="w-3 h-3" />
+            <x-fas-chevron-right class="w-3 h-3" />
             <span class="text-slate-600 font-semibold">Write New Post</span>
         </div>
         <h1 class="text-2xl font-black text-slate-900 tracking-tight">Write New Post</h1>
@@ -83,7 +83,7 @@
             {{-- Metadata Section --}}
             <div class="border-t border-slate-100 pt-6">
                 <h3 class="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <div class="w-6 h-6 bg-violet-50 text-violet-600 rounded flex items-center justify-center"><x-fas-tachometer-alt class="w-3.5 h-3.5" /></div>
+                    <div class="w-6 h-6 bg-violet-50 text-violet-600 rounded flex items-center justify-center"><x-fas-wallet class="w-3.5 h-3.5" /></div>
                     Publishing
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">

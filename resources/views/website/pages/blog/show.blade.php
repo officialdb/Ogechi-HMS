@@ -12,9 +12,9 @@
             {{-- Breadcrumb --}}
             <nav aria-label="Breadcrumb" class="flex items-center justify-center gap-2 text-sm mb-6">
                 <a href="{{ route('home') }}" class="text-blue-200 hover:text-white transition-colors font-medium">Home</a>
-                <x-fas-tachometer-alt class="w-3.5 h-3.5 text-blue-300" />
+                <x-fas-chevron-right class="w-3.5 h-3.5 text-blue-300" />
                 <a href="{{ route('website.blog') }}" class="text-blue-200 hover:text-white transition-colors font-medium">Blog</a>
-                <x-fas-tachometer-alt class="w-3.5 h-3.5 text-blue-300" />
+                <x-fas-chevron-right class="w-3.5 h-3.5 text-blue-300" />
                 <span class="text-white font-semibold">Article</span>
             </nav>
 
@@ -22,7 +22,7 @@
             <div class="flex items-center justify-center gap-3 mb-5">
                 <span class="{{ $post->cat_color ?? 'bg-blue-100 text-blue-600' }} text-xs font-bold px-3 py-1 rounded-full bg-white shadow-sm">{{ $post->category }}</span>
                 <span class="text-blue-200 text-xs font-medium flex items-center gap-1">
-                    <x-fas-chart-bar class="w-3.5 h-3.5" />
+                    <x-fas-clock class="w-3.5 h-3.5" />
                     {{ $post->read_time ?? '5 min read' }}
                 </span>
             </div>
@@ -35,24 +35,26 @@
             <div class="flex items-center justify-center gap-4 text-sm">
                 <div class="flex items-center gap-2">
                     <div class="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center text-white font-bold text-xs">
-                        {{ strtoupper(substr($post->author ?? 'A', 0, 1)) }}
+                        {{ strtoupper(substr(is_string($post->author) ? $post->author : ($post->author->name ?? 'A'), 0, 1)) }}
                     </div>
                     <div class="text-left">
-                        <p class="text-white font-semibold text-xs leading-none">{{ $post->author }}</p>
+                        <p class="text-white font-semibold text-xs leading-none">{{ is_string($post->author) ? $post->author : ($post->author->name ?? '') }}</p>
                         <p class="text-blue-200 text-xs mt-0.5">{{ $post->author_role ?? '' }}</p>
                     </div>
                 </div>
                 <div class="w-px h-8 bg-white/20"></div>
                 <time datetime="{{ $post->published_at?->format('Y-m-d') }}" class="text-blue-200 text-xs flex items-center gap-1">
-                    <x-fas-tachometer-alt class="w-3.5 h-3.5" />
+                    <x-fas-calendar-alt class="w-3.5 h-3.5" />
                     {{ $post->published_at?->format('M d, Y') ?? '—' }}
                 </time>
             </div>
         </div>
 
         {{-- Bottom wave --}}
-        <div class="absolute bottom-0 left-0 right-0 overflow-hidden leading-none">
-            <x-fas-home class="w-full" />
+        <div class="absolute bottom-0 left-0 right-0 overflow-hidden leading-none text-white">
+            <svg class="relative block w-full h-[60px] md:h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="currentColor"></path>
+            </svg>
         </div>
     </section>
 
@@ -74,7 +76,7 @@
                             <img src="{{ Storage::url($post->thumbnail) }}" alt="{{ $post->title }}" class="absolute inset-0 w-full h-full object-cover">
                         @else
                             <div class="w-24 h-24 bg-white/15 backdrop-blur-sm rounded-3xl flex items-center justify-center border border-white/25">
-                                <x-fas-eye class="w-12 h-12 text-white" />
+                                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $iconPath }}"/></svg>
                             </div>
                         @endif
                         <div class="absolute bottom-4 left-4 flex gap-2">
@@ -105,13 +107,13 @@
                                     ['label'=>'LinkedIn','bg'=>'bg-blue-800 hover:bg-blue-900','icon'=>'M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 4m-2 0a2 2 0 104 0 2 2 0 10-4 0'],
                                 ] as $s)
                                     <a href="#" aria-label="{{ $s['label'] }}" class="{{ $s['bg'] }} text-white w-9 h-9 rounded-xl flex items-center justify-center transition-colors shadow-sm">
-                                        <x-fas-tachometer-alt class="w-4 h-4" />
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="{{ $s['icon'] }}"/></svg>
                                     </a>
                                 @endforeach
                             </div>
                         </div>
                         <a href="{{ route('website.blog') }}" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-                            <x-fas-tachometer-alt class="w-4 h-4" />
+                            <x-fas-arrow-left class="w-4 h-4" />
                             Back to Blog
                         </a>
                     </div>
@@ -122,27 +124,27 @@
                     {{-- Author card --}}
                     <div class="bg-[#F5F9FF] rounded-2xl p-5 border border-blue-50">
                         <h3 class="text-sm font-bold text-gray-900 mb-4 flex items-center gap-2">
-                            <x-fas-tachometer-alt class="w-4 h-4 text-blue-600" />
+                            <x-fas-user-md class="w-4 h-4 text-blue-600" />
                             About the Author
                         </h3>
                         <div class="flex items-center gap-3 mb-3">
                             <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-base shadow-md shadow-blue-600/30">
-                                {{ strtoupper(substr($post->author ?? 'A', 0, 1)) }}
+                                {{ strtoupper(substr(is_string($post->author) ? $post->author : ($post->author->name ?? 'A'), 0, 1)) }}
                             </div>
                             <div>
-                                <p class="font-bold text-gray-900 text-sm">{{ $post->author }}</p>
+                                <p class="font-bold text-gray-900 text-sm">{{ is_string($post->author) ? $post->author : ($post->author->name ?? '') }}</p>
                                 <p class="text-blue-600 text-xs font-semibold">{{ $post->author_role ?? '' }}</p>
                             </div>
                         </div>
                         <p class="text-xs text-gray-500 leading-relaxed">Board-certified specialist at Ogechi Hospital with extensive clinical experience and a passion for patient education and preventive medicine.</p>
                         <a href="{{ route('website.doctors') }}" class="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-                            View Doctors <x-fas-eye class="w-3.5 h-3.5" />
+                            View Doctors <x-fas-arrow-right class="w-3.5 h-3.5" />
                         </a>
                     </div>
 
                     {{-- Book appointment mini CTA --}}
                     <div class="rounded-2xl p-5 text-white" style="background: linear-gradient(135deg, #062C77, #0B5ED7);">
-                        <x-fas-tachometer-alt class="w-8 h-8 text-blue-200 mb-3" />
+                        <x-fas-calendar-check class="w-8 h-8 text-blue-200 mb-3" />
                         <h3 class="font-bold text-base mb-2">Need a Consultation?</h3>
                         <p class="text-blue-100 text-xs leading-relaxed mb-4">Speak directly with a specialist. Same-day appointments available.</p>
                         <a href="{{ route('website.contact') }}" class="block w-full text-center bg-white text-blue-700 font-bold text-xs py-2.5 rounded-xl hover:bg-blue-50 transition-colors shadow-md">
@@ -162,7 +164,7 @@
                                     @endphp
                                     <a href="{{ route('website.blog.show', $rel->slug) }}" class="flex gap-3 group">
                                         <div class="w-16 h-16 rounded-xl bg-gradient-to-br {{ $relGrad }} flex-shrink-0 flex items-center justify-center">
-                                            <x-fas-home class="w-7 h-7 text-white" />
+                                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $relIconPath }}"/></svg>
                                         </div>
                                         <div class="flex-1 min-w-0">
                                             <p class="text-xs font-bold text-gray-900 group-hover:text-blue-700 transition-colors line-clamp-2 leading-snug">{{ $rel->title }}</p>
@@ -185,7 +187,7 @@
                                 @foreach($sideDepts as $deptName)
                                     <a href="{{ route('website.services') }}" class="flex items-center justify-between text-xs font-medium text-gray-600 hover:text-blue-600 py-1.5 border-b border-gray-100 last:border-0 transition-colors group">
                                         {{ $deptName }}
-                                        <x-fas-tachometer-alt class="w-3.5 h-3.5 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                                        <x-fas-chevron-right class="w-3.5 h-3.5 text-gray-400 group-hover:text-blue-600 transition-colors" />
                                     </a>
                                 @endforeach
                             </div>

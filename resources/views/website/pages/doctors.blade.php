@@ -18,7 +18,7 @@
                 {{-- Empty state --}}
                 <div class="text-center py-20">
                     <div class="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-blue-100">
-                        <x-fas-tachometer-alt class="w-10 h-10 text-blue-300" />
+                        <x-fas-user-md class="w-10 h-10 text-blue-300" />
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">No Doctors Listed Yet</h3>
                     <p class="text-gray-500 text-sm max-w-sm mx-auto">Our team profiles will appear here once added by the admin. Please check back soon.</p>

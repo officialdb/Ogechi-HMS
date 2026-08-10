@@ -37,7 +37,7 @@
                                 Read the
                                 <a href="https://laravel.com/docs" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#f53003] dark:text-[#FF4433] ml-1">
                                     <span>Documentation</span>
-                                    <x-fas-eye class="w-2.5 h-2.5" />
+                                    <x-fas-documents class="w-2.5 h-2.5" />
                                 </a>
                             </span>
                         </li>

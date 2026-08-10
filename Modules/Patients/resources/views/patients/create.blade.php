@@ -5,9 +5,9 @@
     {{-- ── BREADCRUMB ─────────────────────────────────── --}}
     <div class="flex items-center gap-2">
         <a href="{{ route('dashboard') }}" class="text-xs text-slate-400 hover:text-blue-600 transition-colors">Dashboard</a>
-        <x-fas-tachometer-alt class="w-3 h-3 text-slate-300" />
+        <x-fas-chevron-right class="w-3 h-3 text-slate-300" />
         <a href="{{ route('patients.index') }}" class="text-xs text-slate-400 hover:text-blue-600 transition-colors">Patients</a>
-        <x-fas-tachometer-alt class="w-3 h-3 text-slate-300" />
+        <x-fas-chevron-right class="w-3 h-3 text-slate-300" />
         <span class="text-xs text-blue-600 font-semibold">Register Patient</span>
     </div>
 
@@ -18,7 +18,7 @@
             <p class="text-sm text-slate-500 mt-0.5">Complete all sections to create a full patient record.</p>
         </div>
         <a href="{{ route('patients.index') }}" class="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-slate-600 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors shadow-sm">
-            <x-fas-tachometer-alt class="w-4 h-4" />
+            <x-fas-arrow-left class="w-4 h-4" />
             Back
         </a>
     </div>
@@ -72,7 +72,7 @@
             <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                 <div class="flex items-center gap-3 px-6 py-4 border-b border-slate-100" style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);">
                     <div class="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center">
-                        <x-fas-tachometer-alt class="w-4 h-4 text-white" />
+                        <x-fas-check class="w-4 h-4 text-white" />
                     </div>
                     <div>
                         <h2 class="text-sm font-bold text-blue-900">Personal Information</h2>
@@ -194,7 +194,7 @@
             <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                 <div class="flex items-center gap-3 px-6 py-4 border-b border-slate-100" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);">
                     <div class="w-8 h-8 rounded-xl bg-emerald-600 flex items-center justify-center">
-                        <x-fas-tachometer-alt class="w-4 h-4 text-white" />
+                        <x-fas-check class="w-4 h-4 text-white" />
                     </div>
                     <div>
                         <h2 class="text-sm font-bold text-emerald-900">Medical Information</h2>
@@ -247,7 +247,7 @@
 
             <div class="flex justify-between mt-4">
                 <button type="button" @click="step = 1" class="flex items-center gap-2 px-5 py-3 bg-white border border-slate-200 text-slate-600 text-sm font-semibold rounded-xl hover:bg-slate-50 transition-colors shadow-sm">
-                    <x-fas-tachometer-alt class="w-4 h-4" />
+                    <x-fas-arrow-left class="w-4 h-4" />
                     Back
                 </button>
                 <button type="button" @click="step = 3" class="flex items-center gap-2 px-6 py-3 text-white text-sm font-bold rounded-xl shadow-md transition-all hover:opacity-90" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">
@@ -264,7 +264,7 @@
                 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                     <div class="flex items-center gap-3 px-6 py-4 border-b border-slate-100" style="background:linear-gradient(135deg,#FFF7ED,#FFEDD5);">
                         <div class="w-8 h-8 rounded-xl bg-amber-500 flex items-center justify-center">
-                            <x-fas-tachometer-alt class="w-4 h-4 text-white" />
+                            <x-fas-check class="w-4 h-4 text-white" />
                         </div>
                         <div>
                             <h2 class="text-sm font-bold text-amber-900">Next of Kin</h2>
@@ -294,7 +294,7 @@
                 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                     <div class="flex items-center gap-3 px-6 py-4 border-b border-slate-100" style="background:linear-gradient(135deg,#FFF1F2,#FFE4E6);">
                         <div class="w-8 h-8 rounded-xl bg-rose-500 flex items-center justify-center">
-                            <x-fas-tachometer-alt class="w-4 h-4 text-white" />
+                            <x-fas-check class="w-4 h-4 text-white" />
                         </div>
                         <div>
                             <h2 class="text-sm font-bold text-rose-900">Emergency Contact</h2>
@@ -325,7 +325,7 @@
 
             <div class="flex justify-between mt-4">
                 <button type="button" @click="step = 2" class="flex items-center gap-2 px-5 py-3 bg-white border border-slate-200 text-slate-600 text-sm font-semibold rounded-xl hover:bg-slate-50 transition-colors shadow-sm">
-                    <x-fas-tachometer-alt class="w-4 h-4" />
+                    <x-fas-arrow-left class="w-4 h-4" />
                     Back
                 </button>
                 <button type="submit" class="flex items-center gap-2 px-6 py-3 text-white text-sm font-bold rounded-xl shadow-md transition-all hover:opacity-90 hover:shadow-lg" style="background:linear-gradient(135deg,#0B5ED7,#1D4ED8);">

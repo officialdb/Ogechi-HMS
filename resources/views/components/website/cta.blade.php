@@ -43,7 +43,7 @@
             <div class="flex-1 flex flex-col gap-6 text-center lg:text-left" data-aos="fade-up">
                 <div>
                     <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1 text-xs font-semibold text-white/80 uppercase tracking-wider mb-4">
-                        <x-fas-tachometer-alt class="w-3.5 h-3.5 text-blue-200" />
+                        <x-fas-heart class="w-3.5 h-3.5 text-blue-200" />
                         Caring For You
                     </div>
                     <h2 class="text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight">
@@ -81,7 +81,7 @@
                         >
                     </div>
                     <button class="w-full bg-white text-blue-700 font-semibold text-sm py-3 rounded-xl hover:bg-blue-50 transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2">
-                        <x-fas-tachometer-alt class="w-4 h-4" />
+                        <x-fas-calendar-check class="w-4 h-4" />
                         Book Appointment Now
                     </button>
                 </div>

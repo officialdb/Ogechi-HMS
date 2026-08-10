@@ -6,9 +6,9 @@
         <div>
             <div class="flex items-center gap-2 text-xs text-slate-400 mb-3">
                 <a href="{{ route('dashboard') }}" class="hover:text-blue-600 transition-colors">Dashboard</a>
-                <x-fas-tachometer-alt class="w-3 h-3" />
+                <x-fas-chevron-right class="w-3 h-3" />
                 <a href="{{ route('modules.billing.index') }}" class="hover:text-blue-600 transition-colors">Billing</a>
-                <x-fas-tachometer-alt class="w-3 h-3" />
+                <x-fas-chevron-right class="w-3 h-3" />
                 <span class="text-slate-600 font-semibold">{{ $invoice->invoice_number }}</span>
             </div>
             <h1 class="text-2xl font-black text-slate-900 tracking-tight">Invoice Details</h1>

@@ -17,7 +17,7 @@
             @endphp
             <div>
                 <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-600 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-4">
-                    <x-fas-eye class="w-3.5 h-3.5" />
+                    <x-fas-newspaper class="w-3.5 h-3.5" />
                     Latest News
                 </div>
                 <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
@@ -26,7 +26,7 @@
             </div>
             <a href="{{ route('website.blog') }}" class="inline-flex items-center gap-2 border-2 border-blue-600 text-blue-600 font-semibold text-sm px-5 py-2.5 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300 w-fit">
                 View All Posts
-                <x-fas-eye class="w-4 h-4" />
+                <x-fas-arrow-right class="w-4 h-4" />
             </a>
         </div>
 
@@ -51,12 +51,12 @@
                             <img src="{{ Storage::url($post->thumbnail) }}" alt="{{ $post->title }}" class="absolute inset-0 w-full h-full object-cover">
                         @else
                             <div class="absolute inset-0 flex items-center justify-center opacity-20">
-                                <x-fas-eye class="w-32 h-32 text-white" />
+                                <svg class="w-32 h-32 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $iconPath }}"/></svg>
                             </div>
                             {{-- Medical cross watermark --}}
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <div class="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/20">
-                                    <x-fas-eye class="w-10 h-10 text-white" />
+                                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $iconPath }}"/></svg>
                                 </div>
                             </div>
                         @endif
@@ -74,7 +74,7 @@
                     <div class="p-5 flex flex-col gap-3 flex-1">
                         {{-- Date --}}
                         <div class="flex items-center gap-1.5 text-gray-400">
-                            <x-fas-tachometer-alt class="w-3.5 h-3.5" />
+                            <x-fas-calendar-alt class="w-3.5 h-3.5" />
                             <span class="text-xs font-medium">{{ $post->published_at?->format('M d, Y') ?? '—' }}</span>
                         </div>
 
@@ -88,7 +88,7 @@
 
                         <a href="{{ route('website.blog.show', $post->slug) }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors mt-auto pt-2 border-t border-gray-100 group/link">
                             Read More
-                            <x-fas-eye class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                            <x-fas-arrow-right class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
                         </a>
                     </div>
                 </article>

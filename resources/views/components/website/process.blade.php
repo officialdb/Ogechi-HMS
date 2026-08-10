@@ -16,7 +16,7 @@
         @endphp
         <div class="text-center mb-16" data-aos="fade-up">
             <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-600 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-4">
-                <x-fas-eye class="w-3.5 h-3.5" />
+                <x-fas-project-diagram class="w-3.5 h-3.5" />
                 How We Work
             </div>
             <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
